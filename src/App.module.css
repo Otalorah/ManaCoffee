@@ -1,0 +1,34 @@
+.root {
+    position: relative;
+    display: flex;
+    height: auto;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    background-color: #221911;
+    overflow-x: hidden;
+    font-family: Epilogue, "Noto Sans", sans-serif;
+}
+
+.layoutContainer {
+    display: flex;
+    height: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.mainContent {
+    padding: 0 10rem;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 960px;
+    flex: 1;
+}
