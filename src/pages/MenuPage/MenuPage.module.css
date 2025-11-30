@@ -1,0 +1,149 @@
+.root {
+    position: relative;
+    display: flex;
+    height: auto;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    background-color: #221911;
+    overflow-x: hidden;
+    font-family: Epilogue, "Noto Sans", sans-serif;
+}
+
+.layoutContainer {
+    display: flex;
+    height: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.mainContent {
+    padding: 0 2.5rem;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+    flex: 1;
+    gap: 2rem;
+}
+
+.menuHeader {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.title {
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    color: #c9b8a8;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.pdfContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2d1f16;
+    border-radius: 1rem;
+    border: 1px solid #483423;
+    overflow: hidden;
+    min-height: 800px;
+}
+
+.pdfViewer {
+    width: 100%;
+    height: 100%;
+    min-height: 800px;
+    border: none;
+}
+
+.pdfPlaceholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.placeholderIcon {
+    color: #d46c11;
+    opacity: 0.8;
+}
+
+.placeholderTitle {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.placeholderText {
+    color: #c9b8a8;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.placeholderNote {
+    color: #8b7355;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+    padding: 1rem;
+    background-color: rgba(212, 108, 17, 0.1);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(212, 108, 17, 0.2);
+}
+
+.placeholderNote code {
+    color: #d46c11;
+    background-color: rgba(212, 108, 17, 0.15);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mainContent {
+        padding: 0 1rem;
+        padding-top: 5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .pdfContainer {
+        min-height: 600px;
+    }
+
+    .pdfViewer {
+        min-height: 600px;
+    }
+}

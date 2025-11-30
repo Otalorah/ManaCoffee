@@ -8,6 +8,7 @@
     background-color: #221911;
     overflow-x: hidden;
     font-family: Epilogue, "Noto Sans", sans-serif;
+    scroll-behavior: smooth;
 }
 
 .layoutContainer {
@@ -22,7 +23,7 @@
     display: flex;
     flex: 1;
     justify-content: center;
-    padding-top: 1.25rem;
+    padding-top: 5rem;
     padding-bottom: 1.25rem;
 }
 

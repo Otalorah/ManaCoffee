@@ -1,10 +1,17 @@
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     white-space: nowrap;
     border-bottom: 1px solid #483423;
     padding: 0.75rem 2.5rem;
+    background-color: #2d1f16;
+    z-index: 1000;
 }
 
 .logoContainer {
@@ -25,6 +32,7 @@
     font-weight: bold;
     line-height: 1.25;
     letter-spacing: -0.015em;
+    text-decoration: none;
 }
 
 .navContainer {
@@ -46,6 +54,7 @@
     font-weight: 500;
     line-height: 1.5;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .navLink:hover {
