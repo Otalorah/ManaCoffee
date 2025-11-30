@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.tsx'
 import MenuPage from './pages/MenuPage/MenuPage.tsx'
 import Login from './pages/Login/Login.tsx'
-import SignUp from './pages/Login/SignUp.tsx'
+import SignUp from './pages/SignUp/SignUp.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

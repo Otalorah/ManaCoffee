@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { Eye, EyeOff, AlertCircle, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import styles from './Login.module.css';
 
 export default function App() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -12,7 +15,7 @@ export default function App() {
   // NOTA: handleSubmit espera FormEvent, por eso debe ir en el onSubmit de la forma
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(''); 
+    setError('');
     setLoading(true);
 
     const loginData = {
@@ -38,13 +41,13 @@ export default function App() {
       }
 
       console.log('Login exitoso:', data);
-      
+
       // Simulación de acciones post-login
       // window.location.href = '/dashboard';
-      
+
     } catch (error: unknown) { // Usamos 'unknown' para seguridad de tipos
       console.error('Error al iniciar sesión:', error);
-      
+
       let errorMessage = 'Error de conexión. Por favor, intenta de nuevo.';
       if (error instanceof Error) {
         errorMessage = error.message;
@@ -57,24 +60,32 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100 p-5 font-sans">
-      <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-10 w-full max-w-md transition-all duration-300 border border-gray-100">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-8 text-center tracking-tight">
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <button
+          onClick={() => navigate('/')}
+          className={styles.backButton}
+          type="button"
+          aria-label="Volver a la página principal"
+        >
+          <ArrowLeft size={24} />
+        </button>
+
+        <h2 className={styles.title}>
           Iniciar Sesión
         </h2>
-        
-        {/* FIX: Contenedor <form> que maneja el envío */}
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          
+
+        <form onSubmit={handleSubmit} className={styles.form}>
+
           {error && (
-            <div className="bg-red-50 border-l-4 border-red-500 text-red-700 px-4 py-3 rounded-md text-sm flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+            <div className={styles.errorAlert}>
+              <AlertCircle className={styles.errorIcon} />
               <p>{error}</p>
             </div>
           )}
-          
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className="text-sm font-semibold text-gray-700 ml-1">
+
+          <div className={styles.fieldContainer}>
+            <label htmlFor="email" className={styles.label}>
               Correo Electrónico
             </label>
             <input
@@ -82,47 +93,40 @@ export default function App() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg outline-none focus:border-amber-700 focus:ring-2 focus:ring-amber-100 transition hover:border-gray-400"
+              className={styles.input}
               placeholder="tu@correo.com"
               required
             />
           </div>
 
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className="text-sm font-semibold text-gray-700 ml-1">
+          <div className={styles.fieldContainer}>
+            <label htmlFor="password" className={styles.label}>
               Contraseña
             </label>
-            <div className="relative">
+            <div className={styles.passwordContainer}>
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 pr-12 text-base border border-gray-300 rounded-lg outline-none focus:border-amber-700 focus:ring-2 focus:ring-amber-100 transition hover:border-gray-400"
+                className={styles.passwordInput}
                 placeholder="••••••••"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-amber-700 transition p-1"
+                className={styles.toggleButton}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
           </div>
 
-          {/* El botón tiene type="submit" y dispara el onSubmit de la forma */}
-          <button 
-            type="submit" // Clave para disparar el onSubmit
+          <button
+            type="submit"
             disabled={loading}
-            className={`
-              bg-gradient-to-r from-amber-700 to-amber-900 text-white px-6 py-3.5 text-base font-bold rounded-xl mt-3 
-              hover:from-amber-800 hover:to-amber-950 hover:shadow-lg
-              focus:ring-4 focus:ring-amber-200 active:scale-[0.99]
-              disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:shadow-none
-              transition-all duration-200 flex items-center justify-center gap-3
-            `}
+            className={styles.submitButton}
           >
             {loading ? (
               <>
@@ -135,10 +139,10 @@ export default function App() {
           </button>
         </form>
 
-        <div className="mt-6 text-center border-t border-gray-100 pt-6">
-          <p className="text-sm text-gray-600">
+        <div className={styles.footer}>
+          <p className={styles.footerText}>
             ¿No tienes cuenta?{' '}
-            <a href="/signup" className="text-amber-700 font-bold hover:text-amber-900 transition hover:underline underline-offset-2">
+            <a href="/signup" className={styles.link}>
               Créala aquí
             </a>
           </p>

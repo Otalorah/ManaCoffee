@@ -31,9 +31,13 @@ function App() {
               />
             </div>
 
-            <FeaturedItems items={featuredItems} />
+            <div id="featured-items">
+              <FeaturedItems items={featuredItems} />
+            </div>
 
-            <Gallery images={galleryImages} />
+            <div id="gallery">
+              <Gallery images={galleryImages} />
+            </div>
 
             <div id="location-hours">
               <LocationHours
