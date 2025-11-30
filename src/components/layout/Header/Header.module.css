@@ -1,0 +1,92 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    border-bottom: 1px solid #483423;
+    padding: 0.75rem 2.5rem;
+    background-color: #2d1f16;
+    z-index: 1000;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+}
+
+.logoIcon {
+    width: 1rem;
+    height: 1rem;
+}
+
+.logoText {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: bold;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    text-decoration: none;
+}
+
+.navContainer {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+}
+
+.navLink {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navLink:hover {
+    opacity: 0.8;
+}
+
+.ctaButton {
+    display: flex;
+    min-width: 84px;
+    max-width: 480px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: #d46c11;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 0.015em;
+    border: none;
+}
+
+.ctaButton:hover {
+    background-color: #c05e0f;
+}
+
+.ctaButtonText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
