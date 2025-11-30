@@ -11,32 +11,57 @@
     padding: 1.25rem 1rem 0.75rem;
 }
 
-.scrollContainer {
-    display: flex;
-    overflow-y: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.scrollContainer::-webkit-scrollbar {
-    display: none;
-}
-
-.itemsContainer {
-    display: flex;
-    align-items: stretch;
+.carouselContainer {
     padding: 1rem;
-    gap: 0.75rem;
+    position: relative;
+}
+
+.carousel {
+    width: 100%;
+}
+
+.carouselContent {
+    margin-left: 0 !important;
+}
+
+.carouselItem {
+    padding-left: 0.75rem !important;
+    flex-basis: 100%;
+}
+
+@media (min-width: 640px) {
+    .carouselItem {
+        flex-basis: 50%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .carouselItem {
+        flex-basis: 33.333333%;
+    }
+}
+
+.carouselButton {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(201, 172, 146, 0.3);
+    color: #8b4513;
+}
+
+.carouselButton:hover {
+    background-color: #c9ac92;
+    color: white;
+}
+
+.carouselButton:disabled {
+    opacity: 0.3;
 }
 
 .itemCard {
     display: flex;
     height: 100%;
-    flex: 1;
     flex-direction: column;
     gap: 1rem;
     border-radius: 0.5rem;
-    min-width: 15rem;
 }
 
 .itemImage {

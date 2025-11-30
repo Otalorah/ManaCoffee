@@ -7,7 +7,7 @@ interface GalleryProps {
 const Gallery = ({ images }: GalleryProps) => {
     return (
         <section className={styles.section}>
-            <h2 className={styles.title}>Gallery</h2>
+            <h2 className={styles.title}>Galería</h2>
             <div className={styles.grid}>
                 {images.map((image, index) => (
                     <div key={index} className={styles.imageColumn}>

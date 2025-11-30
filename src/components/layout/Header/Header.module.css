@@ -40,6 +40,8 @@
     flex: 1;
     justify-content: flex-end;
     gap: 2rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav {
@@ -89,4 +91,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.isButton {
+    background-color: transparent;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 0.015em;
+    border: none;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }

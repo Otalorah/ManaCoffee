@@ -26,8 +26,8 @@ function App() {
 
             <div id="our-story">
               <OurStory
-                title="Our Story"
-                content="Established in 2010, Coffee Corner has been a beloved gathering place for coffee enthusiasts and casual visitors alike. Our passion for quality coffee and friendly service has made us a local favorite. We source our beans from the best farms around the world, ensuring every cup is a delightful experience."
+                title="Nuestra Historia"
+                content="Fundada en 2010, Coffee Corner ha sido un lugar querido para los amantes del café y los visitantes casuales. Nuestra pasión por el café de calidad y el servicio amable nos ha convertido en un favorito local. Obtenemos nuestros granos de las mejores plantaciones del mundo, asegurando que cada taza sea una experiencia deliciosa."
               />
             </div>
 
