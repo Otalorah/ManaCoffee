@@ -1,5 +1,3 @@
-import styles from './Menu.module.css';
-
 export interface MenuItem {}
 
 const Menu = () => {
