@@ -6,9 +6,9 @@ const Footer = () => {
             <div className={styles.footerContainer}>
                 <footer className={styles.footer}>
                     <div className={styles.linksContainer}>
-                        <a className={styles.link} href="#">Privacy Policy</a>
-                        <a className={styles.link} href="#">Terms of Service</a>
-                        <a className={styles.link} href="#">Contact Us</a>
+                        <a className={styles.link} href="#">Política de Privacidad</a>
+                        <a className={styles.link} href="#">Términos y Condiciones</a>
+                        <a className={styles.link} href="#">Contactanos</a>
                     </div>
                     <div className={styles.socialContainer}>
                         <a href="#" className={styles.socialLink}>
@@ -39,7 +39,7 @@ const Footer = () => {
                             </div>
                         </a>
                     </div>
-                    <p className={styles.copyright}>@2024 Coffee Corner. All rights reserved.</p>
+                    <p className={styles.copyright}>@2024 Mana Coffee. Todos los derechos reservados.</p>
                 </footer>
             </div>
         </footer>

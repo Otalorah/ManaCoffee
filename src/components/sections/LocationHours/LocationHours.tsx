@@ -9,7 +9,7 @@ interface LocationHoursProps {
 const LocationHours = ({ mapImage, address, hours }: LocationHoursProps) => {
     return (
         <section className={styles.section}>
-            <h2 className={styles.title}>Location & Hours</h2>
+            <h2 className={styles.title}>Ubicación & Horario</h2>
             <div className={styles.mapContainer}>
                 <div
                     className={styles.map}
