@@ -42,8 +42,8 @@ function App() {
             <div id="location-hours">
               <LocationHours
                 mapImage="https://lh3.googleusercontent.com/aida-public/AB6AXuDNASFpVA7gAYyLiXHRMq4fRYS7ROwekzD3vmcdxbdNgw6gc7H-wiPOHP5P8qO4Qr3gqCcSLD3re9Zo34mnejXUHX5V75aLGy-cQUHEs_aScEpDhQ-5CZ1-QuZuejz3gEpkOHd6azin_yeBBE7YIX4Wfl_-N2UGkhTcQx39WnKp_nY03YDaYNaW2knbShMb5WbEsmhA36fgLeWT6Zj6SNx72vCvZ3BtmHiKuXOopTKfoxJt5Q3Jaww0SKgdA3m_7QPFrcfgLqrnjg"
-                address="123 Main Street, Anytown, USA"
-                hours="Monday - Friday: 7 AM - 7 PM Saturday - Sunday: 8 AM - 5 PM"
+                address="Carrera 9 Calle 5, Pamplona, Norte de Santander, Colombia"
+                hours="Lunes - Domingo: 7 AM - 9 PM"
               />
             </div>
           </div>
