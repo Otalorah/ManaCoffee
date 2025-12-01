@@ -44,19 +44,19 @@ const Header = () => {
                             <Link className={styles.navLink} to="/menu">Menu</Link>
                             {isHomePage ? (
                                 <>
-                                    <a className={styles.navLink} href="#our-story" onClick={(e) => handleSmoothScroll(e, 'our-story')}>Nuestra Historia</a>
-                                    <a className={styles.navLink} href="#featured-items" onClick={(e) => handleSmoothScroll(e, 'featured-items')}>Nuestros Destacados</a>
-                                    <a className={styles.navLink} href="#gallery" onClick={(e) => handleSmoothScroll(e, 'gallery')}>Galeria</a>
-                                    <a className={styles.navLink} href="#location-hours" onClick={(e) => handleSmoothScroll(e, 'location-hours')}>Ubicación & Horario</a>
-                                    <a className={styles.navLink} href="#contact" onClick={(e) => handleSmoothScroll(e, 'contact')}>Contacto</a>
+                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#our-story" onClick={(e) => handleSmoothScroll(e, 'our-story')}>Nuestra Historia</a>
+                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#featured-items" onClick={(e) => handleSmoothScroll(e, 'featured-items')}>Nuestros Destacados</a>
+                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#gallery" onClick={(e) => handleSmoothScroll(e, 'gallery')}>Galeria</a>
+                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#location-hours" onClick={(e) => handleSmoothScroll(e, 'location-hours')}>Ubicación & Horario</a>
+                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#contact" onClick={(e) => handleSmoothScroll(e, 'contact')}>Contacto</a>
                                 </>
                             ) : (
                                 <>
-                                    <Link className={styles.navLink} to="/#our-story">Nuestra Historia</Link>
-                                    <Link className={styles.navLink} to="/#featured-items">Nuestros Destacados</Link>
-                                    <Link className={styles.navLink} to="/#gallery">Galeria</Link>
-                                    <Link className={styles.navLink} to="/#location-hours">Ubicación & Horario</Link>
-                                    <Link className={styles.navLink} to="/#contact">Contacto</Link>
+                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#our-story">Nuestra Historia</Link>
+                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#featured-items">Nuestros Destacados</Link>
+                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#gallery">Galeria</Link>
+                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#location-hours">Ubicación & Horario</Link>
+                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#contact">Contacto</Link>
                                 </>
                             )}
                         </nav>

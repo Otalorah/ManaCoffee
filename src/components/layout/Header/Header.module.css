@@ -108,3 +108,40 @@
     align-items: center;
     gap: 1rem;
 }
+
+@media (max-width: 768px) {
+    .desktopOnlyLink {
+        display: none;
+    }
+
+    .header {
+        padding: 0.5rem 1rem;
+    }
+
+    .logoText {
+        font-size: 1rem;
+    }
+
+    .navLink {
+        font-size: 0.75rem;
+    }
+
+    .ctaButton {
+        height: 2rem;
+        padding: 0 0.75rem;
+        font-size: 0.75rem;
+        min-width: auto;
+    }
+
+    .isButton {
+        font-size: 0.75rem;
+    }
+
+    .navContainer {
+        gap: 0.5rem;
+    }
+
+    .buttonContainer {
+        gap: 0.5rem;
+    }
+}

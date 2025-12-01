@@ -41,13 +41,22 @@
 
 .title {
     color: white;
-    font-size: 2.25rem;
+    font-size: 1.75rem;
     font-weight: 900;
     line-height: 1.2;
     letter-spacing: -0.033em;
 }
 
 @media (min-width: 480px) {
+    .title {
+        font-size: 2.25rem;
+        font-weight: 900;
+        line-height: 1.2;
+        letter-spacing: -0.033em;
+    }
+}
+
+@media (min-width: 768px) {
     .title {
         font-size: 3rem;
         font-weight: 900;
