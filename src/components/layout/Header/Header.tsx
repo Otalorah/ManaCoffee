@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import { User, LogOut, Calendar, Bike } from 'lucide-react';
+import { User, LogOut } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import styles from './Header.module.css';
 
@@ -72,15 +72,11 @@ const Header = () => {
                             {isAuthenticated ? (
                                 <>
                                     <Link className={`${styles.navLink} ${styles.authNavLink}`} to="/reservations">
-                                        <Calendar size={16} /> Reservaciones
+                                        Reservaciones
                                     </Link>
-                                    <button
-                                        className={`${styles.navLink} ${styles.authNavLink}`}
-                                        onClick={() => console.log("Navegar a pedidos")}
-                                        style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer' }}
-                                    >
-                                        <Bike size={16} /> Domicilios
-                                    </button>
+                                    <Link className={`${styles.navLink} ${styles.authNavLink}`} to="/orders">
+                                        Domicilios
+                                    </Link>
                                 </>
                             ) : (
                                 isHomePage ? (

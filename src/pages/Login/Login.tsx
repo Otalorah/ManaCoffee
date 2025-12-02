@@ -129,6 +129,12 @@ export default function Login() {
                         </div>
                     </div>
 
+                    <div className={styles.forgotPasswordContainer}>
+                        <a href="/password" className={styles.link}>
+                            ¿Olvidaste tu contraseña?
+                        </a>
+                    </div>
+
                     <button
                         type="submit"
                         disabled={loading}
