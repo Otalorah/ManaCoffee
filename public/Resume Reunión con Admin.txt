@@ -20,8 +20,8 @@ Información:
 Requerimientos:
 + Agendamientos de reservas (Aceptar solo admin, numero de personas, tipo de comida, tipo de evento) (Abono en consumibles para hacer la reservación 10-15%) (ChatBot wpp)
 + Menu (Acceso directo a la carta) (Idea: Vista previa del menú PDF)
-+ Ubicación
-+ Contactos
++ Ubicación HECHO
++ Contactos HECHO
 + Modificación amigable (Añadir menús y cambiar información de forma intuitiva)
 + Accesibilidad
 + Domicilios (ChatBot wpp)

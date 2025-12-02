@@ -18,6 +18,7 @@ function App() {
         <Header />
         <div className={styles.mainContent}>
           <div className={styles.contentContainer}>
+
             <Hero
               title="Bienvenidos a Mana Coffee"
               subtitle="En nuestra cafetería creemos que cada taza cuenta una historia. Aquí, el aroma del café recién preparado se mezcla con conversaciones que reconfortan y momentos que se guardan para siempre. Porque más que servir bebidas, creamos encuentros. El sabor de la compañía es insuperable. Y queremos que lo vivas en cada visita."

@@ -1,9 +1,32 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useState, useRef, useEffect } from 'react';
+import { User, LogOut, Calendar, Bike } from 'lucide-react';
+import { useAuth } from '../../../context/AuthContext';
 import styles from './Header.module.css';
 
 const Header = () => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const { isAuthenticated, logout } = useAuth();
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
     const isHomePage = location.pathname === '/';
+    const isMenuPage = location.pathname === '/menu';
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
         e.preventDefault();
@@ -30,7 +53,11 @@ const Header = () => {
         }
     };
 
-    const isMenuPage = location.pathname === '/menu';
+    const handleLogout = () => {
+        logout();
+        setIsDropdownOpen(false);
+        navigate('/');
+    };
 
     return (
         <header className={styles.header}>
@@ -42,32 +69,68 @@ const Header = () => {
                     <div className={styles.navContainer}>
                         <nav className={styles.nav}>
                             <Link className={styles.navLink} to="/menu">Menu</Link>
-                            {isHomePage ? (
+                            {isAuthenticated ? (
                                 <>
-                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#our-story" onClick={(e) => handleSmoothScroll(e, 'our-story')}>Nuestra Historia</a>
-                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#featured-items" onClick={(e) => handleSmoothScroll(e, 'featured-items')}>Nuestros Destacados</a>
-                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#gallery" onClick={(e) => handleSmoothScroll(e, 'gallery')}>Galeria</a>
-                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#location-hours" onClick={(e) => handleSmoothScroll(e, 'location-hours')}>Ubicación & Horario</a>
-                                    <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#contact" onClick={(e) => handleSmoothScroll(e, 'contact')}>Contacto</a>
+                                    <Link className={`${styles.navLink} ${styles.authNavLink}`} to="/reservations">
+                                        <Calendar size={16} /> Reservaciones
+                                    </Link>
+                                    <button
+                                        className={`${styles.navLink} ${styles.authNavLink}`}
+                                        onClick={() => console.log("Navegar a pedidos")}
+                                        style={{ background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer' }}
+                                    >
+                                        <Bike size={16} /> Domicilios
+                                    </button>
                                 </>
                             ) : (
-                                <>
-                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#our-story">Nuestra Historia</Link>
-                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#featured-items">Nuestros Destacados</Link>
-                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#gallery">Galeria</Link>
-                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#location-hours">Ubicación & Horario</Link>
-                                    <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#contact">Contacto</Link>
-                                </>
+                                isHomePage ? (
+                                    <>
+                                        <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#our-story" onClick={(e) => handleSmoothScroll(e, 'our-story')}>Nuestra Historia</a>
+                                        <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#featured-items" onClick={(e) => handleSmoothScroll(e, 'featured-items')}>Nuestros Destacados</a>
+                                        <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#gallery" onClick={(e) => handleSmoothScroll(e, 'gallery')}>Galeria</a>
+                                        <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#location-hours" onClick={(e) => handleSmoothScroll(e, 'location-hours')}>Ubicación & Horario</a>
+                                        <a className={`${styles.navLink} ${styles.desktopOnlyLink}`} href="#contact" onClick={(e) => handleSmoothScroll(e, 'contact')}>Contacto</a>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#our-story">Nuestra Historia</Link>
+                                        <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#featured-items">Nuestros Destacados</Link>
+                                        <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#gallery">Galeria</Link>
+                                        <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#location-hours">Ubicación & Horario</Link>
+                                        <Link className={`${styles.navLink} ${styles.desktopOnlyLink}`} to="/#contact">Contacto</Link>
+                                    </>
+                                )
                             )}
                         </nav>
                     </div>
                     <div className={styles.buttonContainer}>
-                        <button className={styles.ctaButton}>
-                            <Link className={styles.ctaButtonText} to='/signup'>Registrate</Link>
-                        </button>
-                        <button className={styles.isButton}>
-                            <Link className={styles.ctaButtonText} to='/login'>Inicia Sesión</Link>
-                        </button>
+                        {isAuthenticated ? (
+                            <div className={styles.userContainer} ref={dropdownRef}>
+                                <button
+                                    className={styles.userButton}
+                                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                    aria-label="Menú de usuario"
+                                >
+                                    <User size={24} />
+                                </button>
+                                {isDropdownOpen && (
+                                    <div className={styles.dropdownMenu}>
+                                        <button className={styles.dropdownItem} onClick={handleLogout}>
+                                            <LogOut size={16} /> Cerrar Sesión
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <>
+                                <button className={styles.ctaButton}>
+                                    <Link className={styles.ctaButtonText} to='/signup'>Registrate</Link>
+                                </button>
+                                <button className={styles.isButton}>
+                                    <Link className={styles.ctaButtonText} to='/login'>Inicia Sesión</Link>
+                                </button>
+                            </>
+                        )}
                     </div>
                 </>
             )}

@@ -109,6 +109,76 @@
     gap: 1rem;
 }
 
+/* User Dropdown Styles */
+.userContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.userButton {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.userButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: #2d1f16;
+    border: 1px solid #483423;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
+    min-width: 150px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    z-index: 1001;
+}
+
+.dropdownItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    color: white;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.authNavLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #d46c11;
+    /* Highlight color for special actions */
+    font-weight: bold;
+}
+
+.authNavLink:hover {
+    color: #c05e0f;
+}
+
 @media (max-width: 768px) {
     .desktopOnlyLink {
         display: none;
