@@ -169,7 +169,6 @@
 .authNavLink {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     color: #d46c11;
     /* Highlight color for special actions */
     font-weight: bold;
@@ -213,5 +212,41 @@
 
     .buttonContainer {
         gap: 0.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    
+    .header {
+        padding: 0.25rem 0.75rem;
+    }
+
+    .logoText {
+        font-size: 0.75rem;
+    }
+
+    .navLink {
+        font-size: 0.6rem;
+    }
+
+    .ctaButton {
+        height: 1.5rem;
+        padding: 0 0.5rem;
+        font-size: 0.6rem;
+        min-width: auto;
+    }
+
+    .isButton {
+        font-size: 0.6rem;
+    }
+
+    .navContainer {
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .buttonContainer {
+        justify-content: center;
     }
 }
