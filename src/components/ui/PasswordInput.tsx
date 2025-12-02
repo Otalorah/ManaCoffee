@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type {ChangeEvent, FocusEvent} from 'react';
-import styles from '../../pages/signUp/SignUp.module.css';
+import styles from '../../pages/SignUp/SignUp.module.css';
 import { Eye, EyeOff, CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface PasswordInputProps {

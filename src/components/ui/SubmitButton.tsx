@@ -1,5 +1,5 @@
 import { Loader2, CheckCircle2 } from 'lucide-react';
-import styles from '../../pages/signUp/SignUp.module.css';
+import styles from '../../pages/SignUp/SignUp.module.css';
 
 interface SubmitButtonProps {
     loading: boolean;

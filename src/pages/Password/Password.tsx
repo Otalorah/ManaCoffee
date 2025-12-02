@@ -3,7 +3,7 @@ import { Send, Check, Lock, Loader2 } from 'lucide-react';
 import StandardInput from '../../components/ui/StandardInput';
 import PasswordInput from '../../components/ui/PasswordInput';
 import { useSignUpForm } from '../../hooks/useSignUpForm';
-import styles from '../signUp/SignUp.module.css';
+import styles from '../SignUp/SignUp.module.css';
 import type { ChangeEvent } from 'react';
 
 // ============================================================================

@@ -1,5 +1,5 @@
 import { AlertCircle } from 'lucide-react';
-import styles from '../../pages/signUp/SignUp.module.css';
+import styles from '../../pages/SignUp/SignUp.module.css';
 import type { ChangeEvent, FocusEvent, KeyboardEvent } from 'react';
 
 interface UnifiedInputProps {
