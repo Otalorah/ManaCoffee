@@ -2,10 +2,12 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Eye, EyeOff, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import styles from './Login.module.css';
 
 export default function Login() {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -42,8 +44,12 @@ export default function Login() {
 
             console.log('Login exitoso:', data);
 
-            // Simulación de acciones post-login
-            // window.location.href = '/dashboard';
+            // Usar el contexto para iniciar sesión y guardar cookie
+            const tokenToSave = data.token || data.access_token || JSON.stringify(data);
+            login(tokenToSave);
+
+            // Redirigir a la landing page
+            navigate('/');
 
         } catch (error: unknown) { // Usamos 'unknown' para seguridad de tipos
             console.error('Error al iniciar sesión:', error);

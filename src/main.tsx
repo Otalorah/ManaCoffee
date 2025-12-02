@@ -7,17 +7,20 @@ import MenuPage from './pages/MenuPage/MenuPage'
 import Login from './pages/Login/Login'
 import SignUp from './pages/SignUp/SignUp'
 import Reservations from './pages/Reservations/Reservations'
+import { AuthProvider } from './context/AuthContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/menu" element={<MenuPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/reservations" element={<Reservations />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/menu" element={<MenuPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/reservations" element={<Reservations />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   </StrictMode>,
 )
