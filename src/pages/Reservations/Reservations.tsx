@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Calendar } from '@/components/ui/calendar';
-import { ArrowLeft, Calendar as CalendarIcon, Users, FileText, CheckCircle, AlertCircle } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Calendar as CalendarIcon, Users, FileText, CheckCircle, AlertCircle } from 'lucide-react';
+import Header from '../../components/layout/Header/Header';
 import styles from './Reservations.module.css';
 
 export default function Reservations() {
-    const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
     const [numberOfPeople, setNumberOfPeople] = useState('');
     const [reason, setReason] = useState('');
@@ -87,16 +86,8 @@ export default function Reservations() {
 
     return (
         <div className={styles.container}>
+            <Header />
             <div className={styles.content}>
-                <button
-                    onClick={() => navigate('/')}
-                    className={styles.backButton}
-                    type="button"
-                    aria-label="Volver a la página principal"
-                >
-                    <ArrowLeft size={24} />
-                </button>
-
                 <div className={styles.header}>
                     <h1 className={styles.title}>Reservaciones</h1>
                     <p className={styles.subtitle}>

@@ -13,5 +13,35 @@
       "image": "../public/images/salmon_en_salsa_de_frutos_rojos.png",
       "title": "Salmon en salsa de frutos rojos",
       "description": ""
+    },
+    {
+      "image": "../public/images/1.webp",
+      "title": "Cerdo en salsa de maracuya",
+      "description": ""
+    },
+    {
+      "image": "../public/images/2.webp",
+      "title": "Coctel de mango",
+      "description": ""
+    },
+    {
+      "image": "../public/images/5.webp",
+      "title": "Mazorcada",
+      "description": ""
+    },
+    {
+      "image": "../public/images/6.webp",
+      "title": "Coctel de fresas",
+      "description": ""
+    },
+    {
+      "image": "../public/images/7.webp",
+      "title": "Copa Crocante de Helado”",
+      "description": ""
+    },
+    {
+      "image": "../public/images/11.webp",
+      "title": "Plato especial",
+      "description": ""
     }
 ]
