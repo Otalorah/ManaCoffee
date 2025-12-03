@@ -3,14 +3,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #221911;
+    background-color: #fffaf0;
     padding: 1.25rem;
     font-family: Epilogue, "Noto Sans", sans-serif;
 }
 
 .card {
     position: relative;
-    background-color: #2d1f16;
+    background-color: #f8f4e1;
     border-radius: 0.75rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     padding: 2.5rem;
@@ -20,31 +20,10 @@
     border: 1px solid #483423;
 }
 
-.backButton {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    background: none;
-    border: none;
-    color: #c9b8a8;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.backButton:hover {
-    background-color: rgba(212, 108, 17, 0.1);
-    color: #d46c11;
-}
-
 .title {
     font-size: 1.875rem;
     font-weight: bold;
-    color: white;
+    color:#3e2723;
     margin-bottom: 2rem;
     text-align: center;
     letter-spacing: -0.02em;
@@ -84,7 +63,7 @@
 .label {
     font-size: 0.875rem;
     font-weight: 600;
-    color: #c9b8a8;
+    color: #3e2723;
     margin-left: 0.25rem;
 }
 
@@ -96,8 +75,8 @@
     border-radius: 0.5rem;
     outline: none;
     transition: all 0.2s;
-    background-color: #221911;
-    color: white;
+    background-color: #f8f4e1;
+    color: #6f4e37;
     font-family: Epilogue, "Noto Sans", sans-serif;
 }
 
@@ -127,8 +106,8 @@
     border-radius: 0.5rem;
     outline: none;
     transition: all 0.2s;
-    background-color: #221911;
-    color: white;
+    background-color: #f8f4e1;
+    color: #6f4e37;
     font-family: Epilogue, "Noto Sans", sans-serif;
 }
 
@@ -163,7 +142,7 @@
 }
 
 .submitButton {
-    background-color: #d46c11;
+    background-color: #3e2723;
     color: white;
     padding: 0.875rem 1.5rem;
     font-size: 1rem;
@@ -182,7 +161,7 @@
 }
 
 .submitButton:hover {
-    background-color: #c05e0f;
+    background-color: #6f4e37;
 }
 
 .submitButton:focus {
@@ -211,7 +190,7 @@
 
 .footerText {
     font-size: 0.875rem;
-    color: #c9b8a8;
+    color: #3e2723;
 }
 
 .link {

@@ -56,15 +56,15 @@ const MessageBox = ({ message }: { message: { type: string; text: string } | nul
 
 const ProgressStep = ({ number, label, completed, active }: { number: string; label: string; completed: boolean; active: boolean }) => {
     const getStepClasses = () => {
-        if (completed) return 'bg-green-600 text-coffee';
-        if (active) return 'bg-[#c05e0f] text-coffee';
-        return 'bg-gray-300 text-coffee';
+        if (completed) return 'bg-green-600 text-[#f8f4e1]';
+        if (active) return 'bg-[#c05e0f] text-[#f8f4e1]';
+        return 'bg-[#483423] text-[#f8f4e1]';
     };
 
     const getStepTextClasses = () => {
         if (completed) return 'text-green-600';
         if (active) return 'text-[#c05e0f]';
-        return 'text-white';
+        return 'text-[#3e2723]';
     };
 
     const getStepIcon = () => {
@@ -326,8 +326,8 @@ const App = () => {
 
     return (
         <div className={styles.container}>
-            <div className="bg-coffee p-8 md:p-10 rounded-xl shadow-2xl w-full max-w-xl border border-[#e5ddd5]">
-                <h1 className="text-3xl font-bold mb-6 text-white text-center">
+            <div className={styles.card}>
+                <h1 className="text-3xl font-bold mb-6 text-[#3e2723] text-center">
                     Recuperación de Contraseña
                 </h1>
 

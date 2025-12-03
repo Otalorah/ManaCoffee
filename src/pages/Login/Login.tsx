@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { Eye, EyeOff, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff, AlertCircle, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import styles from './Login.module.css';
@@ -14,7 +14,6 @@ export default function Login() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    // NOTA: handleSubmit espera FormEvent, por eso debe ir en el onSubmit de la forma
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
@@ -68,14 +67,6 @@ export default function Login() {
     return (
         <div className={styles.container}>
             <div className={styles.card}>
-                <button
-                    onClick={() => navigate('/')}
-                    className={styles.backButton}
-                    type="button"
-                    aria-label="Volver a la página principal"
-                >
-                    <ArrowLeft size={24} />
-                </button>
 
                 <h2 className={styles.title}>
                     Iniciar Sesión

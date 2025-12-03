@@ -1,4 +1,4 @@
-import { AlertCircle, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { AlertCircle, CheckCircle2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignUp.module.css';
 
@@ -22,22 +22,14 @@ export default function SignUp() {
         handleSubmit,
     } = useSignUpForm(() => {
         console.log("Redirigiendo al login...");
-        // navigate('/login');
+        navigate('/login');
     });
 
     return (
         <div className={styles.container}>
             <div className={styles.card}>
-                <button
-                    onClick={() => navigate('/')}
-                    className={styles.backButton}
-                    type="button"
-                    aria-label="Volver a la página principal"
-                >
-                    <ArrowLeft size={24} />
-                </button>
 
-                <h2 className={styles.title}>Crear Cuenta</h2>
+                <h2 className={styles.title}>Crear cuenta administrador</h2>
 
                 <form onSubmit={handleSubmit} className={styles.form}>
                     {/* Grid para Nombre y Apellido */}
