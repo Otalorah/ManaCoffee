@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     background-color: #221911;
-    padding: 2rem 1.25rem;
+    padding: calc(80px + 2rem) 1.25rem 2rem;
     font-family: Epilogue, "Noto Sans", sans-serif;
 }
 
@@ -17,28 +17,6 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     padding: 3rem 2.5rem;
     border: 1px solid #483423;
-}
-
-.backButton {
-    position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    background: none;
-    border: none;
-    color: #c9b8a8;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-}
-
-.backButton:hover {
-    background-color: rgba(212, 108, 17, 0.1);
-    color: #d46c11;
 }
 
 .header {
@@ -381,11 +359,6 @@
 
     .subtitle {
         font-size: 1rem;
-    }
-
-    .backButton {
-        top: 1rem;
-        left: 1rem;
     }
 
     .calendarContainer {

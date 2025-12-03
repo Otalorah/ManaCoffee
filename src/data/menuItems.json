@@ -1,0 +1,17 @@
+[
+    { "id": 1, "name": "Arroz", "price": 4000, "portion": "1 porción" },
+    { "id": 2, "name": "Papas a la Francesa", "price": 5200, "portion": "1 porción" },
+    { "id": 3, "name": "Carnes (Res, Cerdo o Pechuga)", "price": 8900, "portion": "150g" },
+    { "id": 4, "name": "Sopa de día", "price": 5000, "portion": "1 taza" },
+    { "id": 5, "name": "Ensalada del día", "price": 3200, "portion": "1 porción" },
+    { "id": 6, "name": "Tajadas de Maduro", "price": 3000, "portion": "1 porción" },
+    { "id": 7, "name": "Maiz", "price": 3000, "portion": "1 porción" },
+    { "id": 8, "name": "Tocineta", "price": 5000, "portion": "1 porción" },
+    { "id": 9, "name": "Huevo", "price": 3000, "portion": "1 unidad" },
+    { "id": 10, "name": "Queso", "price": 3500, "portion": "1 tajada" },
+    { "id": 11, "name": "Chorizo", "price": 4000, "portion": "1 unidad" },
+    { "id": 12, "name": "Salchicha", "price": 3000, "portion": "1 unidad" },
+    { "id": 13, "name": "Granos del día", "price": 4000, "portion": "1 porción" },
+    { "id": 14, "name": "Patacones", "price": 6500, "portion": "1 porción" },
+    { "id": 15, "name": "Papas locas", "price": 9900, "portion": "1 porción" }
+]
