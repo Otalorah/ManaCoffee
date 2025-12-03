@@ -64,7 +64,7 @@ const Header = () => {
             <div className={styles.logoContainer}>
                 <Link className={styles.logoText} to="/" onClick={handleLogoClick}>Mana Coffee</Link>
             </div>
-            {!isMenuPage && (
+            {(!isMenuPage || isAuthenticated) && (
                 <>
                     <div className={styles.navContainer}>
                         <nav className={styles.nav}>
@@ -74,8 +74,11 @@ const Header = () => {
                                     <Link className={`${styles.navLink} ${styles.authNavLink}`} to="/reservations">
                                         Reservaciones
                                     </Link>
-                                    <Link className={`${styles.navLink} ${styles.authNavLink}`} to="/orders">
+                                    <Link className={`${styles.navLink} ${styles.authNavLink}`} to="/delivery">
                                         Domicilios
+                                    </Link>
+                                    <Link className={`${styles.navLink} ${styles.authNavLink}`} to="/build-your-menu">
+                                        Arma tu menu
                                     </Link>
                                 </>
                             ) : (
