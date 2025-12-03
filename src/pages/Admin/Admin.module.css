@@ -1,0 +1,166 @@
+.container {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f4e1; /* Blanco roto/Crema */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d3c0a5; /* Café claro tenue */
+}
+
+.header {
+    color: #6f4e37; /* Marrón Café */
+    border-bottom: 2px solid #a0522d; /* Marrón Sombra */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.tabs-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+/* Base del botón de pestaña */
+.tab-button {
+    padding: 10px 20px;
+    margin-right: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    transition: background-color 0.3s;
+    background-color: #e6e0d0;
+    color: #6f4e37;
+    font-weight: normal;
+}
+
+/* Clase para el estado activo */
+.tab-button-active {
+    background-color: #d3c0a5; /* Color activo */
+    color: #3e2723; /* Texto oscuro */
+    font-weight: bold;
+}
+
+.form-title {
+    color: #6f4e37;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #d3c0a5;
+    border-radius: 6px;
+    background-color: #fffaf0; /* Blanco Marfil */
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    padding: 10px;
+    border: 1px solid #d3c0a5;
+    border-radius: 4px;
+    margin-top: 5px;
+    background-color: #fff;
+    color: #3e2723;
+}
+
+.label {
+    font-weight: bold;
+    color: #6f4e37;
+}
+
+.add-button {
+    padding: 10px;
+    background-color: #a0522d; /* Marrón Sombra */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.th {
+    border: 1px solid #d3c0a5;
+    padding: 12px;
+    background-color: #d3c0a5; 
+    color: #3e2723;
+    text-align: center;
+}
+
+.td {
+    border: 1px solid #d3c0a5;
+    padding: 10px;
+    background-color: #fffaf0;
+    color: #3e2723;
+    text-align: center;
+}
+
+.widht {
+    width: 5%;
+}
+
+.save-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #3e2723; /* Marrón oscuro */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 30px;
+    transition: background-color 0.3s;
+}
+
+.loading {
+    text-align: center;
+    font-size: 1.2em;
+    color: #6f4e37;
+}
+
+.error {
+    text-align: center;
+    font-size: 1.2em;
+    color: red;
+}
+
+.message {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #e6e0d0;
+    border-radius: 4px;
+    color: #3e2723;
+}
+
+.delete-button {
+    padding: 5px 10px;
+    background-color: #fffaf0;    
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+    outline: 1px solid #990000;
+}

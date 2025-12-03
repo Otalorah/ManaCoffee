@@ -49,7 +49,7 @@ export default function Login() {
             login(tokenToSave);
 
             // Redirigir a la landing page
-            navigate('/');
+            navigate(data.redirect);
 
         } catch (error: unknown) { // Usamos 'unknown' para seguridad de tipos
             console.error('Error al iniciar sesión:', error);
