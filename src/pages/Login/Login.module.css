@@ -3,27 +3,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fffaf0;
+    background: linear-gradient(135deg, #f5f1ed 0%, #e8dfd5 100%);
     padding: 1.25rem;
     font-family: Epilogue, "Noto Sans", sans-serif;
 }
 
 .card {
     position: relative;
-    background-color: #f8f4e1;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(111, 78, 55, 0.08);
     padding: 2.5rem;
     width: 100%;
     max-width: 28rem;
     transition: all 0.3s;
-    border: 1px solid #483423;
+    border: 2px solid #d4c4b0;
 }
 
 .title {
     font-size: 1.875rem;
     font-weight: bold;
-    color:#3e2723;
+    color: #6f4e37;
     margin-bottom: 2rem;
     text-align: center;
     letter-spacing: -0.02em;
@@ -38,7 +38,7 @@
 .errorAlert {
     background-color: rgba(239, 68, 68, 0.1);
     border-left: 4px solid #ef4444;
-    color: #fca5a5;
+    color: #b91c1c;
     padding: 0.75rem 1rem;
     border-radius: 0.375rem;
     font-size: 0.875rem;
@@ -63,7 +63,7 @@
 .label {
     font-size: 0.875rem;
     font-weight: 600;
-    color: #3e2723;
+    color: #4a3b32;
     margin-left: 0.25rem;
 }
 
@@ -71,12 +71,12 @@
     width: 100%;
     padding: 0.75rem 1rem;
     font-size: 1rem;
-    border: 1px solid #483423;
+    border: 1px solid #d4c4b0;
     border-radius: 0.5rem;
     outline: none;
     transition: all 0.2s;
-    background-color: #f8f4e1;
-    color: #6f4e37;
+    background-color: #ffffff;
+    color: #4a3b32;
     font-family: Epilogue, "Noto Sans", sans-serif;
 }
 
@@ -86,11 +86,11 @@
 }
 
 .input:hover {
-    border-color: #8b7355;
+    border-color: #8b6f47;
 }
 
 .input::placeholder {
-    color: #8b7355;
+    color: #9b8570;
 }
 
 .passwordContainer {
@@ -102,12 +102,12 @@
     padding: 0.75rem 1rem;
     padding-right: 3rem;
     font-size: 1rem;
-    border: 1px solid #483423;
+    border: 1px solid #d4c4b0;
     border-radius: 0.5rem;
     outline: none;
     transition: all 0.2s;
-    background-color: #f8f4e1;
-    color: #6f4e37;
+    background-color: #ffffff;
+    color: #4a3b32;
     font-family: Epilogue, "Noto Sans", sans-serif;
 }
 
@@ -117,11 +117,11 @@
 }
 
 .passwordInput:hover {
-    border-color: #8b7355;
+    border-color: #8b6f47;
 }
 
 .passwordInput::placeholder {
-    color: #8b7355;
+    color: #9b8570;
 }
 
 .toggleButton {
@@ -129,7 +129,7 @@
     right: 0.75rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #8b7355;
+    color: #9b8570;
     background: none;
     border: none;
     cursor: pointer;
@@ -142,7 +142,7 @@
 }
 
 .submitButton {
-    background-color: #3e2723;
+    background-color: #d46c11;
     color: white;
     padding: 0.875rem 1.5rem;
     font-size: 1rem;
@@ -161,7 +161,7 @@
 }
 
 .submitButton:hover {
-    background-color: #6f4e37;
+    background-color: #c05e0f;
 }
 
 .submitButton:focus {
@@ -184,13 +184,13 @@
 .footer {
     margin-top: 1.5rem;
     text-align: center;
-    border-top: 1px solid #483423;
+    border-top: 1px solid #e8dfd5;
     padding-top: 1.5rem;
 }
 
 .footerText {
     font-size: 0.875rem;
-    color: #3e2723;
+    color: #4a3b32;
 }
 
 .link {

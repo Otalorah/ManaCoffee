@@ -237,12 +237,6 @@ const BuildYourMenu = () => {
                                             Efectivo
                                         </div>
                                         <div
-                                            className={`${styles.paymentMethod} ${paymentMethod === 'nequi' ? styles.selected : ''}`}
-                                            onClick={() => setPaymentMethod('nequi')}
-                                        >
-                                            Nequi
-                                        </div>
-                                        <div
                                             className={`${styles.paymentMethod} ${paymentMethod === 'bancolombia' ? styles.selected : ''}`}
                                             onClick={() => setPaymentMethod('bancolombia')}
                                         >
