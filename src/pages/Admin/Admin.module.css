@@ -1,0 +1,590 @@
+/* Paleta de Colores (Basada en la original):
+   - #3e2723: Marrón Oscuro (Texto Sidebar, Botón Guardar)
+   - #6f4e37: Marrón Café (Texto)
+   - #a0522d: Marrón Sombra (Botón Agregar, Resaltado, Botón Salir HOVER)
+   - #d3c0a5: Café Claro Tenue (Fondo Sidebar, Hover)
+   - #e6e0d0: Gris-Crema (Separadores)
+   - #f8f4e1: Blanco roto/Crema (Fondo Contenido)
+   - #fffaf0: Blanco Marfil (Fondo de campos/tabla)
+*/
+
+/* --- Estructura Principal del Dashboard (MODIFICADO para Flex) --- */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e6e0d0;
+}
+
+.full-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f8f4e1;
+}
+
+.unauthenticated-box {
+    padding: 40px;
+    background-color: #fffaf0;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+
+/* --- Sidebar (MODIFICADO para usar Flexbox Vertical) --- */
+
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    background-color: #d3c0a5;
+    color: #3e2723;
+    padding: 20px 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    /* Propiedades Flexbox para empujar el footer hacia abajo */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    font-size: 1.5em;
+    font-weight: 700;
+    padding: 0 20px 20px 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #6f4e37;
+    text-align: center;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Esto permite que el nav ocupe el espacio restante */
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    text-align: left;
+    border: none;
+    background: transparent;
+    color: #3e2723;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s, border-left 0.3s;
+}
+
+.nav-item:hover {
+    background-color: #e6e0d0;
+}
+
+.nav-item-active {
+    background-color: #f8f4e1;
+    border-left: 5px solid #a0522d;
+    color: #a0522d;
+}
+
+/* --- NUEVOS ESTILOS: Sidebar Footer y Botón de Cerrar Sesión --- */
+
+.sidebar-footer {
+    padding: 20px 15px 10px 15px; /* Padding interior */
+    border-top: 1px solid #c4b09d; /* Separador sutil */
+    margin-top: auto; /* Empuja el footer a la parte inferior (gracias a flex-direction: column en .sidebar) */
+}
+
+.logout-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 15px;
+    background-color: #3e2723; /* Marrón oscuro para destacar que es una acción final */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #a0522d; /* Color Sombra (principal) para el hover */
+}
+
+
+/* --- Contenido Principal --- */
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: #f8f4e1;
+    overflow-y: auto;
+}
+
+.content-panel {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.subheader {
+    color: #3e2723;
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e6e0d0;
+    padding-bottom: 10px;
+}
+
+.placeholder {
+    color: #6f4e37;
+    text-align: center;
+    padding: 30px;
+    background-color: #fffaf0;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+
+/* --- Componentes de la Sección Menú (Formulario y Tabla) --- */
+
+.message {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.form-title {
+    color: #6f4e37;
+    margin: 0 0 15px 0;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding-left: 5px;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.5fr;
+    align-items: end;
+    gap: 15px;
+    padding: 25px;
+    border: 1px solid #e6e0d0;
+    border-radius: 8px;
+    background-color: #fffaf0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    margin-bottom: 30px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-weight: 600;
+    color: #6f4e37;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.input {
+    padding: 12px;
+    border: 1px solid #d3c0a5;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #3e2723;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus {
+    border-color: #a0522d;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.2);
+}
+
+.add-button {
+    padding: 12px 20px;
+    background-color: #a0522d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.1s;
+    height: 44px;
+}
+
+.add-button:hover {
+    background-color: #8b4513;
+}
+
+/* --- Tabla --- */
+
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.th {
+    border: none;
+    padding: 15px 12px;
+    background-color: #d3c0a5;
+    color: #3e2723;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.95em;
+    text-transform: uppercase;
+}
+
+.table thead tr th:first-child { border-top-left-radius: 8px; }
+.table thead tr th:last-child { border-top-right-radius: 8px; }
+
+.td {
+    border-bottom: 1px solid #e6e0d0;
+    padding: 12px;
+    background-color: #fffaf0;
+    color: #3e2723;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+
+.td:last-child { text-align: center; }
+
+.width { width: 15%; }
+
+.delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px 12px;
+    background-color: #fffaf0;
+    border: 1px solid #d3c0a5;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s, border-color 0.2s;
+    font-weight: 600;
+}
+
+.delete-button:hover {
+    background-color: #f4cccc;
+    border-color: #cc0000;
+    color: #cc0000;
+}
+
+/* --- Botón Guardar --- */
+
+.save-button-container {
+    padding: 20px 0;
+    border-top: 1px solid #e6e0d0;
+    margin-top: 30px;
+}
+
+.save-button {
+    width: 100%;
+    padding: 18px;
+    background-color: #3e2723;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, opacity 0.3s;
+    font-size: 1.1em;
+    box-shadow: 0 4px 10px rgba(62, 39, 35, 0.2);
+}
+
+.save-button:hover:not(:disabled) {
+    background-color: #5d4037;
+}
+
+.save-button:disabled {
+    background-color: #a0522d55;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+
+
+/* --- Mensajes de Estado --- */
+
+.loading {
+    text-align: center;
+    font-size: 1.5em;
+    color: #6f4e37;
+}
+
+.error {
+    text-align: center;
+    font-size: 1.2em;
+    color: #cc0000;
+}
+
+/* ============================================================
+   ESTILOS RESPONSIVE
+   ============================================================ */
+
+/* --- Tablets (hasta 900px) --- */
+@media (max-width: 900px) {
+    .form {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .add-button {
+        grid-column: span 2;
+    }
+
+    .sidebar {
+        width: 200px;
+        min-width: 200px;
+    }
+
+    .sidebar-header {
+        font-size: 1.3em;
+    }
+
+    .nav-item {
+        font-size: 1em;
+        padding: 12px 20px;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .subheader {
+        font-size: 1.5em;
+    }
+
+    .th {
+        font-size: 0.85em;
+        padding: 12px 8px;
+    }
+
+    .td {
+        padding: 10px 8px;
+        font-size: 0.9em;
+    }
+}
+
+/* --- Tablets pequeñas y móviles grandes (hasta 768px) --- */
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 100%;
+        padding: 15px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-header {
+        font-size: 1.4em;
+        padding: 0 15px 15px 15px;
+        margin-bottom: 15px;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0 10px;
+    }
+
+    .nav-item {
+        white-space: nowrap;
+        padding: 12px 20px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+    .nav-item-active {
+        border-left: none;
+        border-bottom: 3px solid #a0522d;
+    }
+
+    .sidebar-footer {
+        padding: 15px;
+        margin-top: 0;
+    }
+
+    .logout-button {
+        font-size: 0.95em;
+        padding: 10px 15px;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .form {
+        grid-template-columns: 1fr;
+        padding: 20px 15px;
+        gap: 12px;
+    }
+
+    .add-button {
+        grid-column: span 1;
+        order: -1;
+    }
+
+    .subheader {
+        font-size: 1.4em;
+    }
+
+    .unauthenticated-box {
+        padding: 30px 20px;
+        margin: 0 15px;
+    }
+
+    /* Tabla responsive: scroll horizontal */
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .th, .td {
+        min-width: 100px;
+    }
+
+    .width {
+        width: auto;
+        min-width: 120px;
+    }
+}
+
+/* --- Móviles (hasta 480px) --- */
+@media (max-width: 480px) {
+    .sidebar-header {
+        font-size: 1.2em;
+    }
+
+    .nav-item {
+        font-size: 0.95em;
+        padding: 10px 15px;
+    }
+
+    .main-content {
+        padding: 12px;
+    }
+
+    .subheader {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    .form {
+        padding: 15px 12px;
+        gap: 10px;
+    }
+
+    .input {
+        padding: 10px;
+        font-size: 16px; /* Previene zoom en iOS */
+    }
+
+    .label {
+        font-size: 0.85em;
+    }
+
+    .add-button {
+        padding: 12px 15px;
+        font-size: 0.95em;
+    }
+
+    .form-title {
+        font-size: 1.1em;
+    }
+
+    .th {
+        font-size: 0.75em;
+        padding: 10px 6px;
+    }
+
+    .td {
+        font-size: 0.85em;
+        padding: 8px 6px;
+    }
+
+    .delete-button {
+        font-size: 0.85em;
+        padding: 6px 10px;
+    }
+
+    .save-button {
+        padding: 15px;
+        font-size: 1em;
+    }
+
+    .message {
+        padding: 12px;
+        font-size: 0.9em;
+    }
+
+    .placeholder {
+        padding: 20px 15px;
+        font-size: 0.95em;
+    }
+
+    .logout-button {
+        font-size: 0.9em;
+        padding: 10px 12px;
+    }
+
+    .unauthenticated-box {
+        padding: 25px 15px;
+    }
+
+    .error, .loading {
+        font-size: 1em;
+    }
+}
+
+/* --- Móviles muy pequeños (hasta 360px) --- */
+@media (max-width: 360px) {
+    .sidebar-header {
+        font-size: 1.1em;
+    }
+
+    .nav-item {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+
+    .subheader {
+        font-size: 1.2em;
+    }
+
+    .th {
+        font-size: 0.7em;
+        padding: 8px 4px;
+    }
+
+    .td {
+        font-size: 0.8em;
+        padding: 6px 4px;
+    }
+
+    .delete-button {
+        font-size: 0.8em;
+        padding: 5px 8px;
+    }
+}
