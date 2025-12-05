@@ -3,7 +3,7 @@
 }
 
 .title {
-    color: white;
+    color: #6f4e37;
     font-size: 1.375rem;
     font-weight: bold;
     line-height: 1.25;
@@ -58,11 +58,11 @@
 .carouselButton {
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(201, 172, 146, 0.3);
-    color: #8b4513;
+    color: #8b6f47;
 }
 
 .carouselButton:hover {
-    background-color: #c9ac92;
+    background-color: #8b6f47;
     color: white;
 }
 
@@ -96,14 +96,14 @@
 }
 
 .itemTitle {
-    color: white;
+    color: #4a3b32;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5;
 }
 
 .itemDescription {
-    color: #c9ac92;
+    color: #9b8570;
     font-size: 0.875rem;
     font-weight: normal;
     line-height: 1.5;

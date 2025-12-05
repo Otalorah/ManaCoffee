@@ -6,42 +6,18 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 1rem;
     white-space: nowrap;
     border-bottom: 1px solid #483423;
-    padding: 0.75rem 2.5rem;
+    padding: 0.5rem 2.5rem;
     background-color: #2d1f16;
     z-index: 1000;
 }
 
-.logoContainer {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    color: white;
-}
-
-.logoIcon {
-    width: 1rem;
-    height: 1rem;
-}
-
-.logoText {
-    color: white;
-    font-size: 1.125rem;
-    font-weight: bold;
-    line-height: 1.25;
-    letter-spacing: -0.015em;
-    text-decoration: none;
-}
-
 .navContainer {
     display: flex;
-    flex: 1;
-    justify-content: flex-end;
-    gap: 2rem;
     align-items: center;
-    justify-content: center;
 }
 
 .nav {
@@ -51,12 +27,15 @@
 }
 
 .navLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: white;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.5;
+    font-weight: bold;
+    font-size: 1.25rem;
     text-decoration: none;
     cursor: pointer;
+    transition: opacity 0.2s ease;
 }
 
 .navLink:hover {
@@ -166,16 +145,25 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.authNavLink {
+.imgContainer {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    z-index: 10;
     display: flex;
     align-items: center;
-    color: #d46c11;
-    /* Highlight color for special actions */
-    font-weight: bold;
+    justify-content: center;
+    margin-top: 5px;
 }
 
-.authNavLink:hover {
-    color: #c05e0f;
+.logoIcon {
+    width: 80px;
+    height: 80px;
+    transition: all 0.3s ease;
+}
+
+.logoIcon:hover {
+    transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
@@ -185,14 +173,16 @@
 
     .header {
         padding: 0.5rem 1rem;
-    }
-
-    .logoText {
-        font-size: 1rem;
+        gap: 0.75rem;
     }
 
     .navLink {
         font-size: 0.75rem;
+        gap: 0.35rem;
+    }
+
+    .nav {
+        gap: 1.5rem;
     }
 
     .ctaButton {
@@ -206,27 +196,36 @@
         font-size: 0.75rem;
     }
 
-    .navContainer {
+    .buttonContainer {
         gap: 0.5rem;
     }
 
-    .buttonContainer {
-        gap: 0.5rem;
+    .imgContainer {
+        width: 60px;
+        height: 60px;
+        margin-top: 5px;
+    }
+
+    .logoIcon {
+        width: 60px;
+        height: 60px;
     }
 }
 
 @media (max-width: 400px) {
-    
+
     .header {
         padding: 0.25rem 0.75rem;
-    }
-
-    .logoText {
-        font-size: 0.75rem;
+        gap: 0.5rem;
     }
 
     .navLink {
         font-size: 0.6rem;
+        gap: 0.25rem;
+    }
+
+    .nav {
+        gap: 1rem;
     }
 
     .ctaButton {
@@ -240,13 +239,14 @@
         font-size: 0.6rem;
     }
 
-    .navContainer {
-        justify-content: center;
-        align-items: center;
-
+    .imgContainer {
+        width: 40px;
+        height: 40px;
+        margin-top: 0;
     }
 
-    .buttonContainer {
-        justify-content: center;
+    .logoIcon {
+        width: 40px;
+        height: 40px;
     }
 }

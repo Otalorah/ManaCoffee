@@ -56,15 +56,15 @@ const MessageBox = ({ message }: { message: { type: string; text: string } | nul
 
 const ProgressStep = ({ number, label, completed, active }: { number: string; label: string; completed: boolean; active: boolean }) => {
     const getStepClasses = () => {
-        if (completed) return 'bg-green-600 text-[#f8f4e1]';
-        if (active) return 'bg-[#c05e0f] text-[#f8f4e1]';
-        return 'bg-[#483423] text-[#f8f4e1]';
+        if (completed) return 'bg-green-600 text-white';
+        if (active) return 'bg-[#d46c11] text-white';
+        return 'bg-[#d4c4b0] text-[#4a3b32]';
     };
 
     const getStepTextClasses = () => {
         if (completed) return 'text-green-600';
-        if (active) return 'text-[#c05e0f]';
-        return 'text-[#3e2723]';
+        if (active) return 'text-[#d46c11]';
+        return 'text-[#9b8570]';
     };
 
     const getStepIcon = () => {
@@ -86,39 +86,39 @@ const ProgressStep = ({ number, label, completed, active }: { number: string; la
 // ============================================================================
 
 const ProgressBar = ({ appState }: { appState: string }) => {
-    const step1Completed = appState === STATES.PHASE_2_ENTRY || 
-                          appState === STATES.PHASE_3_PASSWORD_RESET || 
-                          appState === STATES.VERIFICATION_COMPLETE;
+    const step1Completed = appState === STATES.PHASE_2_ENTRY ||
+        appState === STATES.PHASE_3_PASSWORD_RESET ||
+        appState === STATES.VERIFICATION_COMPLETE;
     const step2Active = appState === STATES.PHASE_2_ENTRY;
-    const step2Completed = appState === STATES.PHASE_3_PASSWORD_RESET || 
-                          appState === STATES.VERIFICATION_COMPLETE;
+    const step2Completed = appState === STATES.PHASE_3_PASSWORD_RESET ||
+        appState === STATES.VERIFICATION_COMPLETE;
     const step3Active = appState === STATES.PHASE_3_PASSWORD_RESET;
     const step3Completed = appState === STATES.VERIFICATION_COMPLETE;
 
     return (
         <div className="flex justify-between items-center mb-8">
-            <ProgressStep 
-                number="1" 
-                label="Identificación" 
-                completed={step1Completed} 
+            <ProgressStep
+                number="1"
+                label="Identificación"
+                completed={step1Completed}
                 active={appState === STATES.PHASE_1_ENTRY}
             />
-            
-            <div className="flex-grow h-0.5 bg-[#c05e0f] self-center mx-1"></div>
-            
-            <ProgressStep 
-                number="2" 
-                label="Código Verificación" 
-                completed={step2Completed} 
+
+            <div className="flex-grow h-0.5 bg-[#d4c4b0] self-center mx-1"></div>
+
+            <ProgressStep
+                number="2"
+                label="Código Verificación"
+                completed={step2Completed}
                 active={step2Active}
             />
-            
-            <div className="flex-grow h-0.5 bg-[#d4c5b5] self-center mx-1"></div>
-            
-            <ProgressStep 
-                number="3" 
-                label="Nueva Contraseña" 
-                completed={step3Completed} 
+
+            <div className="flex-grow h-0.5 bg-[#d4c4b0] self-center mx-1"></div>
+
+            <ProgressStep
+                number="3"
+                label="Nueva Contraseña"
+                completed={step3Completed}
                 active={step3Active}
             />
         </div>
@@ -173,13 +173,13 @@ const Phase2Form = ({ value, onChange, onKeyPress, disabled }: { value: string; 
 // COMPONENTE: Phase3Form
 // ============================================================================
 
-const Phase3Form = ({ 
-    onNewPasswordChange, 
-}: { 
-    newPassword: string; 
-    onNewPasswordChange: (e: ChangeEvent<HTMLInputElement>) => void; 
-    onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void; 
-    disabled: boolean 
+const Phase3Form = ({
+    onNewPasswordChange,
+}: {
+    newPassword: string;
+    onNewPasswordChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    onKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    disabled: boolean
 }) => {
 
     const {
@@ -205,26 +205,26 @@ const Phase3Form = ({
                 label="Contraseña"
                 id="password"
                 name="password"
-                        value={formData.password}
-                        onChange={handleChange2}
-                        onBlur={handleBlur}
-                        error={errors.password}
-                        touched={touched.password}
+                value={formData.password}
+                onChange={handleChange2}
+                onBlur={handleBlur}
+                error={errors.password}
+                touched={touched.password}
                 isConfirm={false}
-                    />
+            />
 
-                    {/* Confirm Password */}
-                    <PasswordInput
-                        label="Confirmar Contraseña"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        error={errors.confirmPassword}
-                        touched={touched.confirmPassword}
-                        isConfirm={true} // Parámetro para habilitar el mensaje de éxito "Coinciden"
-                    />
+            {/* Confirm Password */}
+            <PasswordInput
+                label="Confirmar Contraseña"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.confirmPassword}
+                touched={touched.confirmPassword}
+                isConfirm={true} // Parámetro para habilitar el mensaje de éxito "Coinciden"
+            />
         </div>
     );
 };
@@ -242,31 +242,31 @@ const SubmitButton = ({ appState, onClick, disabled }: { appState: string; onCli
                 classes: 'bg-gray-400 cursor-not-allowed'
             };
         }
-        
+
         switch (appState) {
             case STATES.PHASE_1_ENTRY:
                 return {
                     text: 'Enviar código',
                     icon: <Send className="w-5 h-5 mr-2" />,
-                    classes: 'bg-[#c05e0f] hover:bg-[#3a2d1f]'
+                    classes: 'bg-[#d46c11] hover:bg-[#c05e0f]'
                 };
             case STATES.PHASE_2_ENTRY:
                 return {
                     text: 'Confirmar',
                     icon: <Check className="w-5 h-5 mr-2" />,
-                    classes: 'bg-[#c05e0f] hover:bg-[#3a2d1f]'
+                    classes: 'bg-[#d46c11] hover:bg-[#c05e0f]'
                 };
             case STATES.PHASE_3_PASSWORD_RESET:
                 return {
                     text: 'Establecer nueva contraseña',
                     icon: <Lock className="w-5 h-5 mr-2" />,
-                    classes: 'bg-[#c05e0f] hover:bg-[#3a2d1f]'
+                    classes: 'bg-[#d46c11] hover:bg-[#c05e0f]'
                 };
             default:
                 return {
                     text: 'Continuar',
                     icon: null,
-                    classes: 'bg-[#221911] hover:bg-[#3a2d1f]'
+                    classes: 'bg-[#d46c11] hover:bg-[#c05e0f]'
                 };
         }
     };
@@ -276,7 +276,7 @@ const SubmitButton = ({ appState, onClick, disabled }: { appState: string; onCli
     return (
         <button
             onClick={onClick}
-            className={`w-full py-3 px-4 rounded-lg text-coffee hover:text-white font-semibold shadow-lg transition duration-200 ease-in-out flex justify-center items-center ${classes}`}
+            className={`w-full py-3 px-4 rounded-lg text-white font-semibold shadow-lg transition duration-200 ease-in-out flex justify-center items-center ${classes}`}
             disabled={disabled}
         >
             {icon}
@@ -318,16 +318,16 @@ const App = () => {
 
     const buttonDisabled = appState === STATES.LOADING;
 
-    const step1Completed = appState === STATES.PHASE_2_ENTRY || 
-                          appState === STATES.PHASE_3_PASSWORD_RESET || 
-                          appState === STATES.VERIFICATION_COMPLETE;
-    const step2Completed = appState === STATES.PHASE_3_PASSWORD_RESET || 
-                          appState === STATES.VERIFICATION_COMPLETE;
+    const step1Completed = appState === STATES.PHASE_2_ENTRY ||
+        appState === STATES.PHASE_3_PASSWORD_RESET ||
+        appState === STATES.VERIFICATION_COMPLETE;
+    const step2Completed = appState === STATES.PHASE_3_PASSWORD_RESET ||
+        appState === STATES.VERIFICATION_COMPLETE;
 
     return (
         <div className={styles.container}>
             <div className={styles.card}>
-                <h1 className="text-3xl font-bold mb-6 text-[#3e2723] text-center">
+                <h1 className="text-3xl font-bold mb-6 text-[#6f4e37] text-center">
                     Recuperación de Contraseña
                 </h1>
 

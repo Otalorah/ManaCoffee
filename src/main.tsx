@@ -8,6 +8,7 @@ import Login from './pages/Login/Login'
 import SignUp from './pages/SignUp/SignUp'
 import Reservations from './pages/Reservations/Reservations'
 import BuildYourMenu from './pages/BuildYourMenu/BuildYourMenu'
+import Delivery from './pages/Delivery/Delivery'
 import Password from './pages/Password/Password'
 import Admin from './pages/Admin/Admin'
 import { AuthProvider } from './context/AuthContext'
@@ -23,6 +24,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/signup" element={<SignUp />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/build-your-menu" element={<BuildYourMenu />} />
+          <Route path="/delivery" element={<Delivery />} />
           <Route path="/password" element={<Password />} />
           <Route path="/admin" element={<Admin />} />
         </Routes>

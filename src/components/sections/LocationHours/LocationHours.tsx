@@ -11,10 +11,13 @@ const LocationHours = ({ mapImage, address, hours }: LocationHoursProps) => {
         <section className={styles.section}>
             <h2 className={styles.title}>Ubicación & Horario</h2>
             <div className={styles.mapContainer}>
-                <div
+                <a
                     className={styles.map}
                     style={{ backgroundImage: `url("${mapImage}")` }}
-                ></div>
+                    href="https://maps.app.goo.gl/FJjPWGYsVq2yv1bXA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                ></a>
             </div>
             <p className={styles.info}>{address} {hours}</p>
         </section>

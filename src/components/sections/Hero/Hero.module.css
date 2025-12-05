@@ -17,9 +17,7 @@
     min-height: 480px;
     flex-direction: column;
     gap: 1.5rem;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-color: #8b6f47;
     border-radius: 0.5rem;
     align-items: center;
     justify-content: center;
