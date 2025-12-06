@@ -19,7 +19,7 @@ function App() {
 
             <Hero
               title="Bienvenidos a Mana Coffee"
-              subtitle="En nuestro restobar creemos que cada taza, cada plato y cada encuentro cuenta una historia. Aquí, el aroma del café recién preparado se funde con deliciosos sabores, se mezcla con conversaciones que reconfortan y da vida a momentos que se guardan para siempre. Porque más que servir café o comida, creamos experiencias. El sabor de la buena compañía es insuperable. Y queremos que lo vivas en cada visita, ya sea para desayunar, almorzar, cenar o simplemente disfrutar de una buena copa."
+              subtitle="En nuestro restobar, cada encuentro cuenta una historia. Donde los aromas de café y buena comida se mezclan con conversaciones y momentos memorables. Porque más que servir, creamos experiencias. Y queremos que vivas la magia de la buena compañía en cada visita."
             />
 
 
