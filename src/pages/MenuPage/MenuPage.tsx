@@ -5,7 +5,7 @@ import styles from './MenuPage.module.css';
 
 const MenuPage = () => {
     // Ruta del PDF - Cambia esta ruta cuando tengas el PDF real
-    const PDF_PATH = '/menu.pdf';
+    const PDF_PATH = 'public/menu.pdf';
     const [pdfError, setPdfError] = useState(false);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const MenuPage = () => {
                         <div className={styles.menuHeader}>
                             <h1 className={styles.title}>Nuestro Menú</h1>
                             <p className={styles.subtitle}>
-                                Descubre nuestra selección de cafés especiales, bebidas artesanales y deliciosos acompañamientos
+                                Descubre nuestra selección de cafés especiales, bebidas artesanales y deliciosos alimentos
                             </p>
                         </div>
 

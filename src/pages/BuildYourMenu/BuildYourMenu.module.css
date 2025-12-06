@@ -67,6 +67,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .menuItem {
@@ -402,6 +404,14 @@
     }
 }
 
+@media (max-width: 400px) {
+    .mainContent {
+        padding: 0.5rem 0.5rem;
+        padding-top: 2rem;
+        right: 2rem;
+    }
+}
+
 .loaderContainer {
   display: flex;
   flex-direction: column;
@@ -429,3 +439,4 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+

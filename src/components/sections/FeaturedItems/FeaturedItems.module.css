@@ -1,10 +1,11 @@
 .section {
     margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .title {
     color: #6f4e37;
-    font-size: 1.375rem;
+    font-size: 1.4rem;
     font-weight: bold;
     line-height: 1.25;
     letter-spacing: -0.015em;
@@ -17,21 +18,10 @@
 }
 
 .carousel {
-    width: 100%;
-}
-
-@media (max-width: 400px) {
-    .carousel {
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-@media (min-width: 640px) {
-    .carousel {
-        width: 100%;
-    }
+    height: 530px;
+    width: 530px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .carouselContent {
@@ -39,23 +29,12 @@
 }
 
 .carouselItem {
-    padding-left: 0.75rem !important;
+    padding-left: 0 !important;
     flex-basis: 100%;
 }
 
-@media (min-width: 640px) {
-    .carouselItem {
-        flex-basis: 50%;
-    }
-}
-
-@media (min-width: 1024px) {
-    .carouselItem {
-        flex-basis: 33.333333%;
-    }
-}
-
 .carouselButton {
+    position: absolute;
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(201, 172, 146, 0.3);
     color: #8b6f47;
@@ -107,4 +86,57 @@
     font-size: 0.875rem;
     font-weight: normal;
     line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .section {
+        margin-top: 1rem;
+        margin-bottom: 0.15rem;
+    }
+    
+    .title {
+        font-size: 1.75rem;
+        padding: 0.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .carousel {
+        height: 38%;
+        width: 38%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .carouselItem {
+        flex-basis: 100%;
+    }
+
+}
+
+@media (max-width: 400px) {
+    .section {
+        margin-top: 1rem;
+        margin-bottom: 0.15rem;
+    }
+
+    .title {
+        font-size: 1.25rem;
+        padding: 0.5rem;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .carousel {
+        height: 28%;
+        width: 28%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .carouselItem {
+        flex-basis: 100%;
+    }
 }

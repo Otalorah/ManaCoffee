@@ -141,7 +141,7 @@ const BuildYourMenu = () => {
                 <Header />
                 <div className={styles.mainContent}>
                     <div className={styles.container}>
-                        <h1 className={styles.title}>Arma tu Menú</h1>
+                        <h1 className={styles.title}>Arma tu Almuerzo</h1>
 
                         {isLoading ? (
                             <div className={styles.loaderContainer}>

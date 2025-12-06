@@ -23,6 +23,7 @@
 .nav {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 2.25rem;
 }
 
@@ -167,9 +168,6 @@
 }
 
 @media (max-width: 768px) {
-    .desktopOnlyLink {
-        display: none;
-    }
 
     .header {
         padding: 0.5rem 1rem;
@@ -177,38 +175,23 @@
     }
 
     .navLink {
-        font-size: 0.75rem;
-        gap: 0.35rem;
+        font-size: 0.6rem;
+        gap: 0.32rem;
     }
 
     .nav {
-        gap: 1.5rem;
-    }
-
-    .ctaButton {
-        height: 2rem;
-        padding: 0 0.75rem;
-        font-size: 0.75rem;
-        min-width: auto;
-    }
-
-    .isButton {
-        font-size: 0.75rem;
-    }
-
-    .buttonContainer {
-        gap: 0.5rem;
+        gap: 0.275rem;
     }
 
     .imgContainer {
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
         margin-top: 5px;
     }
 
     .logoIcon {
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
     }
 }
 
@@ -220,33 +203,22 @@
     }
 
     .navLink {
-        font-size: 0.6rem;
-        gap: 0.25rem;
+        font-size: 0.42rem;
+        gap: 0.3rem;
     }
 
     .nav {
-        gap: 1rem;
-    }
-
-    .ctaButton {
-        height: 1.5rem;
-        padding: 0 0.5rem;
-        font-size: 0.6rem;
-        min-width: auto;
-    }
-
-    .isButton {
-        font-size: 0.6rem;
+        gap: 0.27rem;
     }
 
     .imgContainer {
-        width: 40px;
-        height: 40px;
+        width: 55px;
+        height: 55px;
         margin-top: 0;
     }
 
     .logoIcon {
-        width: 40px;
-        height: 40px;
+        width: 55px;
+        height: 55px;
     }
 }

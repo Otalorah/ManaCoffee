@@ -19,7 +19,8 @@ const LocationHours = ({ mapImage, address, hours }: LocationHoursProps) => {
                     rel="noopener noreferrer"
                 ></a>
             </div>
-            <p className={styles.info}>{address} {hours}</p>
+            <p className={styles.ubicationInfo}>{address}</p>
+            <p className={styles.hours}>{hours}</p>
         </section>
     );
 };

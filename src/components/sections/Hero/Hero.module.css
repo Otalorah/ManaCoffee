@@ -1,16 +1,13 @@
 .container {
     container-type: inline-size;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .wrapper {
     padding: 1rem;
 }
 
-@media (min-width: 480px) {
-    .wrapper {
-        padding: 1rem;
-    }
-}
 
 .hero {
     display: flex;
@@ -24,97 +21,94 @@
     padding: 1rem;
 }
 
-@media (min-width: 480px) {
-    .hero {
-        gap: 2rem;
-    }
-}
-
 .textContainer {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 3rem;
     text-align: center;
 }
 
 .title {
     color: white;
-    font-size: 1.75rem;
+    font-size: 3rem;
     font-weight: 900;
     line-height: 1.2;
     letter-spacing: -0.033em;
 }
 
-@media (min-width: 480px) {
-    .title {
-        font-size: 2.25rem;
-        font-weight: 900;
-        line-height: 1.2;
-        letter-spacing: -0.033em;
-    }
-}
-
-@media (min-width: 768px) {
-    .title {
-        font-size: 3rem;
-        font-weight: 900;
-        line-height: 1.2;
-        letter-spacing: -0.033em;
-    }
-}
-
 .subtitle {
     color: white;
-    font-size: 0.875rem;
+    font-size: 1.2rem;
     font-weight: normal;
-    line-height: 1.5;
+    line-height: 1.2;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+
 }
 
-@media (min-width: 480px) {
+@media (max-width: 768px) {
+
+    .wrapper {
+        padding: 0.5rem;
+    }
+
+    .hero {
+        max-height: 48%;
+        max-width: 48%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .title {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.033em;
+    }
+
     .subtitle {
         font-size: 1rem;
         font-weight: normal;
         line-height: 1.5;
     }
-}
 
-.ctaButton {
-    display: flex;
-    min-width: 84px;
-    max-width: 480px;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 0.5rem;
-    height: 2.5rem;
-    padding: 0 1rem;
-    background-color: #d46c11;
-    color: white;
-    font-size: 0.875rem;
-    font-weight: bold;
-    line-height: 1.5;
-    letter-spacing: 0.015em;
-    border: none;
-}
-
-@media (min-width: 480px) {
-    .ctaButton {
-        height: 3rem;
-        padding: 0 1.25rem;
-        font-size: 1rem;
-        font-weight: bold;
-        line-height: 1.5;
-        letter-spacing: 0.015em;
+    .textContainer {
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 }
 
-.ctaButton:hover {
-    background-color: #c05e0f;
+@media (max-width: 400px) {
+    .wrapper {
+        padding: 0.25rem;
+    }
+
+    .hero {
+        max-height: 35%;
+        max-width: 35%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .title {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.033em;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        font-weight: normal;
+        line-height: 1.2;
+    }
 }
 
-.ctaButtonText {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
