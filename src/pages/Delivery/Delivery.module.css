@@ -730,10 +730,14 @@
 /* Sidebar - Solo desktop */
 .sidebar {
   display: none;
-  position: relative;
+  position: fixed;
   width: 240px;
-  flex-shrink: 0;
-  align-self: flex-start;
+  top: 200px;
+  left: clamp(2.5rem, calc((100vw - 1400px) / 2 + 2.5rem), calc(100vw - 240px - 2.5rem));
+  z-index: 100;
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebarContent {
@@ -742,6 +746,8 @@
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(111, 78, 55, 0.08);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .sidebarTitle {
@@ -759,6 +765,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .categoryLink {
@@ -790,21 +797,21 @@
   box-shadow: 0 2px 8px rgba(184, 137, 75, 0.15);
 }
 
-/* Scrollbar para sidebar (si es necesario) */
-.sidebarContent::-webkit-scrollbar {
+/* Scrollbar para sidebar */
+.sidebar::-webkit-scrollbar {
   width: 6px;
 }
 
-.sidebarContent::-webkit-scrollbar-track {
+.sidebar::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.sidebarContent::-webkit-scrollbar-thumb {
+.sidebar::-webkit-scrollbar-thumb {
   background: #d4c4b0;
   border-radius: 3px;
 }
 
-.sidebarContent::-webkit-scrollbar-thumb:hover {
+.sidebar::-webkit-scrollbar-thumb:hover {
   background: #c9a882;
 }
 
@@ -902,8 +909,11 @@
 /* Desktop (1024px+) - Mostrar sidebar */
 @media (min-width: 1024px) {
   .sidebar {
-    margin-top: 200px;
     display: block;
+  }
+  
+  .container {
+    margin-left: 280px; /* 240px sidebar + 40px gap */
   }
   
   .mobileMenuToggle,
@@ -916,6 +926,10 @@
 @media (max-width: 1023px) {
   .sidebar {
     display: none;
+  }
+  
+  .container {
+    margin-left: 0;
   }
 
   .contentWrapper {

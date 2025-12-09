@@ -101,6 +101,8 @@ const Delivery = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const categoryRefs = useRef<Record<string, HTMLDivElement | null>>({});
     const observerRef = useRef<IntersectionObserver | null>(null);
+    const sidebarRef = useRef<HTMLElement | null>(null);
+    const sidebarButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
     // Handlers
     const handleQuantityChange = (itemId: string, delta: number) => {
@@ -365,18 +367,30 @@ const Delivery = () => {
     useEffect(() => {
         observerRef.current = new IntersectionObserver(
             (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-                        const categoryKey = entry.target.getAttribute('data-category');
-                        if (categoryKey && typeof categoryKey === 'string') {
-                            setActiveCategory(categoryKey);
+                // Find the entry with the highest intersection ratio that's in view
+                let maxRatio = 0;
+                let activeEntry: IntersectionObserverEntry | null = null;
+
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        const ratio = entry.intersectionRatio;
+                        if (ratio > maxRatio) {
+                            maxRatio = ratio;
+                            activeEntry = entry;
                         }
                     }
-                });
+                }
+
+                if (activeEntry && maxRatio > 0.1) {
+                    const categoryKey = activeEntry.target.getAttribute('data-category');
+                    if (categoryKey && typeof categoryKey === 'string') {
+                        setActiveCategory(categoryKey);
+                    }
+                }
             },
             {
-                rootMargin: '-100px 0px -50% 0px',
-                threshold: [0, 0.3, 0.5, 1]
+                rootMargin: '-120px 0px -60% 0px',
+                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
             }
         );
 
@@ -393,6 +407,37 @@ const Delivery = () => {
             }
         };
     }, [categories]);
+
+    // Auto-scroll sidebar to keep active category visible
+    useEffect(() => {
+        if (!activeCategory || !sidebarRef.current) return;
+
+        const activeButton = sidebarButtonRefs.current[activeCategory];
+        if (!activeButton) return;
+
+        const sidebar = sidebarRef.current;
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const buttonRect = activeButton.getBoundingClientRect();
+
+        // Check if button is outside visible area
+        const isAboveView = buttonRect.top < sidebarRect.top;
+        const isBelowView = buttonRect.bottom > sidebarRect.bottom;
+
+        if (isAboveView || isBelowView) {
+            // Calculate scroll position to center the active button
+            const buttonOffsetTop = activeButton.offsetTop;
+            const sidebarHeight = sidebar.clientHeight;
+            const buttonHeight = activeButton.offsetHeight;
+            
+            // Center the button in the sidebar
+            const targetScroll = buttonOffsetTop - (sidebarHeight / 2) + (buttonHeight / 2);
+            
+            sidebar.scrollTo({
+                top: Math.max(0, targetScroll),
+                behavior: 'smooth'
+            });
+        }
+    }, [activeCategory]);
 
     // Recursive renderer for menu items
     const renderMenuSection = (data: MenuSection, prefix: string, title?: string) => {
@@ -502,13 +547,16 @@ const Delivery = () => {
                 <div className={styles.mainContent}>
                     <div className={styles.contentWrapper}>
                         {/* Sidebar Navigation - Desktop */}
-                        <aside className={styles.sidebar}>
+                        <aside ref={sidebarRef} className={styles.sidebar}>
                             <div className={styles.sidebarContent}>
                                 <h3 className={styles.sidebarTitle}>Categorías</h3>
                                 <nav className={styles.categoryNav}>
                                     {categories.map((categoryKey) => (
                                         <button
                                             key={categoryKey}
+                                            ref={(el: HTMLButtonElement | null) => {
+                                                sidebarButtonRefs.current[categoryKey] = el;
+                                            }}
                                             className={`${styles.categoryLink} ${activeCategory === categoryKey ? styles.categoryLinkActive : ''}`}
                                             onClick={() => scrollToCategory(categoryKey)}
                                         >
