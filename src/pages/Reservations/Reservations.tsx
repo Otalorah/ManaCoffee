@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { FormEvent } from 'react';
 import { Calendar } from '@/components/ui/calendar';
-import { Calendar as CalendarIcon, Users, FileText, CheckCircle, AlertCircle, User, Mail, Phone, Clock } from 'lucide-react';
+import { Calendar as CalendarIcon, Users, FileText, CheckCircle, AlertCircle, User, Mail, Phone, Clock, X } from 'lucide-react';
 import Header from '../../components/layout/Header/Header';
 import styles from './Reservations.module.css';
 
@@ -20,9 +20,6 @@ export default function Reservations() {
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
     const [showContactModal, setShowContactModal] = useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
     const [contactError, setContactError] = useState('');
     type ReservationRecord = {
         date: string;
@@ -38,7 +35,7 @@ export default function Reservations() {
         phone?: string;
     };
 
-    const [tempReservationData, setTempReservationData] = useState<ReservationRecord | null>(null);
+    const [_tempReservationData, setTempReservationData] = useState<ReservationRecord | null>(null);
 
     // --- Helpers to persist and read reservations locally (used for availability checks) ---
     const STORAGE_KEY = 'mc_reservations';
@@ -259,17 +256,22 @@ export default function Reservations() {
         setLoading(true);
 
         try {
-            // Format time for display
-            const [hours, minutes] = time.split(':');
-            const timeFormatted = `${hours}:${minutes}`;
-            const timeFormatted12h = new Date(`2000-01-01T${time}`).toLocaleTimeString('es-ES', {
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: true
-            });
+            if (!selectedDate) {
+                setContactError('Por favor selecciona una fecha');
+                setLoading(false);
+                return;
+            }
+
+            // Calculate people count
+            const peopleCount = parseInt(numberOfPeople);
+            if (isNaN(peopleCount) || peopleCount < 1 || peopleCount > 35) {
+                setContactError('El número de personas debe estar entre 1 y 35');
+                setLoading(false);
+                return;
+            }
 
             // Create reservation data
-            const reservationData = {
+            const reservationData: ReservationRecord = {
                 date: selectedDate.toISOString(),
                 dateFormatted: selectedDate.toLocaleDateString('es-ES', {
                     weekday: 'long',
@@ -277,19 +279,19 @@ export default function Reservations() {
                     month: 'long',
                     day: 'numeric'
                 }),
-                time: timeFormatted,
-                timeFormatted: timeFormatted12h,
+                time: reservationType === 'time' ? timeValue || null : null,
                 name: name.trim(),
                 email: email.trim(),
                 phone: phone.trim(),
                 numberOfPeople: peopleCount,
                 reason: reason.trim(),
                 timestamp: new Date().toISOString(),
-                timestampFormatted: new Date().toLocaleString('es-ES')
+                timestampFormatted: new Date().toLocaleString('es-ES'),
+                reservationType: reservationType
             };
 
             // Check availability against stored reservations
-            const availability = isAvailable(completeReservationData);
+            const availability = isAvailable(reservationData);
             if (!availability.ok) {
                 setContactError(availability.message || 'Sin cupo. Comunícate al WhatsApp.');
                 setLoading(false);
@@ -300,7 +302,7 @@ export default function Reservations() {
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
             const filename = `reservation_${timestamp}.json`;
 
-            console.log('Reservación completa:', completeReservationData);
+            console.log('Reservación completa:', reservationData);
             console.log('Sería guardada en:', `public/data/reservations/${filename}`);
 
             // Simulate API call
@@ -308,7 +310,7 @@ export default function Reservations() {
 
             // Persist to localStorage (so availability checks work)
             try {
-                saveReservationToStorage(completeReservationData);
+                saveReservationToStorage(reservationData);
             } catch (err) {
                 console.warn('No se pudo guardar localmente', err);
             }
