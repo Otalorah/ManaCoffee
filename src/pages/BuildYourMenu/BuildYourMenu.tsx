@@ -13,6 +13,30 @@ interface MenuItem {
     amount: string;
 }
 
+const STORAGE_KEY = 'buildYourMenu_items';
+const STORAGE_TIMESTAMP_KEY = 'buildYourMenu_items_timestamp';
+
+const loadMenuFromStorage = (): MenuItem[] | null => {
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            return JSON.parse(stored) as MenuItem[];
+        }
+    } catch (error) {
+        console.error('Error al leer del localStorage:', error);
+    }
+    return null;
+};
+
+const saveMenuToStorage = (items: MenuItem[]): void => {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        localStorage.setItem(STORAGE_TIMESTAMP_KEY, Date.now().toString());
+    } catch (error) {
+        console.error('Error al guardar en localStorage:', error);
+    }
+};
+
 const loadMenuAPI = async (): Promise<MenuItem[]> => {
     try {
         const response = await fetch('https://apimanacoffee-production.up.railway.app/menu/get');
@@ -24,6 +48,9 @@ const loadMenuAPI = async (): Promise<MenuItem[]> => {
             throw new Error(errorMessage);
         }
         console.log('Menú cargado exitosamente:', data);
+
+        // Guardar en localStorage después de obtener los datos exitosamente
+        saveMenuToStorage(data);
 
         return data;
     } catch (error) {
@@ -49,11 +76,29 @@ const BuildYourMenu = () => {
         const fetchMenu = async () => {
             try {
                 setIsLoading(true);
-                const items = await loadMenuAPI();
-                setMenuItems(items);
+                
+                // Intentar cargar desde localStorage primero
+                const storedItems = loadMenuFromStorage();
+                if (storedItems && storedItems.length > 0) {
+                    setMenuItems(storedItems);
+                    setIsLoading(false);
+                    
+                    // Actualizar en segundo plano sin bloquear la UI
+                    try {
+                        const freshItems = await loadMenuAPI();
+                        setMenuItems(freshItems);
+                    } catch (error) {
+                        console.error('Error al actualizar el menú en segundo plano:', error);
+                        // Si falla la actualización, mantenemos los datos del localStorage
+                    }
+                } else {
+                    // Si no hay datos en localStorage, cargar desde la API
+                    const items = await loadMenuAPI();
+                    setMenuItems(items);
+                    setIsLoading(false);
+                }
             } catch (error) {
                 console.error('Error al cargar el menú:', error);
-            } finally {
                 setIsLoading(false);
             }
         };
