@@ -30,7 +30,7 @@ function App() {
             <div id="our-story">
               <OurStory
                 title="Nuestra Historia"
-                content="Fundada en 2010, Coffee Corner ha sido un lugar querido para los amantes del café y los visitantes casuales. Nuestra pasión por el café de calidad y el servicio amable nos ha convertido en un favorito local. Obtenemos nuestros granos de las mejores plantaciones del mundo, asegurando que cada taza sea una experiencia deliciosa."
+                content="Nacidos en Enero de 2025, Mana Coffee se ha convertido en un lugar especial para los amantes del café y la buena comida."
               />
             </div>
 

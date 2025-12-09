@@ -1,12 +1,15 @@
 .section {
     margin-bottom: 1rem;
     margin-top: 1rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .title {
     color: #6f4e37;
-    font-size: 1.4rem;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: bolder;
     line-height: 1.25;
     letter-spacing: -0.015em;
     padding: 1.25rem 1rem 0.75rem;
@@ -76,14 +79,14 @@
 
 .itemTitle {
     color: #4a3b32;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.1rem;
     line-height: 1.5;
+    font-weight: bold;
 }
 
 .itemDescription {
     color: #9b8570;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: normal;
     line-height: 1.5;
 }
@@ -97,16 +100,11 @@
     .title {
         font-size: 1.75rem;
         padding: 0.5rem;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
     }
 
     .carousel {
         height: 38%;
         width: 38%;
-        margin-left: auto;
-        margin-right: auto;
     }
 
     .carouselItem {
@@ -124,16 +122,11 @@
     .title {
         font-size: 1.25rem;
         padding: 0.5rem;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
     }
 
     .carousel {
         height: 28%;
         width: 28%;
-        margin-left: auto;
-        margin-right: auto;
     }
 
     .carouselItem {

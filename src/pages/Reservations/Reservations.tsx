@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { FormEvent } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { Calendar as CalendarIcon, Users, FileText, CheckCircle, AlertCircle } from 'lucide-react';
@@ -12,6 +12,10 @@ export default function Reservations() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

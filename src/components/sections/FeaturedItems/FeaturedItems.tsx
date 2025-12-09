@@ -7,6 +7,8 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 
+import Autoplay from "embla-carousel-autoplay";
+
 interface FeaturedItem {
     image: string;
     title: string;
@@ -27,6 +29,11 @@ const FeaturedItems = ({ items }: FeaturedItemsProps) => {
                         align: "start",
                         loop: true,
                     }}
+                    plugins={[
+                        Autoplay({
+                            delay: 4000,
+                        }),
+                    ]}
                     className={styles.carousel}
                 >
                     <CarouselContent className={styles.carouselContent}>
