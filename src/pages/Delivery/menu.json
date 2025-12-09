@@ -1,0 +1,756 @@
+{
+  "menu": {
+    "clásicos": [
+      {
+        "nombre": "Americano",
+        "descripción": "Café filtrado.",
+        "precio": "3.000"
+      },
+      {
+        "nombre": "Espresso",
+        "descripción": "Café concentrado.",
+        "precio": "3.500"
+      },
+      {
+        "nombre": "Cappuccino",
+        "descripción": "Café, leche vaporizada. (Los productos vienen con una pequeña adición de canela).",
+        "precios": [
+          {"tamaño": "7oz", "precio": "3.500"},
+          {"tamaño": "9oz", "precio": "5.800"}
+        ]
+      },
+      {
+        "nombre": "Moca",
+        "descripción": "Café, chocolate, leche vaporizada.",
+        "precios": [
+          {"tamaño": "7oz", "precio": "6.500"},
+          {"tamaño": "9oz", "precio": "6.800"}
+        ]
+      },
+      {
+        "nombre": "Latte",
+        "descripción": "Café, Leche vaporizada.",
+        "precios": [
+          {"tamaño": "7oz", "precio": "5.500"},
+          {"tamaño": "9oz", "precio": "6.500"}
+        ]
+      }
+    ],
+    "disfruta": [
+      {
+        "nombre": "Café Nevado",
+        "descripción": "Café, Crema batida.",
+        "precio": "5.000"
+      },
+      {
+        "nombre": "Cappu Nevado",
+        "descripción": "Café, Crema batida, Leche.",
+        "precio": "6.500"
+      },
+      {
+        "nombre": "Moca Nevado",
+        "descripción": "Café, Crema batida, Chocolate.",
+        "precio": "7.500"
+      },
+      {
+        "nombre": "Cappuccino + Sabor",
+        "descripción": "Cappu + (Vainilla, Menta, Canela).",
+        "precio": "7.000"
+      },
+      {
+        "nombre": "Cappuccino + Baileys",
+        "descripción": null,
+        "precio": "8.500"
+      },
+      {
+        "nombre": "Affogato",
+        "descripción": "Helado, Espresso, galleta.",
+        "precio": "8.000"
+      },
+      {
+        "nombre": "Affogato + Baileys",
+        "descripción": null,
+        "precio": "10.000"
+      },
+      {
+        "nombre": "ADICIONAL: Queso",
+        "descripción": null,
+        "precio": "3.500"
+      }
+    ],
+    "frappes": [
+      {
+        "nombre": "Frappé de café",
+        "descripción": "Café, Leche, Granizado, Crema batida.",
+        "precio": "12.000"
+      },
+      {
+        "nombre": "Frappé de Milo",
+        "descripción": "Milo, Leche, Granizado, Crema batida.",
+        "precio": "11.000"
+      }
+    ],
+    "copa_de_helado": [
+      {
+        "nombre": "Normal",
+        "descripción": null,
+        "precio": "4.000"
+      },
+      {
+        "nombre": "Premium",
+        "descripción": "Viene con diferentes frutas.",
+        "precio": "6.500"
+      }
+    ],
+    "fresas_con_crema": [
+      {
+        "nombre": "Fresas con Crema",
+        "descripción": null,
+        "precio": "10.000"
+      },
+      {
+        "nombre": "Premium",
+        "descripción": "Con chocolate, piazza, mini chips. Fruticrema.",
+        "precio": "12.000"
+      }
+    ],
+    "migao_colombiano": [
+      {
+        "nombre": "Migao Colombiano",
+        "descripción": "Galleta, Queso, Buñuelo, Pan, Masmelo, Canela y chocolate.",
+        "precio": "15.000"
+      }
+    ],
+    "bebidas_calientes": [
+      {
+        "nombre": "Chocolate",
+        "descripción": "Chocolate en agua o leche.",
+        "precios": [
+          {"base": "Agua", "precio": "5.000"},
+          {"base": "Leche", "precio": "6.000"}
+        ]
+      },
+      {
+        "nombre": "Aguapanela",
+        "descripción": "Aguapanela sola.",
+        "precio": "3.000"
+      },
+      {
+        "nombre": "Aguapanela en Leche",
+        "descripción": null,
+        "precio": "3.300"
+      },
+      {
+        "nombre": "Té Chai",
+        "descripción": "Té negro, Especias, Leche.",
+        "precio": "5.000"
+      },
+      {
+        "nombre": "Chocolate + Masmelo",
+        "descripción": null,
+        "precio": "7.000"
+      },
+      {
+        "nombre": "Infusión aromática",
+        "descripción": "Papeleta Infusión. Sabores: Frutos Rojos, Manzanilla, Hierbabuena, Manzanilla - Miel y Jengibre, Limonaria, Toronjil o Menta.",
+        "precio": "2.500"
+      },
+      {
+        "nombre": "Aromática en Leche",
+        "descripción": "Papeleta Infusión. Sabores: Frutos Rojos, Manzanilla, Hierbabuena, Manzanilla - Miel y Jengibre, Limonaria, Toronjil o Menta.",
+        "precio": "3.800"
+      },
+      {
+        "nombre": "Aromática Frutos Rojos",
+        "descripción": "Frutas Rojas, Agua caliente.",
+        "precio": "6.000"
+      },
+      {
+        "nombre": "Aromática Frutos Amarillos",
+        "descripción": "Frutos Amarillos, agua caliente.",
+        "precio": "6.000"
+      }
+    ],
+    "malteadas": [
+      {
+        "nombre": "Malteada Vainilla",
+        "descripción": "Helado de vainilla, Leche, Chantilly",
+        "precio": "11.500"
+      },
+      {
+        "nombre": "Malteada de Arequipe",
+        "descripción": "Helado de Vainilla, Arequipe, Leche, Chantilly",
+        "precio": "12.500"
+      },
+      {
+        "nombre": "Malteada de Oreo",
+        "descripción": "Helado, Oreo, Leche, Chantilly",
+        "precio": "12.500"
+      },
+      {
+        "nombre": "Malteada de Café",
+        "descripción": "Helado, Café, Leche, Chantilly",
+        "precio": "13.500"
+      },
+      {
+        "nombre": "Malteada de Milo",
+        "descripción": "Helado, Milo, Leche, Chantilly",
+        "precio": "12.500"
+      },
+      {
+        "nombre": "Malteada de Fresa",
+        "descripción": "Helado, Fresa, Leche, Chantilly",
+        "precio": "12.500"
+      }
+    ],
+    "repostería": [
+      {"nombre": "Torta de Red Velvet", "precio": "7.300"},
+      {"nombre": "Torta de Chocolate", "precio": "7.300"},
+      {"nombre": "Torta Genovesa", "precio": "7.300"},
+      {"nombre": "Torta de Zanahoria", "precio": "7.300"},
+      {"nombre": "Torta de Queso", "precio": "7.300"},
+      {"nombre": "Torta Selva Negra", "precio": "7.300"},
+      {"nombre": "Cheescake Frutos Rojos", "precio": "8.000"},
+      {"nombre": "Cheescake Frutos Amarillos", "precio": "8.000"},
+      {"nombre": "Brownie", "precio": "7.000"},
+      {"nombre": "Brownie con Helado", "precio": "10.000"},
+      {"nombre": "Quesillo", "precio": "7.300"},
+      {"nombre": "Cupcake de Red Velvet", "precio": "5.000"},
+      {"nombre": "Cupcake de Vainilla", "precio": "4.000"}
+    ],
+    "se_te_antoja": [
+      {"nombre": "Mantecada MANÁ", "precio": "4.000"},
+      {"nombre": "Hojaldre de pollo", "precio": "3.500"},
+      {"nombre": "Palito de Queso", "precio": "3.500"},
+      {"nombre": "Croissant jamón y queso", "precio": "3.500"},
+      {"nombre": "Arepa con queso", "precio": "3.000"},
+      {"nombre": "Buñuelo", "precio": "3.000"},
+      {"nombre": "Galletas de Café", "precio": "5.000"},
+      {"nombre": "Galletas de Queso", "precio": "5.000"},
+      {"nombre": "Galletas New York (chocolate, queso)", "precio": "5.000"}
+    ],
+    "adicionales_repostería": [
+      {"nombre": "Nutella", "precio": "2.000"},
+      {"nombre": "Crema Chantilly", "precio": "2.500"},
+      {"nombre": "Masmelo (3 unidades)", "precio": "2.000"},
+      {"nombre": "Bola de helado", "precio": "3.000"},
+      {"nombre": "Chocolate Líquido", "precio": "1.200"},
+      {"nombre": "Jamón y Queso", "precio": "6.000"}
+    ],
+    "desayunos": {
+      "especiales": [
+        {
+          "nombre": "Huevos benedictinos con salsa holandesa.",
+          "descripción": null,
+          "precio": "19.000"
+        },
+        {
+          "nombre": "Tortilla Española",
+          "descripción": "huevos, pollo desmechado, chorizo y vegetales.",
+          "precio": "19.900"
+        },
+        {
+          "nombre": "Tostadas francesas con dips de queso mozzarella",
+          "descripción": null,
+          "precio": "16.000"
+        },
+        {
+          "nombre": "Desayuno perfecto",
+          "descripción": "Caldo (huevos o costilla), arepa o pan, huevos (pericos, rancheros, revueltos o fritos) y bebida caliente.",
+          "precio": "19.500"
+        },
+        {
+          "nombre": "Tamal",
+          "descripción": "Tamal, con queso y pan tostado al ajillo y bebida caliente.",
+          "precio": "12.900"
+        }
+      ],
+      "caldos": [
+        {
+          "nombre": "Caldo de Costilla",
+          "descripción": null,
+          "precio": "12.900"
+        },
+        {
+          "nombre": "Caldo con huevo",
+          "descripción": "En agua o leche",
+          "precio": "12.900"
+        },
+        {
+          "nombre": "Caldo de Bagre",
+          "descripción": "En agua o leche",
+          "precio": "17.000"
+        },
+        {
+          "nombre": "Caldo de Pollo",
+          "descripción": null,
+          "precio": "12.900"
+        }
+      ],
+      "huevos": [
+        {
+          "nombre": "Pericos, Rancheros, Revueltos, Fritos",
+          "descripción": null,
+          "precio": "13.000"
+        },
+        {
+          "nombre": "Omelette",
+          "descripción": null,
+          "precio": "15.000"
+        }
+      ],
+      "adicionales": [
+        {"nombre": "Arepa", "precio": "3.000"},
+        {"nombre": "Queso", "precio": "3.500"},
+        {"nombre": "Tostadas", "precio": "1.900"},
+        {"nombre": "Costilla", "precio": "4.900"},
+        {"nombre": "Pan", "precio": "2.500"},
+        {"nombre": "Tamal", "precio": "6.000"},
+        {"nombre": "Consomé de costilla", "precio": "5.000"},
+        {"nombre": "Caldo de Costilla sin arepa", "precio": "9.000"}
+      ]
+    },
+    "almuerzos": {
+      "carnes_(330_gr)": [
+        {
+          "nombre": "Churrasco",
+          "descripción": "Acompañado de ensalada de la casa, papa criolla al ajillo, chorizo.",
+          "precio": "47.000"
+        },
+        {
+          "nombre": "Filet Mignon",
+          "descripción": "Corte de lomo fino tierno bañado en salsa de champiñones cremosos en reducción de vino tinto, acompañado de cremoso de papas y ensalada de la casa.",
+          "precio": "48.000"
+        },
+        {
+          "nombre": "Medallones de Res con Salsa de Camarones.",
+          "descripción": "Carne finamente picada asada con salsa de camarones en vino blanco",
+          "precio": "52.000"
+        }
+      ],
+      "aves_(330_gr)": [
+        {
+          "nombre": "Cordon Blue",
+          "descripción": "Pechuga rellena de jamón, queso y vegetales confitados, bañados en salsa de tocineta y maíz, acompañado de papas a la francesa y ensalada de la casa.",
+          "precio": "40.000"
+        },
+        {
+          "nombre": "Pechuga Hawaiana",
+          "descripción": "Filete de pechuga gratinada con piña asada caramelizada, acompañada de papas a la francesa y ensalada de la casa.",
+          "precio": "34.000"
+        },
+        {
+          "nombre": "Pasta Con Pollo a los 4 quesos",
+          "descripción": "Pasta acompañada de pechuga asada bañada en salsa 4 quesos y tocino, con tostadas de pan al ajillo.",
+          "precio": "40.000"
+        }
+      ],
+      "mariscos": [
+        {
+          "nombre": "Arroz Marinero",
+          "descripción": "Arroz con mixtura de mariscos y vegetales finamente picados, acompañado con plumas de plátanos.",
+          "precio": "50.000"
+        },
+        {
+          "nombre": "Pastas Green con Langostinos",
+          "descripción": "Pastas fetuccini bañadas en exquisita salsa de vegetales verdes con langostinos, acompañados con pan de la casa.",
+          "precio": "43.000"
+        },
+        {
+          "nombre": "Salmón en salsa de Frutos Rojos",
+          "descripción": "Lomo de Salmón bañado en salsa de frutos rojos, acompañado de ensalada salteada y papas a la francesa.",
+          "precio": "48.000"
+        },
+        {
+          "nombre": "Salmón a la Toscana",
+          "descripción": "Lomo de Salmón en salsa toscana, acompañado de discos de patacones y ensaladas de la casa.",
+          "precio": "52.000"
+        }
+      ],
+      "ceviches": [
+        {
+          "nombre": "Ceviche Cartagenero",
+          "descripción": "Camarones marinados en limón y salsa de la casa, con verduras en corte brunoise, acompañado de plumas de plátano.",
+          "precio": "30.000"
+        },
+        {
+          "nombre": "Ceviche Peruano",
+          "descripción": "Camarones marinados en salsa rosada de la casa, limón y brunoise de verduras, maíz dulce y aguacate.",
+          "precio": "30.000"
+        },
+        {
+          "nombre": "Causita de Langostino",
+          "descripción": "Langostinos y camarones marinados envueltos en puré de papa amarilla, aderezados con pimentón asado y limón.",
+          "precio": "50.000"
+        },
+        {
+          "nombre": "Ceviche Especial Maná",
+          "descripción": "Chicharrón de cerdo marinado en salsa de la casa, acompañado de discos de patacones",
+          "precio": "31.900"
+        }
+      ]
+    },
+    "ensaladas": [
+      {"nombre": "Ensalada Griega", "precio": "12.900"},
+      {"nombre": "Ensalada Cesar", "precio": "15.000"},
+      {"nombre": "Ensalada Waldocf", "precio": "16.900"},
+      {"nombre": "Ensalada de Frutas", "precio": "13.900"},
+      {"nombre": "Ensalada de Frutas con helado", "precio": "16.900"}
+    ],
+    "adicionales_almuerzos": [
+      {"nombre": "Arroz", "precio": "4.000"},
+      {"nombre": "Papas a la Francesa", "precio": "5.200"},
+      {"nombre": "Aguacate", "precio": "6.000"},
+      {"nombre": "Carnes (Res, Cerdo o Pechuga)", "precio": "8.000"},
+      {"nombre": "Sopa de día", "precio": "5.000"},
+      {"nombre": "Ensalada del día", "precio": "3.200"},
+      {"nombre": "Tajadas de Maduro", "precio": "3.000"},
+      {"nombre": "Maiz", "precio": "3.000"},
+      {"nombre": "Tocineta", "precio": "5.000"},
+      {"nombre": "Huevo", "precio": "3.000"},
+      {"nombre": "Queso", "precio": "3.500"},
+      {"nombre": "Chorizo", "precio": "4.000"},
+      {"nombre": "Salchicha", "precio": "3.000"},
+      {"nombre": "Granos del día", "precio": "4.000"},
+      {"nombre": "Patacones", "precio": "6.500"},
+      {"nombre": "Papas locas", "precio": "9.900"}
+    ],
+    "menú_vegetariano": [
+      {
+        "nombre": "Hamburguesa",
+        "descripción": "Champiñones, Maíz, Apio España, Calabacín asado, Queso, Lechuga, Tomate y Salsa de la casa.",
+        "precio": "19.900"
+      },
+      {
+        "nombre": "Maicitos",
+        "descripción": "Champiñones, Maíz, Apio España, Calabacín asado y Vegetales Frescos.",
+        "precio": "23.000"
+      },
+      {
+        "nombre": "Wraps",
+        "descripción": "Tortilla rellena con vegetales salteados y salsas de la casa.",
+        "precio": "19.000"
+      }
+    ],
+    "comidas_rápidas": {
+      "wraps": [
+        {
+          "nombre": "Pollo",
+          "descripción": "Trozos de pechuga, Vegetales, Ripio de papa, Jamón, Queso, Tocineta y Salsa de la casa.",
+          "precio": "20.000"
+        },
+        {
+          "nombre": "Carne",
+          "descripción": "Trozos de carne, Vegetales, Ripio de papa, Jamón, Queso, Tocineta y Salsa de la casa.",
+          "precio": "20.000"
+        },
+        {
+          "nombre": "Mixto",
+          "descripción": "Trozos de carne, Trozos de pollo, Vegetales, Ripio de papa, Jamón, Queso, Tocineta, Chorizo argentino y Salsa de la casa.",
+          "precio": "23.000"
+        }
+      ],
+      "hamburguesas": [
+        {
+          "nombre": "Clásica",
+          "descripción": "Pan brioche, carne artesanal, jamón, queso, cebolla caramelizada y vegetales.",
+          "precio": "16.000"
+        },
+        {
+          "nombre": "Mixta",
+          "descripción": "Pan brioche, carne artesanal, pollo desmechado tarteado, tocineta, cebolla caramelizada y vegetales.",
+          "precio": "21.000"
+        },
+        {
+          "nombre": "La Pamplonesa",
+          "descripción": "Pan brioche, carne artesanal, carne desmechada con génovas, salchichón cervecero, jamón, queso, tocineta, cebolla caramelizada y vegetales.",
+          "precio": "23.000"
+        },
+        {
+          "nombre": "Alemana",
+          "descripción": "Pan brioche, carne artesanal, queso doble crema, mermelada de tocineta, cebolla caramelizada y vegetales.",
+          "precio": "22.000"
+        },
+        {
+          "nombre": "Chicken's",
+          "descripción": "Pan brioche, pechuga asada, jamón, queso, tocineta, cebolla caramelizada y vegetales.",
+          "precio": "20.000"
+        },
+        {
+          "nombre": "Doble",
+          "descripción": "Pan brioche, doble carne artesanal, jamón, queso, tocineta, cebolla caramelizada y vegetales.",
+          "precio": "29.900"
+        },
+        {
+          "nombre": "Hamburguesa especial Maná",
+          "descripción": "Pan brioche, carne artesanal, jamón, queso, tocineta, cebolla morada, huevo, tocineta, bañada en queso mozzarella, coronada con topping de tocineta y chorizo.",
+          "precio": "35.000"
+        },
+        {
+          "nombre": "Hawaiana",
+          "descripción": "Pan brioche, carne artesanal, jamón, queso, tocineta, piña asada con tajin, vegetales frescos.",
+          "precio": "35.000"
+        }
+      ],
+      "hot_dogs": [
+        {
+          "nombre": "Americano",
+          "descripción": "Pan de perro caliente, salchicha americana, papa ripio, queso, tocineta y salsas de la casa.",
+          "precio": "15.900"
+        },
+        {
+          "nombre": "Mixto",
+          "descripción": "Pan de perro caliente, salchicha americana, pollo desmechado, papa ripio, queso, tocineta y salsa de la casa.",
+          "precio": "20.000"
+        },
+        {
+          "nombre": "Argentino",
+          "descripción": "Pan de perro caliente, chorizo argentino bañado en chimichurri, papa ripio, queso, tocineta y vegetales.",
+          "precio": "22.000"
+        },
+        {
+          "nombre": "Doble",
+          "descripción": "Pan de perro caliente, doble salchicha, papa ripio, doble queso, doble tocineta, pollo desmechado.",
+          "precio": "24.500"
+        }
+      ],
+      "desgranados": [
+        {
+          "nombre": "De Pollo",
+          "descripción": "Base de maíz dulce, trozos de pechuga asada, coronado con queso gratinado y topping de tocineta.",
+          "precio": "23.000"
+        },
+        {
+          "nombre": "De Carne",
+          "descripción": "Base de maíz dulce, acompañado de trozos de carne asada, coronado con queso gratinado y topping de tocineta.",
+          "precio": "23.000"
+        },
+        {
+          "nombre": "Mixto",
+          "descripción": "Base de maíz dulce, acompañado de trozos de carne y pollo, queso gratinado y topping de tocineta.",
+          "precio": "27.000"
+        }
+      ],
+      "picadas": [
+        {
+          "nombre": "Personal",
+          "descripción": "Incluye: Base de vegetales frescos, papas francesas, papas criollas, maduritos, salchichas, chorizos, mix de carnes, queso, maíz dulce y salsas de la casa.",
+          "precio": "25.900"
+        },
+        {
+          "nombre": "Doble",
+          "descripción": "Incluye: Base de vegetales frescos, papas francesas, papas criollas, maduritos, salchichas, chorizos, mix de carnes, queso, maíz dulce y salsas de la casa.",
+          "precio": "39.900"
+        },
+        {
+          "nombre": "Familiar",
+          "descripción": "Incluye: Base de vegetales frescos, papas francesas, papas criollas, maduritos, salchichas, chorizos, mix de carnes, queso, maíz dulce y salsas de la casa.",
+          "precio": "64.900"
+        }
+      ],
+      "sandwich": [
+        {
+          "nombre": "Clásico",
+          "descripción": "Pan de sandwich artesanal, acompañado de jamón, queso y vegetales frescos.",
+          "precio": "12.000"
+        },
+        {
+          "nombre": "Pollo",
+          "descripción": "Pan de sandwich artesanal, acompañado de pollo desmechado, jamón, queso y vegetales frescos.",
+          "precio": "15.000"
+        },
+        {
+          "nombre": "Carne",
+          "descripción": "Pan de sandwich artesanal, acompañado de carne desmechada, jamón, queso y vegetales frescos.",
+          "precio": "15.000"
+        },
+        {
+          "nombre": "Mixto",
+          "descripción": "Pan de sandwich artesanal, acompañado de carne desmechada, pollo desmechado, jamón, queso y vegetales frescos.",
+          "precio": "18.000"
+        },
+        {
+          "nombre": "House Maná",
+          "descripción": "Doble pan de sandwich artesanal, filete de pechuga, huevo, jamón, queso, vegetales con porción de papa a la francesa.",
+          "precio": "25.000"
+        },
+        {
+          "nombre": "Club",
+          "descripción": null,
+          "precio": "25.000"
+        }
+      ],
+      "patacones": [
+        {
+          "nombre": "Pollo",
+          "descripción": "Incluye: Tapa de Patacón, vegetales frescos, proteína, jamón, queso y salsas de la casa.",
+          "precio": "15.000"
+        },
+        {
+          "nombre": "Carne",
+          "descripción": "Incluye: Tapa de Patacón, vegetales frescos, proteína, jamón, queso y salsas de la casa.",
+          "precio": "15.000"
+        },
+        {
+          "nombre": "Mixto",
+          "descripción": "Incluye: Tapa de Patacón, vegetales frescos, proteína, jamón, queso y salsas de la casa.",
+          "precio": "20.000"
+        },
+        {
+          "nombre": "Trifásico",
+          "descripción": "Incluye: Tapa de Patacón, vegetales frescos, proteína, jamón, queso y salsas de la casa.",
+          "precio": "30.000"
+        }
+      ],
+      "salchipapas": [
+        {
+          "nombre": "Clásica",
+          "descripción": "Incluye: Vegetales, papas a la francesa, proteína, queso y salsas de la casa.",
+          "precio": "16.000"
+        },
+        {
+          "nombre": "De pollo",
+          "descripción": "Incluye: Vegetales, papas a la francesa, proteína, queso y salsas de la casa.",
+          "precio": "20.000"
+        },
+        {
+          "nombre": "De carne",
+          "descripción": "Incluye: Vegetales, papas a la francesa, proteína, queso y salsas de la casa.",
+          "precio": "21.000"
+        },
+        {
+          "nombre": "Mixta",
+          "descripción": "Incluye: Vegetales, papas a la francesa, proteína, queso y salsas de la casa.",
+          "precio": "25.000"
+        },
+        {
+          "nombre": "Coripapa",
+          "descripción": "Incluye: Vegetales, papas a la francesa, proteína, queso y salsas de la casa.",
+          "precio": "18.000"
+        }
+      ]
+    },
+    "menú_infantil": [
+      {
+        "nombre": "Child croquette",
+        "descripción": "Croqueta de carne, Papa a la francesa, Salsas de la casa y Natu Malta.",
+        "precio": "21.900"
+      },
+      {
+        "nombre": "Chickentender",
+        "descripción": "Trozos de pechuga apanada, Papas a la francesa, Salsas de la casa y Natu malta.",
+        "precio": "21.900"
+      },
+      {
+        "nombre": "Miniburger",
+        "descripción": "Mini Hamburguesa de carne y queso, Papas a la francesa, Salsas de la casa y Natu malta.",
+        "precio": "24.900"
+      }
+    ],
+    "bebidas_frias": {
+      "jugos_naturales": [
+        {
+          "nombre": "En Agua",
+          "sabores": "Guanábana, Mango, Mora, Fresa, Maracuyá y Durazno.",
+          "precio": "7.000"
+        },
+        {
+          "nombre": "En Leche",
+          "sabores": "Guanábana, Mango, Mora, Fresa, Maracuyá, Durazno",
+          "precio": "9.000"
+        }
+      ],
+      "limonadas": [
+        {"nombre": "Clásica", "descripción": "Limón, Agua, Azúcar", "precio": "5.000"},
+        {"nombre": "Panela", "descripción": "Limón, Agua, Panela", "precio": "6.000"},
+        {"nombre": "Burbujeante", "descripción": "Limón, Soda, Azúcar", "precio": "7.000"},
+        {"nombre": "Santandereana", "descripción": "Limón, Hipinto, Hierbabuena", "precio": "7.500"},
+        {"nombre": "Hierbabuena", "descripción": "Limón, Hierbabuena", "precio": "6.500"},
+        {"nombre": "Cerezada", "descripción": "Cereza, Limón, Agua", "precio": "8.500"},
+        {"nombre": "Coco", "descripción": "Esencia de coco, Limón, Crema de leche", "precio": "10.000"},
+        {"nombre": "Frutos rojos", "descripción": "Limón, Soda, Azúcar, Frutos rojos, Menta", "precio": "10.000"},
+        {"nombre": "Frutos amarillos", "descripción": "Limón, Soda, Azúcar, Frutos amarillos, Menta", "precio": "10.000"}
+      ],
+      "sodas": [
+        {"nombre": "Infusión de Soda", "descripción": "Soda, Limón, hierbabuena, Sabor dulce y trozos de fruta. Sabores: (Kiwi, Fresa, Mora, Mango)", "precio": "10.000"}
+      ]
+    },
+    "mocktails": [
+      {
+        "nombre": "Frutos Rojos Refrescantes",
+        "descripción": "Frutas Rojas, Limón, Jugo de Arándanos",
+        "precio": "10.000"
+      },
+      {
+        "nombre": "Amarillo Tropical",
+        "descripción": "Mango, Maracuyá, Piña, Limón",
+        "precio": "10.000"
+      },
+      {
+        "nombre": "Marácumango",
+        "descripción": null,
+        "precio": "8.000"
+      }
+    ],
+    "micheladas": [
+      {"nombre": "Clásica", "descripción": "Limón con sal (se puede pedir con Ginger o Gaseosa)", "precio": "1.500"},
+      {"nombre": "Michelada Mango biche", "descripción": "Limón, Mango, Pimienta, Tajín (se puede pedir con Ginger o Gaseosa)", "precio": "4.500"},
+      {"nombre": "Frutos Rojos", "descripción": "Limón, Frutos Rojos, Azúcar (se puede pedir con Ginger o Gaseosa)", "precio": "5.000"},
+      {"nombre": "Frutos Amarillos", "descripción": "Limón, Sal, Frutos Amarillos (se puede pedir con Ginger o Gaseosa)", "precio": "5.000"},
+      {"nombre": "Michelada Maná", "descripción": "Limón, Fresa, Whiskey, Tequila, Tajín (se puede pedir con Ginger o Gaseosa)", "precio": "6.000"},
+      {"nombre": "Diablito", "descripción": "Piña, Limón, Jack Fire, Sal, Tabasco, tajín, pimienta. (se puede pedir con Ginger o Gaseosa)", "precio": "7.000"}
+    ],
+    "cervezas": [
+      {"nombre": "Andina", "precio": "5.000"},
+      {"nombre": "Poker", "precio": "5.000"},
+      {"nombre": "Budweiser", "precio": "5.000"},
+      {"nombre": "Club Colombia", "precio": "5.500"},
+      {"nombre": "Corona", "precio": "9.000"},
+      {"nombre": "Coronita", "precio": "6.000"},
+      {"nombre": "Heineken", "precio": "5.500"},
+      {"nombre": "Águila", "precio": "5.000"}
+    ],
+    "cócteles": [
+      {"nombre": "Mojito Clásico", "descripción": "Ron blanco, Hierbabuena, Limón, Soda", "precio": "14.000"},
+      {"nombre": "Margarita Tradicional", "descripción": "Tequila, Triple Sec, Limón, Sal", "precio": "15.000"},
+      {"nombre": "Piña Colada", "descripción": "Ron Blanco, Helado, Crema de coco, piña", "precio": "19.000"},
+      {"nombre": "Sex on The Beach", "descripción": "Vodka, Licor de Durazno, Naranja, Arándano", "precio": "18.000"},
+      {"nombre": "Orgasm", "descripción": "Amaretto, Licor de Café, Baileys, Crema de leche", "precio": "18.000"},
+      {"nombre": "Penicillin", "descripción": "Jack honey, Limón, Ginebra, Whiskey Aumado", "precio": "19.000"},
+      {"nombre": "Moscow Mule", "descripción": "Vodka, Cerveza, Ginger, Limón", "precio": "18.000"},
+      {"nombre": "Daikiri", "descripción": "Ron Blanco, Limón, Fruta (elegir), Dulce", "precio": "15.000"},
+      {"nombre": "Caipiroska", "descripción": "Limón Macerado, Azúcar, Vodka", "precio": "16.000"},
+      {"nombre": "Caipirissima", "descripción": "Limón Macerado, Azúcar, Ron", "precio": "16.000"},
+      {"nombre": "Whiskey Sour", "descripción": "Limón, Azúcar, Clara de Huevo, Whiskey", "precio": "14.000"},
+      {"nombre": "Alexander", "descripción": "Licor de Café, Bailey's, Crema de Leche, Ginebra, Canela.", "precio": "18.000"}
+    ],
+    "otras_bebidas": [
+      {"nombre": "Agua", "precio": "2.000"},
+      {"nombre": "Gaseosa 350ml", "precio": "3.200"},
+      {"nombre": "Gaseosa 500ml", "precio": "4.000"},
+      {"nombre": "Jugo Hit 250 ml", "precio": "2.900"},
+      {"nombre": "Jarra de limonada", "precio": "9.000"},
+      {"nombre": "Jarra de cerezada", "precio": "13.000"},
+      {"nombre": "Jarra de Panelada", "precio": "10.000"},
+      {"nombre": "Gaseosa 1.5 Lt", "precio": "8.000"},
+      {"nombre": "Cocacola 1.5 Lt", "precio": "9.000"},
+      {"nombre": "Jugo Hit 350 ml", "precio": "3.200"},
+      {"nombre": "Jugo Hit 500 ml", "precio": "3.600"},
+      {"nombre": "Natu Malta mini", "precio": "1.800"},
+      {"nombre": "Natu Malta 400 ml", "precio": "3.900"},
+      {"nombre": "Natu Malta Lt", "precio": "6.000"},
+      {"nombre": "Agua Lt", "precio": "3.000"},
+      {"nombre": "Soda 350ml", "precio": "3.200"},
+      {"nombre": "Soda 1.5 Lt", "precio": "7.000"},
+      {"nombre": "Ginger (Canada Dry)", "precio": "3.200"},
+      {"nombre": "Gaseosa 2.5 Lt", "precio": "10.000"},
+      {"nombre": "Gatorade", "precio": "4.500"},
+      {"nombre": "Mr Tea", "precio": "3.700"},
+      {"nombre": "Suero CRISTAL", "precio": "3.000"}
+    ],
+    "vinos": [
+      {"nombre": "Copa de Vino", "precio": "12.000"},
+      {"nombre": "Vino Caliente", "precio": "15.000"}
+    ]
+  }
+}

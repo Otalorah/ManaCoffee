@@ -4,11 +4,12 @@
     margin-left: auto;
     margin-right: auto;
     container-type: inline-size;
+    text-align: center;
 }
 
 .title {
     color: #6f4e37;
-    font-size: 1.4rem;
+    font-size: 2rem;
     font-weight: bold;
     line-height: 1.25;
     letter-spacing: -0.015em;
@@ -33,9 +34,6 @@
         font-size: 2rem;
         font-weight: bold;
         line-height: 1.5;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
     }
 
     .content {
@@ -62,9 +60,6 @@
         font-size: 1.75rem;
         font-weight: bold;
         line-height: 1.5;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
     }
 
     .content {

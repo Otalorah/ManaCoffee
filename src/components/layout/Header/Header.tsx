@@ -12,6 +12,7 @@ const Header = () => {
 
     const closeMobileMenu = () => {
         setIsMobileMenuOpen(false);
+        window.scrollTo(0, 0);
     };
 
     return (
@@ -34,19 +35,19 @@ const Header = () => {
             {/* Desktop Navigation */}
             <div className={styles.navContainer}>
                 <nav className={styles.nav}>
-                    <Link className={styles.navLink} to="/menu">
+                    <Link className={styles.navLink} to="/menu" onClick={() => window.scrollTo(0, 0)}>
                         <BookOpen size={18} />
                         <span>Nuestro menú</span>
                     </Link>
-                    <Link className={styles.navLink} to="/reservations">
+                    <Link className={styles.navLink} to="/reservations" onClick={() => window.scrollTo(0, 0)}>
                         <CalendarCheck size={18} />
                         <span>Reservaciones</span>
                     </Link>
-                    <Link className={styles.navLink} to="/build-your-menu">
+                    <Link className={styles.navLink} to="/build-your-menu" onClick={() => window.scrollTo(0, 0)}>
                         <ChefHat size={18} />
                         <span>Arma tu almuerzo</span>
                     </Link>
-                    <Link className={styles.navLink} to="/delivery">
+                    <Link className={styles.navLink} to="/delivery" onClick={() => window.scrollTo(0, 0)}>
                         <Truck size={18} />
                         <span>Domicilios</span>
                     </Link>

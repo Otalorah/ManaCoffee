@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { FormEvent } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import { Calendar as CalendarIcon, Users, FileText, CheckCircle, AlertCircle, X } from 'lucide-react';
@@ -88,6 +88,10 @@ export default function Reservations() {
         if (totalForTime + Number(newRes.numberOfPeople) > 35) return { ok: false, message: 'Sin cupo. Comunícate al WhatsApp.' };
         return { ok: true };
     };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

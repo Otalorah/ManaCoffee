@@ -8,9 +8,9 @@ type DeliveryOption = 'delivery' | 'restaurant';
 type PaymentMethod = 'efectivo' | 'nequi' | 'bancolombia';
 
 interface MenuItem {
-  name: string;
-  price: number;
-  amount: string;
+    name: string;
+    price: number;
+    amount: string;
 }
 
 const loadMenuAPI = async (): Promise<MenuItem[]> => {
@@ -18,19 +18,19 @@ const loadMenuAPI = async (): Promise<MenuItem[]> => {
         const response = await fetch('https://apimanacoffee-production.up.railway.app/menu/get');
         const data: MenuItem[] = await response.json();
         if (!response.ok) {
-            const errorMessage = (data as { detail?: string; error?: string }).detail || 
-                                (data as { detail?: string; error?: string }).error || 
-                                `Error ${response.status}: Error desconocido del servidor.`;
+            const errorMessage = (data as { detail?: string; error?: string }).detail ||
+                (data as { detail?: string; error?: string }).error ||
+                `Error ${response.status}: Error desconocido del servidor.`;
             throw new Error(errorMessage);
         }
         console.log('Menú cargado exitosamente:', data);
-   
+
         return data;
     } catch (error) {
         if (error instanceof Error) {
             throw error;
         }
-        
+
         throw new Error('Error de conexión. Verifica tu internet.');
     }
 };
@@ -45,6 +45,7 @@ const BuildYourMenu = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const fetchMenu = async () => {
             try {
                 setIsLoading(true);
@@ -58,7 +59,7 @@ const BuildYourMenu = () => {
         };
         fetchMenu();
     }, []);
- 
+
     const handleQuantityChange = (id: number, delta: number) => {
         setQuantities(prev => {
             const current = prev[id] || 0;
