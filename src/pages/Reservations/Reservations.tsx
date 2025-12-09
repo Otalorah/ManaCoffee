@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import type { FormEvent } from 'react';
 import { Calendar } from '@/components/ui/calendar';
-import { Calendar as CalendarIcon, Users, FileText, CheckCircle, AlertCircle } from 'lucide-react';
+import { Calendar as CalendarIcon, Users, FileText, CheckCircle, AlertCircle, User, Mail, Phone, Clock } from 'lucide-react';
 import Header from '../../components/layout/Header/Header';
 import styles from './Reservations.module.css';
 
 export default function Reservations() {
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+    const [time, setTime] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [numberOfPeople, setNumberOfPeople] = useState('');
     const [reason, setReason] = useState('');
     const [error, setError] = useState('');
@@ -17,6 +21,34 @@ export default function Reservations() {
         window.scrollTo(0, 0);
     }, []);
 
+    // Generate time options every 30 minutes from 7:30 AM to 9:00 PM
+    const generateTimeOptions = () => {
+        const options: { value: string; label: string }[] = [];
+        const startMinutes = 7 * 60 + 30; // 7:30 AM in minutes
+        const endMinutes = 20.5 * 60; // 9:00 PM (21:00) in minutes
+        
+        for (let minutes = startMinutes; minutes <= endMinutes; minutes += 30) {
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            const time24h = `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+            const date = new Date(`2000-01-01T${time24h}`);
+            const time12h = date.toLocaleTimeString('es-ES', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+            
+            options.push({
+                value: time24h,
+                label: time12h
+            });
+        }
+        
+        return options;
+    };
+
+    const timeOptions = generateTimeOptions();
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
@@ -25,6 +57,33 @@ export default function Reservations() {
         // Validation
         if (!selectedDate) {
             setError('Por favor selecciona una fecha para tu reservación');
+            return;
+        }
+
+        if (!time.trim()) {
+            setError('Por favor selecciona una hora para tu reservación');
+            return;
+        }
+
+        if (!name.trim()) {
+            setError('Por favor ingresa tu nombre completo');
+            return;
+        }
+
+        if (!email.trim()) {
+            setError('Por favor ingresa tu correo electrónico');
+            return;
+        }
+
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.trim())) {
+            setError('Por favor ingresa un correo electrónico válido');
+            return;
+        }
+
+        if (!phone.trim()) {
+            setError('Por favor ingresa tu número de teléfono');
             return;
         }
 
@@ -42,6 +101,15 @@ export default function Reservations() {
         setLoading(true);
 
         try {
+            // Format time for display
+            const [hours, minutes] = time.split(':');
+            const timeFormatted = `${hours}:${minutes}`;
+            const timeFormatted12h = new Date(`2000-01-01T${time}`).toLocaleTimeString('es-ES', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+
             // Create reservation data
             const reservationData = {
                 date: selectedDate.toISOString(),
@@ -51,6 +119,11 @@ export default function Reservations() {
                     month: 'long',
                     day: 'numeric'
                 }),
+                time: timeFormatted,
+                timeFormatted: timeFormatted12h,
+                name: name.trim(),
+                email: email.trim(),
+                phone: phone.trim(),
                 numberOfPeople: peopleCount,
                 reason: reason.trim(),
                 timestamp: new Date().toISOString(),
@@ -74,6 +147,10 @@ export default function Reservations() {
 
             // Reset form
             setSelectedDate(undefined);
+            setTime('');
+            setName('');
+            setEmail('');
+            setPhone('');
             setNumberOfPeople('');
             setReason('');
 
@@ -156,6 +233,76 @@ export default function Reservations() {
 
                         <form onSubmit={handleSubmit} className={styles.form}>
                             <div className={styles.fieldContainer}>
+                                <label htmlFor="time" className={styles.label}>
+                                    <Clock size={18} className={styles.labelIcon} />
+                                    Hora de la Reservación
+                                </label>
+                                <select
+                                    id="time"
+                                    value={time}
+                                    onChange={(e) => setTime(e.target.value)}
+                                    className={styles.input}
+                                    required
+                                >
+                                    <option value="">Selecciona una hora</option>
+                                    {timeOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                                <p className={styles.fieldHint}>Horario disponible: 7:30 am - 9:00 pm (cada 30 minutos)</p>
+                            </div>
+
+                            <div className={styles.fieldContainer}>
+                                <label htmlFor="name" className={styles.label}>
+                                    <User size={18} className={styles.labelIcon} />
+                                    Nombre Completo
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className={styles.input}
+                                    placeholder="Ej: Juan Pérez"
+                                    required
+                                />
+                            </div>
+
+                            <div className={styles.fieldContainer}>
+                                <label htmlFor="email" className={styles.label}>
+                                    <Mail size={18} className={styles.labelIcon} />
+                                    Correo Electrónico
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className={styles.input}
+                                    placeholder="Ej: juan.perez@ejemplo.com"
+                                    required
+                                />
+                            </div>
+
+                            <div className={styles.fieldContainer}>
+                                <label htmlFor="phone" className={styles.label}>
+                                    <Phone size={18} className={styles.labelIcon} />
+                                    Teléfono
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    className={styles.input}
+                                    placeholder="Ej: +34 123 456 789"
+                                    required
+                                />
+                            </div>
+
+                            <div className={styles.fieldContainer}>
                                 <label htmlFor="numberOfPeople" className={styles.label}>
                                     <Users size={18} className={styles.labelIcon} />
                                     Número de Personas
@@ -195,7 +342,7 @@ export default function Reservations() {
 
                             <button
                                 type="submit"
-                                disabled={loading || !selectedDate}
+                                disabled={loading || !selectedDate || !time}
                                 className={styles.submitButton}
                             >
                                 {loading ? (

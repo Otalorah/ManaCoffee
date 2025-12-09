@@ -97,6 +97,56 @@ const BuildYourMenu = () => {
         return true;
     }, [quantities, deliveryOption, deliveryData]);
 
+    const constructWhatsAppMessage = (
+        items: Array<{ name: string; quantity: number; price: number; subtotal: number }>,
+        deliveryOption: DeliveryOption,
+        deliveryData: { address: string; phone: string },
+        paymentMethod: PaymentMethod,
+        total: number
+    ) => {
+        let message = "¡Hola, Mana Coffee!\n\n";
+        message += "Quiero hacer un pedido de almuerzo personalizado con los siguientes datos:\n\n";
+        message += "---\n\n";
+
+        // 1. DETALLES DEL PEDIDO
+        message += "*1. DETALLES DEL PEDIDO*\n";
+        items.forEach(item => {
+            message += `- ${item.quantity} x ${item.name} (${formatCurrency(item.price)} c/u)\n`;
+        });
+        message += `\n*Total:* ${formatCurrency(total)}\n\n`;
+
+        // 2. TIPO DE ENTREGA
+        message += "*2. TIPO DE ENTREGA*\n";
+        if (deliveryOption === 'delivery') {
+            message += "- *Tipo:* Domicilio\n";
+            message += `- *Dirección:* ${deliveryData.address}\n`;
+            message += `- *Teléfono de Contacto:* ${deliveryData.phone}\n`;
+        } else {
+            message += "- *Tipo:* Comer en restaurante\n\n";
+        }
+
+        // 3. MÉTODO DE PAGO
+        message += "*3. MÉTODO DE PAGO*\n";
+        let paymentType = '';
+        switch (paymentMethod) {
+            case 'efectivo':
+                paymentType = "Efectivo";
+                break;
+            case 'nequi':
+                paymentType = "Nequi";
+                break;
+            case 'bancolombia':
+                paymentType = "Transferencia Bancaria (Bancolombia)";
+                break;
+        }
+        message += `- *Forma de Pago:* ${paymentType}\n\n`;
+
+        message += "---\n\n";
+        message += "¡Muchas gracias!";
+
+        return message;
+    };
+
     const handleCompleteOrder = () => {
         if (!isValidOrder) return;
 
@@ -110,16 +160,18 @@ const BuildYourMenu = () => {
                 }))
                 .filter(item => item.quantity > 0);
 
-            const orderData = {
-                date: new Date().toISOString(),
-                items: selectedItems,
+            // Construct WhatsApp message
+            const message = constructWhatsAppMessage(
+                selectedItems,
                 deliveryOption,
-                deliveryData: deliveryOption === 'delivery' ? deliveryData : null,
+                deliveryData,
                 paymentMethod,
                 total
-            };
+            );
 
-            console.log('Pedido realizado con éxito:', orderData);
+            // Open WhatsApp
+            const whatsappUrl = `https://wa.me/573150118386?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
 
             setShowSuccess(true);
 
@@ -130,7 +182,7 @@ const BuildYourMenu = () => {
 
             setTimeout(() => {
                 setShowSuccess(false);
-            }, 3000);
+            }, 5000);
 
         } catch (error) {
             console.error('Error al procesar el pedido:', error);
@@ -269,7 +321,7 @@ const BuildYourMenu = () => {
                                 {showSuccess && (
                                     <div className={styles.successAlert}>
                                         <CheckCircle2 className={styles.alertIcon} />
-                                        <p>¡Pedido realizado con éxito! Revisa la consola para ver los detalles.</p>
+                                        <p>¡Pedido realizado con éxito! Se ha abierto WhatsApp para que puedas enviar tu pedido.</p>
                                     </div>
                                 )}
                             </>
