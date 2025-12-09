@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, CalendarCheck, Truck, ChefHat, Menu, X } from 'lucide-react';
 import styles from './Header.module.css';
 
 const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMediumOrSmall, setIsMediumOrSmall] = useState(false);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMediumOrSmall(window.innerWidth <= 768);
+        };
+
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+        return () => window.removeEventListener('resize', checkScreenSize);
+    }, []);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -19,7 +30,7 @@ const Header = () => {
         <header className={styles.header}>
             <div className={styles.imgContainer}>
                 <a href="/">
-                    <img className={styles.logoIcon} src="/images/LOGOFNUDE.webp" alt="" />
+                    <img className={styles.logoIcon} src={isMediumOrSmall ? "/images/Blanco Cafe SF.webp" : "/images/LOGOFNUDE.webp"} alt="" />
                 </a>
             </div>
 
