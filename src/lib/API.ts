@@ -1,4 +1,5 @@
 import type { UserRegistrationData, ApiResponse, EmailData, CodeData, PasswordUpdateData } from '../types/api';
+import type { MenuItem, VerifyTokenResponse, SaveMenuResponse } from '../types/admin';
 /**
  * URL base de la API
  */
@@ -158,6 +159,88 @@ export const sendCode = async (codeUser: CodeData): Promise<ApiResponse> => {
         if (error instanceof Error) {
             throw error;
         }
+        throw new Error('Error de conexión. Verifica tu internet.');
+    }
+};
+
+/**
+ * Verificación del token de autenticación.
+ * @param token El token de autenticación del usuario.
+ * @returns Una promesa que resuelve con el estado de verificación.
+ */
+export const verifyTokenAPI = async (token: string | null): Promise<VerifyTokenResponse> => {
+    return new Promise((resolve) => {
+        // Simulación de latencia de red
+        setTimeout(() => {
+            if (token) {
+                resolve({ success: true, message: 'Token verificado correctamente.' });
+            } else {
+                resolve({ success: false, message: 'Token inválido o expirado.' });
+            }
+        }, 500);
+    });
+};
+
+/**
+ * Guarda o actualiza el menú en el servidor.
+ * @param menuData La lista de elementos del menú a guardar.
+ * @returns Una promesa que resuelve con la respuesta del servidor.
+ */
+export const saveMenuAPI = async (menuData: MenuItem[]): Promise<SaveMenuResponse> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/menu/update`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(menuData)
+        });
+
+        const data: SaveMenuResponse = await response.json();
+
+        if (!response.ok) {
+            const errorMessage = (data as { detail?: string; error?: string }).detail ||
+                (data as { detail?: string; error?: string }).error ||
+                `Error ${response.status}: Error desconocido del servidor.`;
+            throw new Error(errorMessage);
+        }
+
+        console.log('Registro exitoso:', data);
+        return data;
+
+    } catch (error) {
+        if (error instanceof Error) {
+            throw error;
+        }
+
+        throw new Error('Error de conexión. Verifica tu internet.');
+    }
+};
+
+/**
+ * Carga la lista actual de elementos del menú desde el servidor.
+ * @returns Una promesa que resuelve con la lista de MenuItem.
+ */
+export const loadMenuAPI = async (): Promise<MenuItem[]> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/menu/get`);
+        const data: MenuItem[] = await response.json();
+
+        if (!response.ok) {
+            const errorMessage = (data as { detail?: string; error?: string }).detail ||
+                (data as { detail?: string; error?: string }).error ||
+                `Error ${response.status}: Error desconocido del servidor.`;
+            throw new Error(errorMessage);
+        }
+
+        console.log('Menú cargado exitosamente:', data);
+        return data;
+
+    } catch (error) {
+        if (error instanceof Error) {
+            throw error;
+        }
+
         throw new Error('Error de conexión. Verifica tu internet.');
     }
 };

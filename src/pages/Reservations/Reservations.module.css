@@ -205,6 +205,24 @@
     gap: 0.5rem;
 }
 
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.radioLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: #4b4036;
+}
+
+.input[type="time"] {
+    max-width: 160px;
+}
+
 .label {
     font-size: 0.875rem;
     font-weight: 600;
@@ -361,6 +379,111 @@ select:hover {
     .title {
         font-size: 2.5rem;
     }
+}
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modalTitle {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.closeButton:hover:not(:disabled) {
+    color: #000;
+}
+
+.closeButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modalActions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.cancelButton {
+    flex: 1;
+    padding: 12px 24px;
+    border: 2px solid #ddd;
+    background: white;
+    color: #666;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancelButton:hover:not(:disabled) {
+    border-color: #999;
+    color: #333;
+}
+
+.cancelButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 @media (max-width: 400px) {

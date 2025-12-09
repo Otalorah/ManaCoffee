@@ -10,7 +10,7 @@ import Reservations from './pages/Reservations/Reservations'
 import BuildYourMenu from './pages/BuildYourMenu/BuildYourMenu'
 import Delivery from './pages/Delivery/Delivery'
 import Password from './pages/Password/Password'
-import Admin from './pages/Admin/Admin'
+import Admin from './pages/Admin/MenuManager'
 import { AuthProvider } from './context/AuthContext'
 
 createRoot(document.getElementById('root')!).render(

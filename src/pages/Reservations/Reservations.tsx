@@ -13,9 +13,113 @@ export default function Reservations() {
     const [phone, setPhone] = useState('');
     const [numberOfPeople, setNumberOfPeople] = useState('');
     const [reason, setReason] = useState('');
+    // Reservation time/type: 'time' = specific HH:mm, 'full' = restaurante completo
+    const [reservationType, setReservationType] = useState<'time' | 'full'>('time');
+    const [timeValue, setTimeValue] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [showContactModal, setShowContactModal] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [contactError, setContactError] = useState('');
+    type ReservationRecord = {
+        date: string;
+        dateFormatted: string;
+        numberOfPeople: number;
+        reason: string;
+        timestamp: string;
+        timestampFormatted: string;
+        reservationType: 'time' | 'full';
+        time?: string | null;
+        name?: string;
+        email?: string;
+        phone?: string;
+    };
+
+    const [tempReservationData, setTempReservationData] = useState<ReservationRecord | null>(null);
+
+    // --- Helpers to persist and read reservations locally (used for availability checks) ---
+    const STORAGE_KEY = 'mc_reservations';
+
+    const loadReservations = (): ReservationRecord[] => {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return [];
+            return JSON.parse(raw) as ReservationRecord[];
+        } catch (err) {
+            console.error('Error reading reservations from storage', err);
+            return [];
+        }
+    };
+
+    const saveReservationToStorage = (reservation: ReservationRecord) => {
+        try {
+            const list = loadReservations();
+            list.push(reservation);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        } catch (err) {
+            console.error('Error saving reservation to storage', err);
+        }
+    };
+
+    const isAvailable = (newRes: ReservationRecord): { ok: boolean; message?: string } => {
+        const existing = loadReservations();
+
+        const newDateOnly = new Date(newRes.date).toDateString();
+
+        const hasFullOnDate = existing.some((r) => r.reservationType === 'full' && new Date(r.date).toDateString() === newDateOnly);
+        if (hasFullOnDate) return { ok: false, message: 'Sin cupo. Comunícate al WhatsApp.' };
+
+        if (newRes.reservationType === 'full') {
+            const anyOnDate = existing.some((r) => new Date(r.date).toDateString() === newDateOnly);
+            if (anyOnDate) return { ok: false, message: 'Sin cupo. Comunícate al WhatsApp.' };
+            return { ok: true };
+        }
+
+        // (no 'allday' option: only 'time' or 'full')
+
+        // specific time
+        const time = newRes.time || '';
+        const totalForTime = existing.reduce((sum: number, r) => {
+            if (new Date(r.date).toDateString() !== newDateOnly) return sum;
+            if (r.reservationType === 'full') return sum + 35;
+            if (r.time === time) return sum + (Number(r.numberOfPeople) || 0);
+            return sum;
+        }, 0);
+
+        if (totalForTime + Number(newRes.numberOfPeople) > 35) return { ok: false, message: 'Sin cupo. Comunícate al WhatsApp.' };
+        return { ok: true };
+    };
+
+    // Generate selectable 1-hour intervals starting every 30 minutes from 07:00,
+    // including only those whose end time is <= 21:00. Returns value and label.
+    const generateIntervals = () => {
+        const intervals: { value: string; label: string; start: string; end: string }[] = [];
+        const open = 7 * 60; // minutes
+        const close = 21 * 60; // minutes
+        const lastStart = close - 60; // last start so that end <= close
+        for (let m = open; m <= lastStart; m += 30) {
+            const startMin = m;
+            const endMin = m + 60;
+            if (endMin > close) continue;
+            const pad = (n: number) => String(n).padStart(2, '0');
+            const start = `${pad(Math.floor(startMin / 60))}:${pad(startMin % 60)}`;
+            const end = `${pad(Math.floor(endMin / 60))}:${pad(endMin % 60)}`;
+
+            const fmt = (hhmm: string) => {
+                const [h, mm] = hhmm.split(':').map(Number);
+                const d = new Date();
+                d.setHours(h, mm, 0, 0);
+                return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+            };
+
+            const label = `${fmt(start)} – ${fmt(end)}`;
+            intervals.push({ value: `${start}-${end}`, label, start, end });
+        }
+        return intervals;
+    };
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -52,7 +156,7 @@ export default function Reservations() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError('');
-        setSuccess(false);
+        setContactError('');
 
         // Validation
         if (!selectedDate) {
@@ -98,6 +202,60 @@ export default function Reservations() {
             return;
         }
 
+        if (reservationType === 'time' && !timeValue) {
+            setError('Por favor selecciona la hora de la reservación');
+            return;
+        }
+
+        // Guardar datos temporales y mostrar modal
+        const reservationData: ReservationRecord = {
+            date: selectedDate.toISOString(),
+            dateFormatted: selectedDate.toLocaleDateString('es-ES', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }),
+            numberOfPeople: peopleCount,
+            reason: reason.trim(),
+            timestamp: new Date().toISOString(),
+            timestampFormatted: new Date().toLocaleString('es-ES'),
+            reservationType: reservationType,
+            time: reservationType === 'time' ? timeValue || null : null
+        };
+
+        setTempReservationData(reservationData);
+        setShowContactModal(true);
+    };
+
+    const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setContactError('');
+
+        // Validar nombre
+        if (!name.trim()) {
+            setContactError('Por favor ingresa tu nombre');
+            return;
+        }
+
+        // Validar email
+        if (!email.trim()) {
+            setContactError('Por favor ingresa tu correo electrónico');
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setContactError('Por favor ingresa un correo electrónico válido');
+            return;
+        }
+
+        // Validar teléfono
+        if (!phone.trim()) {
+            setContactError('Por favor ingresa tu número celular');
+            return;
+        }
+
         setLoading(true);
 
         try {
@@ -130,22 +288,35 @@ export default function Reservations() {
                 timestampFormatted: new Date().toLocaleString('es-ES')
             };
 
+            // Check availability against stored reservations
+            const availability = isAvailable(completeReservationData);
+            if (!availability.ok) {
+                setContactError(availability.message || 'Sin cupo. Comunícate al WhatsApp.');
+                setLoading(false);
+                return;
+            }
+
             // Create filename with timestamp
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
             const filename = `reservation_${timestamp}.json`;
 
-            // In a real application, this would be sent to a backend API
-            // For now, we'll log it and show success
-            console.log('Reservation data:', reservationData);
-            console.log('Would save to:', `public/data/reservations/${filename}`);
+            console.log('Reservación completa:', completeReservationData);
+            console.log('Sería guardada en:', `public/data/reservations/${filename}`);
 
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 500));
 
+            // Persist to localStorage (so availability checks work)
+            try {
+                saveReservationToStorage(completeReservationData);
+            } catch (err) {
+                console.warn('No se pudo guardar localmente', err);
+            }
+
             // Show success message
             setSuccess(true);
 
-            // Reset form
+            // Reset all form
             setSelectedDate(undefined);
             setTime('');
             setName('');
@@ -153,15 +324,31 @@ export default function Reservations() {
             setPhone('');
             setNumberOfPeople('');
             setReason('');
+            setName('');
+            setEmail('');
+            setPhone('');
+            setShowContactModal(false);
+            setTempReservationData(null);
 
             // Scroll to top to show success message
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
         } catch (err) {
             console.error('Error saving reservation:', err);
-            setError('Error al guardar la reservación. Por favor intenta de nuevo.');
+            setContactError('Error al guardar la reservación. Por favor intenta de nuevo.');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const closeModal = () => {
+        if (!loading) {
+            setShowContactModal(false);
+            setName('');
+            setEmail('');
+            setPhone('');
+            setContactError('');
+            setTempReservationData(null);
         }
     };
 
@@ -223,6 +410,55 @@ export default function Reservations() {
                                 </p>
                             </div>
                         )}
+
+                        {/* Time / Full options moved under calendar (left side) */}
+                        <div className={styles.fieldContainer}>
+                            <label className={styles.label}>
+                                <FileText size={18} className={styles.labelIcon} />
+                                Hora de Reservación
+                            </label>
+
+                            <div className={styles.radioGroup}>
+                                <label className={styles.radioLabel}>
+                                    <input
+                                        type="radio"
+                                        name="reservationType"
+                                        value="time"
+                                        checked={reservationType === 'time'}
+                                        onChange={() => setReservationType('time')}
+                                    />
+                                    Hora específica
+                                </label>
+
+                                {reservationType === 'time' && (
+                                    <select
+                                        id="timeInterval"
+                                        aria-label="Hora de la reservación"
+                                        value={timeValue}
+                                        onChange={(e) => { setTimeValue(e.target.value); setReservationType('time'); }}
+                                        className={styles.input}
+                                        required
+                                    >
+                                        <option value="">Selecciona un intervalo</option>
+                                        {generateIntervals().map((it) => (
+                                            <option key={it.value} value={it.value}>{it.label}</option>
+                                        ))}
+                                    </select>
+                                )}
+
+                                <label className={styles.radioLabel}>
+                                    <input
+                                        type="radio"
+                                        name="reservationType"
+                                        value="full"
+                                        checked={reservationType === 'full'}
+                                        onChange={() => setReservationType('full')}
+                                    />
+                                    Reservar restaurante completo
+                                </label>
+                            </div>
+
+                        </div>
                     </div>
 
                     <div className={styles.formSection}>
@@ -321,6 +557,8 @@ export default function Reservations() {
                                 <p className={styles.fieldHint}>Máximo 35 personas</p>
                             </div>
 
+                            
+
                             <div className={styles.fieldContainer}>
                                 <label htmlFor="reason" className={styles.label}>
                                     <FileText size={18} className={styles.labelIcon} />
@@ -353,7 +591,7 @@ export default function Reservations() {
                                 ) : (
                                     <>
                                         <CheckCircle size={20} />
-                                        Confirmar Reservación
+                                        Confirmar
                                     </>
                                 )}
                             </button>
@@ -361,6 +599,113 @@ export default function Reservations() {
                     </div>
                 </div>
             </div>
+
+            {/* Modal para datos de contacto */}
+            {showContactModal && (
+                <div className={styles.modalOverlay} onClick={closeModal}>
+                    <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+                        <div className={styles.modalHeader}>
+                            <h2 className={styles.modalTitle}>Información de Contacto</h2>
+                            <button
+                                type="button"
+                                onClick={closeModal}
+                                disabled={loading}
+                                className={styles.closeButton}
+                            >
+                                <X size={24} />
+                            </button>
+                        </div>
+
+                        {contactError && (
+                            <div className={styles.errorAlert}>
+                                <AlertCircle className={styles.alertIcon} />
+                                <p>{contactError}</p>
+                            </div>
+                        )}
+
+                        <form onSubmit={handleContactSubmit} className={styles.contactForm}>
+                            <div className={styles.fieldContainer}>
+                                <label htmlFor="name" className={styles.label}>
+                                    <Users size={18} className={styles.labelIcon} />
+                                    Nombre Completo *
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    className={styles.input}
+                                    placeholder="Tu nombre"
+                                    required
+                                    disabled={loading}
+                                />
+                            </div>
+
+                            <div className={styles.fieldContainer}>
+                                <label htmlFor="email" className={styles.label}>
+                                    <FileText size={18} className={styles.labelIcon} />
+                                    Correo Electrónico *
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className={styles.input}
+                                    placeholder="tu@correo.com"
+                                    required
+                                    disabled={loading}
+                                />
+                            </div>
+
+                            <div className={styles.fieldContainer}>
+                                <label htmlFor="phone" className={styles.label}>
+                                    <Users size={18} className={styles.labelIcon} />
+                                    Número Celular *
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    className={styles.input}
+                                    placeholder="+57 123 456 7890"
+                                    required
+                                    disabled={loading}
+                                />
+                            </div>
+
+                            <div className={styles.modalActions}>
+                                <button
+                                    type="button"
+                                    onClick={closeModal}
+                                    disabled={loading}
+                                    className={styles.cancelButton}
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className={styles.submitButton}
+                                >
+                                    {loading ? (
+                                        <>
+                                            <div className={styles.spinner} />
+                                            Guardando...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <CheckCircle size={20} />
+                                            Realizar Reserva
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
