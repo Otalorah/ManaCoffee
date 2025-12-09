@@ -89,6 +89,34 @@ export default function Reservations() {
         return { ok: true };
     };
 
+    // Generate selectable 1-hour intervals starting every 30 minutes from 07:00,
+    // including only those whose end time is <= 21:00. Returns value and label.
+    const generateIntervals = () => {
+        const intervals: { value: string; label: string; start: string; end: string }[] = [];
+        const open = 7 * 60; // minutes
+        const close = 21 * 60; // minutes
+        const lastStart = close - 60; // last start so that end <= close
+        for (let m = open; m <= lastStart; m += 30) {
+            const startMin = m;
+            const endMin = m + 60;
+            if (endMin > close) continue;
+            const pad = (n: number) => String(n).padStart(2, '0');
+            const start = `${pad(Math.floor(startMin / 60))}:${pad(startMin % 60)}`;
+            const end = `${pad(Math.floor(endMin / 60))}:${pad(endMin % 60)}`;
+
+            const fmt = (hhmm: string) => {
+                const [h, mm] = hhmm.split(':').map(Number);
+                const d = new Date();
+                d.setHours(h, mm, 0, 0);
+                return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+            };
+
+            const label = `${fmt(start)} – ${fmt(end)}`;
+            intervals.push({ value: `${start}-${end}`, label, start, end });
+        }
+        return intervals;
+    };
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -319,14 +347,19 @@ export default function Reservations() {
                                 </label>
 
                                 {reservationType === 'time' && (
-                                    <input
-                                        type="time"
+                                    <select
+                                        id="timeInterval"
+                                        aria-label="Hora de la reservación"
                                         value={timeValue}
                                         onChange={(e) => { setTimeValue(e.target.value); setReservationType('time'); }}
                                         className={styles.input}
-                                        min="07:00"
-                                        max="21:00"
-                                    />
+                                        required
+                                    >
+                                        <option value="">Selecciona un intervalo</option>
+                                        {generateIntervals().map((it) => (
+                                            <option key={it.value} value={it.value}>{it.label}</option>
+                                        ))}
+                                    </select>
                                 )}
 
                                 <label className={styles.radioLabel}>
