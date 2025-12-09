@@ -14,8 +14,7 @@ export default function Reservations() {
     const [numberOfPeople, setNumberOfPeople] = useState('');
     const [reason, setReason] = useState('');
     // Reservation time/type: 'time' = specific HH:mm, 'full' = restaurante completo
-    const [reservationType, setReservationType] = useState<'time' | 'full'>('time');
-    const [timeValue, setTimeValue] = useState('');
+    const [reservationType] = useState<'time' | 'full'>('time');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -88,34 +87,6 @@ export default function Reservations() {
 
         if (totalForTime + Number(newRes.numberOfPeople) > 35) return { ok: false, message: 'Sin cupo. Comunícate al WhatsApp.' };
         return { ok: true };
-    };
-
-    // Generate selectable 1-hour intervals starting every 30 minutes from 07:00,
-    // including only those whose end time is <= 21:00. Returns value and label.
-    const generateIntervals = () => {
-        const intervals: { value: string; label: string; start: string; end: string }[] = [];
-        const open = 7 * 60; // minutes
-        const close = 21 * 60; // minutes
-        const lastStart = close - 60; // last start so that end <= close
-        for (let m = open; m <= lastStart; m += 30) {
-            const startMin = m;
-            const endMin = m + 60;
-            if (endMin > close) continue;
-            const pad = (n: number) => String(n).padStart(2, '0');
-            const start = `${pad(Math.floor(startMin / 60))}:${pad(startMin % 60)}`;
-            const end = `${pad(Math.floor(endMin / 60))}:${pad(endMin % 60)}`;
-
-            const fmt = (hhmm: string) => {
-                const [h, mm] = hhmm.split(':').map(Number);
-                const d = new Date();
-                d.setHours(h, mm, 0, 0);
-                return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-            };
-
-            const label = `${fmt(start)} – ${fmt(end)}`;
-            intervals.push({ value: `${start}-${end}`, label, start, end });
-        }
-        return intervals;
     };
 
     useEffect(() => {
@@ -199,9 +170,11 @@ export default function Reservations() {
             return;
         }
 
-        if (reservationType === 'time' && !timeValue) {
-            setError('Por favor selecciona la hora de la reservación');
-            return;
+        if (reservationType === 'time') {
+            if (!time.trim()) {
+                setError('Por favor selecciona una hora para tu reservación');
+                return;
+            }
         }
 
         // Guardar datos temporales y mostrar modal
@@ -218,7 +191,7 @@ export default function Reservations() {
             timestamp: new Date().toISOString(),
             timestampFormatted: new Date().toLocaleString('es-ES'),
             reservationType: reservationType,
-            time: reservationType === 'time' ? timeValue || null : null
+            time: reservationType === 'time' ? time || null : null
         };
 
         setTempReservationData(reservationData);
@@ -279,7 +252,7 @@ export default function Reservations() {
                     month: 'long',
                     day: 'numeric'
                 }),
-                time: reservationType === 'time' ? timeValue || null : null,
+                time: reservationType === 'time' ? time || null : null,
                 name: name.trim(),
                 email: email.trim(),
                 phone: phone.trim(),
@@ -411,56 +384,7 @@ export default function Reservations() {
                                     })}
                                 </p>
                             </div>
-                        )}
-
-                        {/* Time / Full options moved under calendar (left side) */}
-                        <div className={styles.fieldContainer}>
-                            <label className={styles.label}>
-                                <FileText size={18} className={styles.labelIcon} />
-                                Hora de Reservación
-                            </label>
-
-                            <div className={styles.radioGroup}>
-                                <label className={styles.radioLabel}>
-                                    <input
-                                        type="radio"
-                                        name="reservationType"
-                                        value="time"
-                                        checked={reservationType === 'time'}
-                                        onChange={() => setReservationType('time')}
-                                    />
-                                    Hora específica
-                                </label>
-
-                                {reservationType === 'time' && (
-                                    <select
-                                        id="timeInterval"
-                                        aria-label="Hora de la reservación"
-                                        value={timeValue}
-                                        onChange={(e) => { setTimeValue(e.target.value); setReservationType('time'); }}
-                                        className={styles.input}
-                                        required
-                                    >
-                                        <option value="">Selecciona un intervalo</option>
-                                        {generateIntervals().map((it) => (
-                                            <option key={it.value} value={it.value}>{it.label}</option>
-                                        ))}
-                                    </select>
-                                )}
-
-                                <label className={styles.radioLabel}>
-                                    <input
-                                        type="radio"
-                                        name="reservationType"
-                                        value="full"
-                                        checked={reservationType === 'full'}
-                                        onChange={() => setReservationType('full')}
-                                    />
-                                    Reservar restaurante completo
-                                </label>
-                            </div>
-
-                        </div>
+                        )}                     
                     </div>
 
                     <div className={styles.formSection}>
