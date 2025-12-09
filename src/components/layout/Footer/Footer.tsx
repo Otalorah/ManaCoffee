@@ -6,7 +6,7 @@ const Footer = () => {
             <div className={styles.footerContainer}>
                 <footer className={styles.footer}>
                     <div className={styles.socialContainer}>
-                        <a href="https://www.instagram.com/mana_coffee_pam/" className={styles.socialLink}>
+                        <a href="https://www.instagram.com/mana_coffee_pam/" className={styles.socialLink} target="_blank" rel="noopener noreferrer">
                             <div className={styles.socialIcon}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
                                     <path
@@ -15,7 +15,7 @@ const Footer = () => {
                                 </svg>
                             </div>
                         </a>
-                        <a href="https://www.tiktok.com/@mana.coffee.pampl" className={styles.socialLink}>
+                        <a href="https://www.tiktok.com/@mana.coffee.pampl" className={styles.socialLink} target="_blank" rel="noopener noreferrer">
                             <div className={styles.socialIcon}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
                                     <path
@@ -24,7 +24,7 @@ const Footer = () => {
                                 </svg>
                             </div>
                         </a>
-                        <a href="https://wa.me/573150118386" className={styles.socialLink}>
+                        <a href="https://wa.me/573150118386" className={styles.socialLink} target="_blank" rel="noopener noreferrer">
                             <div className={styles.socialIcon}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
                                     <path

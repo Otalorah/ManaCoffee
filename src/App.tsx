@@ -38,7 +38,6 @@ function App() {
               <LocationHours
                 mapImage="images/MAP.webp"
                 address="Carrera 9 Calle 5, Pamplona, Norte de Santander, Colombia"
-                hours="Lunes - Domingo: 7 AM - 9 PM"
               />
             </div>
           </div>
@@ -47,7 +46,7 @@ function App() {
         <div id="contact">
           <Footer />
         </div>
-        
+
       </div>
     </div>
   );

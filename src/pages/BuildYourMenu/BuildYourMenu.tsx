@@ -69,11 +69,13 @@ const BuildYourMenu = () => {
     };
 
     const total = useMemo(() => {
-        return menuItems.reduce((sum, item, index) => {
+        const itemsTotal = menuItems.reduce((sum, item, index) => {
             const qty = quantities[index] || 0;
             return sum + (item.price * qty);
         }, 0);
-    }, [quantities, menuItems]);
+
+        return deliveryOption === 'delivery' ? itemsTotal + 1000 : itemsTotal;
+    }, [quantities, menuItems, deliveryOption]);
 
     const formatCurrency = (value: number) => {
         return new Intl.NumberFormat('es-CO', {
@@ -144,6 +146,8 @@ const BuildYourMenu = () => {
                     <div className={styles.container}>
                         <h1 className={styles.title}>Arma tu Almuerzo</h1>
 
+                        <p className={styles.description}>Una opción personalizada a tu gusto, escoge tus porciones y crea tu almuerzo personalizado.</p>
+
                         {isLoading ? (
                             <div className={styles.loaderContainer}>
                                 <div className={styles.loader}></div>
@@ -204,6 +208,7 @@ const BuildYourMenu = () => {
 
                                     {deliveryOption === 'delivery' && (
                                         <div className={styles.deliveryForm}>
+                                            <p className={styles.deliveryNote}>Todo pedido para llevar tiene un costo adicional de $1.000</p>
                                             <div className={styles.formGroup}>
                                                 <label htmlFor="address">Dirección de entrega</label>
                                                 <input
