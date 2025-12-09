@@ -84,7 +84,7 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
     .wrapper {
         padding: 0.25rem;
     }
