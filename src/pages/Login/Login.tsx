@@ -47,8 +47,9 @@ export default function Login() {
             const tokenToSave = data.token || data.access_token || JSON.stringify(data);
             login(tokenToSave);
 
-            // Redirigir a la landing page
-            navigate(data.redirect);
+            // Redirigir a la landing page o admin si viene en la respuesta
+            const redirectPath = data.redirect || '/';
+            navigate(redirectPath);
 
         } catch (error: unknown) { // Usamos 'unknown' para seguridad de tipos
             console.error('Error al iniciar sesión:', error);

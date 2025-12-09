@@ -36,7 +36,7 @@ function App() {
 
             <div id="location-hours">
               <LocationHours
-                mapImage="images/MAP.webp"
+                mapImage="/images/MAP.webp"
                 address="Carrera 9 Calle 5, Pamplona, Norte de Santander, Colombia"
               />
             </div>
