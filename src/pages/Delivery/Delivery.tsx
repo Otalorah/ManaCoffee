@@ -165,7 +165,7 @@ const Delivery = () => {
         };
 
         processItems(menuData.menu as unknown as MenuSection, 'menu');
-        return sum;
+        return sum > 0 ? sum + 1000 : 0;
     }, [quantities]);
 
     const isValidOrder = useMemo(() => {
@@ -417,7 +417,7 @@ const Delivery = () => {
                 <div className={styles.mainContent}>
                     <div className={styles.container}>
                         <h1 className={styles.title}>Domicilios</h1>
-
+                        <p className={styles.description}>Platos frescos y de calidad en cada delivery, tu comida favorita con el sabor de un plato recién hecho en casa.</p>
                         {/* Menu Selection */}
                         <section className={styles.section}>
                             <h2 className={styles.sectionTitle}>1. Selecciona tus productos</h2>

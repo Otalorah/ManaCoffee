@@ -39,6 +39,7 @@
     text-align: center;
     font-size: 3rem;
     font-weight: bold;
+    margin-top: 2rem;
     margin-bottom: 2rem;
     color: #6f4e37;
     letter-spacing: -0.02em;
@@ -60,6 +61,15 @@
     color: #8b6f47;
     border-bottom: 2px solid #d4c4b0;
     padding-bottom: 0.5rem;
+}
+
+.description {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #6f4e37;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 4px rgba(111, 78, 55, 0.1);
 }
 
 /* Menu List */
@@ -200,6 +210,12 @@
     display: grid;
     gap: 1rem;
     animation: fadeIn 0.3s ease-in-out;
+}
+
+.deliveryNote {
+    text-align: left;
+    font-size: 1rem;  
+    color: #6f4e37;
 }
 
 @keyframes fadeIn {
@@ -383,6 +399,17 @@
 
     .title {
         font-size: 2rem;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .deliveryNote {
+        text-align: center;
+        font-size: 0.8rem;
     }
 
     .menuList {
@@ -409,6 +436,10 @@
         padding: 0.5rem 0.5rem;
         padding-top: 2rem;
         right: 2rem;
+    }
+
+    .title{
+        margin-top: 1.5rem;
     }
 }
 

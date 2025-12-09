@@ -54,6 +54,8 @@
     box-shadow: 0 4px 12px rgba(111, 78, 55, 0.08);
 }
 
+
+
 .sectionTitle {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
@@ -75,6 +77,13 @@
     padding-left: 0.5rem;
     border-left: 4px solid #b8894b;
     text-transform: capitalize;
+}
+
+.description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #6f4e37;
+    text-align: center;
 }
 
 /* Menu List */
@@ -552,37 +561,6 @@
     flex: 1;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .mainContent {
-        padding: 0 1rem;
-        padding-top: 5rem;
-    }
-
-    .title {
-        font-size: 2rem;
-    }
-
-    .menuList {
-        grid-template-columns: 1fr;
-    }
-
-    .formGrid {
-        grid-template-columns: 1fr;
-    }
-
-    .totalSection {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
-        position: static;
-    }
-
-    .completeButton {
-        width: 100%;
-    }
-}
-
 /* Error Alert */
 .errorAlert {
     background-color: rgba(239, 68, 68, 0.1);
@@ -613,3 +591,73 @@
         transform: translateX(2px);
     }
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mainContent {
+        padding: 0 1rem;
+        padding-top: 5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .menuList {
+        grid-template-columns: 1fr;
+    }
+
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .totalSection {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        position: static;
+    }
+
+    .completeButton {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .mainContent {
+        padding: 0 1rem;
+        padding-top: 5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .menuList {
+        grid-template-columns: 1fr;
+    }
+
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .totalSection {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        position: static;
+    }
+
+    .completeButton {
+        width: 100%;
+    }
+}
+
