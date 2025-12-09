@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react';
-import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { useState, useMemo, useEffect, useRef } from 'react';
+import { CheckCircle2, AlertCircle, Menu, X } from 'lucide-react';
 import { Combobox } from '../../components/ui/combobox';
 import Header from '../../components/layout/Header/Header';
 import Footer from '../../components/layout/Footer/Footer';
@@ -97,6 +97,10 @@ const Delivery = () => {
     });
     const [showSuccess, setShowSuccess] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [activeCategory, setActiveCategory] = useState<string>('');
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const categoryRefs = useRef<Record<string, HTMLDivElement | null>>({});
+    const observerRef = useRef<IntersectionObserver | null>(null);
 
     // Handlers
     const handleQuantityChange = (itemId: string, delta: number) => {
@@ -322,11 +326,92 @@ const Delivery = () => {
         setTimeout(() => setShowSuccess(false), 5000);
     };
 
+    // Extract all main categories (top-level keys from menu)
+    const categories = useMemo(() => {
+        return Object.keys(menuData.menu);
+    }, []);
+
+    // Format category name for display
+    const formatCategoryName = (key: string): string => {
+        return key
+            .replace(/_/g, ' ')
+            .split(' ')
+            .map(word => {
+                if (word.length === 0) return word;
+                // Capitalize first letter while preserving the rest
+                return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+            })
+            .join(' ');
+    };
+
+    // Scroll to category
+    const scrollToCategory = (categoryKey: string): void => {
+        const element = categoryRefs.current[categoryKey];
+        if (element) {
+            const offset = 120; // Offset for header
+            const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            setActiveCategory(categoryKey);
+            setIsMobileMenuOpen(false);
+        }
+    };
+
+    // Setup intersection observer for active category detection
+    useEffect(() => {
+        observerRef.current = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+                        const categoryKey = entry.target.getAttribute('data-category');
+                        if (categoryKey && typeof categoryKey === 'string') {
+                            setActiveCategory(categoryKey);
+                        }
+                    }
+                });
+            },
+            {
+                rootMargin: '-100px 0px -50% 0px',
+                threshold: [0, 0.3, 0.5, 1]
+            }
+        );
+
+        const currentObserver = observerRef.current;
+        Object.values(categoryRefs.current).forEach((ref) => {
+            if (ref && currentObserver) {
+                currentObserver.observe(ref);
+            }
+        });
+
+        return () => {
+            if (currentObserver) {
+                currentObserver.disconnect();
+            }
+        };
+    }, [categories]);
+
     // Recursive renderer for menu items
     const renderMenuSection = (data: MenuSection, prefix: string, title?: string) => {
         if (Array.isArray(data)) {
+            // Extract only the main category (first part after 'menu-')
+            const categoryKey = prefix.replace('menu-', '').split('-')[0];
             return (
-                <div className={styles.categorySection} key={prefix}>
+                <div 
+                    className={styles.categorySection} 
+                    key={prefix}
+                    id={`category-${categoryKey}`}
+                    data-category={categoryKey}
+                    ref={(el: HTMLDivElement | null) => {
+                        // Only set ref for the first occurrence of each category
+                        if (el && !categoryRefs.current[categoryKey]) {
+                            categoryRefs.current[categoryKey] = el;
+                        }
+                    }}
+                >
                     {title && <h3 className={styles.categoryTitle}>{title}</h3>}
                     <div className={styles.menuList}>
                         {data.map((item, index) => {
@@ -415,16 +500,66 @@ const Delivery = () => {
             <div className={styles.layoutContainer}>
                 <Header />
                 <div className={styles.mainContent}>
-                    <div className={styles.container}>
-                        <h1 className={styles.title}>Domicilios</h1>
-                        <p className={styles.description}>Platos frescos y de calidad en cada delivery, tu comida favorita con el sabor de un plato recién hecho en casa.</p>
-                        {/* Menu Selection */}
-                        <section className={styles.section}>
-                            <h2 className={styles.sectionTitle}>1. Selecciona tus productos</h2>
-                            {Object.keys(menuData.menu).map(key =>
-                                renderMenuSection((menuData.menu as unknown as Record<string, MenuSection>)[key], `menu-${key}`, key.replace(/_/g, ' '))
+                    <div className={styles.contentWrapper}>
+                        {/* Sidebar Navigation - Desktop */}
+                        <aside className={styles.sidebar}>
+                            <div className={styles.sidebarContent}>
+                                <h3 className={styles.sidebarTitle}>Categorías</h3>
+                                <nav className={styles.categoryNav}>
+                                    {categories.map((categoryKey) => (
+                                        <button
+                                            key={categoryKey}
+                                            className={`${styles.categoryLink} ${activeCategory === categoryKey ? styles.categoryLinkActive : ''}`}
+                                            onClick={() => scrollToCategory(categoryKey)}
+                                        >
+                                            {formatCategoryName(categoryKey)}
+                                        </button>
+                                    ))}
+                                </nav>
+                            </div>
+                        </aside>
+
+                        {/* Main Content */}
+                        <div className={styles.container}>
+                            <h1 className={styles.title}>Domicilios</h1>
+                            <p className={styles.description}>Platos frescos y de calidad en cada delivery, tu comida favorita con el sabor de un plato recién hecho en casa.</p>
+                            
+                            {/* Mobile Menu Toggle */}
+                            <div className={styles.mobileMenuToggle}>
+                                <button
+                                    className={styles.mobileMenuButton}
+                                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                    aria-label="Toggle menu"
+                                >
+                                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                                    <span>Categorías</span>
+                                </button>
+                            </div>
+
+                            {/* Mobile Menu Dropdown */}
+                            {isMobileMenuOpen && (
+                                <div className={styles.mobileMenu}>
+                                    <nav className={styles.mobileCategoryNav}>
+                                        {categories.map((categoryKey) => (
+                                            <button
+                                                key={categoryKey}
+                                                className={`${styles.mobileCategoryLink} ${activeCategory === categoryKey ? styles.mobileCategoryLinkActive : ''}`}
+                                                onClick={() => scrollToCategory(categoryKey)}
+                                            >
+                                                {formatCategoryName(categoryKey)}
+                                            </button>
+                                        ))}
+                                    </nav>
+                                </div>
                             )}
-                        </section>
+
+                            {/* Menu Selection */}
+                            <section className={styles.section}>
+                                <h2 className={styles.sectionTitle}>1. Selecciona tus productos</h2>
+                                {Object.keys(menuData.menu).map(key =>
+                                    renderMenuSection((menuData.menu as unknown as Record<string, MenuSection>)[key], `menu-${key}`, key.replace(/_/g, ' '))
+                                )}
+                            </section>
 
                         {/* Customer Information */}
                         <section className={styles.section}>
@@ -550,6 +685,7 @@ const Delivery = () => {
                                 <p>¡Pedido realizado con éxito! Revisa la consola para ver el JSON con los detalles.</p>
                             </div>
                         )}
+                        </div>
                     </div>
                 </div>
                 <Footer />

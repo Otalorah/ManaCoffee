@@ -26,8 +26,18 @@
     padding-bottom: 2rem;
 }
 
+.contentWrapper {
+    display: flex;
+    gap: 3rem;
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 .container {
-    max-width: 1200px;
+    flex: 1;
+    min-width: 0;
     width: 100%;
     margin: 0 auto;
     padding: 2rem;
@@ -68,6 +78,7 @@
 /* Category Section */
 .categorySection {
     margin-bottom: 2rem;
+    scroll-margin-top: 120px;
 }
 
 .categoryTitle {
@@ -599,6 +610,14 @@
         padding-top: 5rem;
     }
 
+    .contentWrapper {
+        gap: 0;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
     .title {
         font-size: 2rem;
     }
@@ -624,21 +643,37 @@
 
     .completeButton {
         width: 100%;
+    }
+
+    .mobileCategoryNav {
+        grid-template-columns: 1fr;
+    }
+
+    .mobileMenu {
+        max-height: 300px;
     }
 }
 
 @media (max-width: 500px) {
     .mainContent {
-        padding: 0 1rem;
+        padding: 0 0.75rem;
         padding-top: 5rem;
     }
 
+    .contentWrapper {
+        gap: 0;
+    }
+
+    .container {
+        padding: 0.75rem;
+    }
+
     .title {
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
 
     .description {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 
     .menuList {
@@ -654,10 +689,244 @@
         text-align: center;
         gap: 1.5rem;
         position: static;
+        padding: 1.5rem;
     }
 
     .completeButton {
         width: 100%;
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .mobileMenuButton {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.9rem;
+    }
+
+    .mobileCategoryNav {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+
+    .mobileCategoryLink {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.8rem;
+    }
+
+    .mobileMenu {
+        max-height: 250px;
+        padding: 0.75rem;
+    }
+
+    .section {
+        padding: 1.5rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.5rem;
     }
 }
 
+/* Sidebar - Solo desktop */
+.sidebar {
+  display: none;
+  position: relative;
+  width: 240px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.sidebarContent {
+  background: #ffffff;
+  border: 2px solid #d4c4b0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(111, 78, 55, 0.08);
+}
+
+.sidebarTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8b6f47;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #d4c4b0;
+}
+
+.categoryNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.categoryLink {
+  display: block;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  color: #6f4e37;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.categoryLink:hover {
+  color: #8b6f47;
+  background-color: #faf8f5;
+  border-left-color: #b8894b;
+}
+
+.categoryLinkActive {
+  color: #6f4e37;
+  background: linear-gradient(135deg, #f5ead6 0%, #ede0cf 100%);
+  border-left-color: #b8894b;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(184, 137, 75, 0.15);
+}
+
+/* Scrollbar para sidebar (si es necesario) */
+.sidebarContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebarContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebarContent::-webkit-scrollbar-thumb {
+  background: #d4c4b0;
+  border-radius: 3px;
+}
+
+.sidebarContent::-webkit-scrollbar-thumb:hover {
+  background: #c9a882;
+}
+
+/* Mobile Menu */
+.mobileMenuToggle {
+  display: none;
+  margin-bottom: 1.5rem;
+}
+
+.mobileMenuButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: #ffffff;
+  border: 2px solid #d4c4b0;
+  border-radius: 12px;
+  color: #6f4e37;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(111, 78, 55, 0.08);
+}
+
+.mobileMenuButton:hover {
+  border-color: #b8894b;
+  box-shadow: 0 4px 12px rgba(111, 78, 55, 0.12);
+}
+
+.mobileMenuButton span {
+  flex: 1;
+  text-align: left;
+}
+
+.mobileMenu {
+  display: none;
+  margin-bottom: 2rem;
+  background: #ffffff;
+  border: 2px solid #d4c4b0;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(111, 78, 55, 0.08);
+  max-height: 400px;
+  overflow-y: auto;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobileCategoryNav {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.5rem;
+}
+
+.mobileCategoryLink {
+  padding: 0.75rem 1rem;
+  background: #faf8f5;
+  border: 2px solid #e8dfd5;
+  border-radius: 8px;
+  color: #6f4e37;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.mobileCategoryLink:hover {
+  background: #f0e9de;
+  border-color: #b8894b;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(184, 137, 75, 0.15);
+}
+
+.mobileCategoryLinkActive {
+  background: linear-gradient(135deg, #f5ead6 0%, #ede0cf 100%);
+  border-color: #b8894b;
+  color: #6f4e37;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(184, 137, 75, 0.2);
+}
+
+/* Desktop (1024px+) - Mostrar sidebar */
+@media (min-width: 1024px) {
+  .sidebar {
+    margin-top: 200px;
+    display: block;
+  }
+  
+  .mobileMenuToggle,
+  .mobileMenu {
+    display: none;
+  }
+}
+
+/* Tablet y Mobile (<1024px) - Ocultar sidebar, mostrar menú móvil */
+@media (max-width: 1023px) {
+  .sidebar {
+    display: none;
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+  }
+  
+  .mobileMenuToggle {
+    display: block;
+  }
+  
+  .mobileMenu {
+    display: block;
+  }
+}

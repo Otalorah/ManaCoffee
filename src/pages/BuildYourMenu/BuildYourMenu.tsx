@@ -13,6 +13,30 @@ interface MenuItem {
     amount: string;
 }
 
+const STORAGE_KEY = 'buildYourMenu_items';
+const STORAGE_TIMESTAMP_KEY = 'buildYourMenu_items_timestamp';
+
+const loadMenuFromStorage = (): MenuItem[] | null => {
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            return JSON.parse(stored) as MenuItem[];
+        }
+    } catch (error) {
+        console.error('Error al leer del localStorage:', error);
+    }
+    return null;
+};
+
+const saveMenuToStorage = (items: MenuItem[]): void => {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        localStorage.setItem(STORAGE_TIMESTAMP_KEY, Date.now().toString());
+    } catch (error) {
+        console.error('Error al guardar en localStorage:', error);
+    }
+};
+
 const loadMenuAPI = async (): Promise<MenuItem[]> => {
     try {
         const response = await fetch('https://apimanacoffee-production.up.railway.app/menu/get');
@@ -24,6 +48,9 @@ const loadMenuAPI = async (): Promise<MenuItem[]> => {
             throw new Error(errorMessage);
         }
         console.log('Menú cargado exitosamente:', data);
+
+        // Guardar en localStorage después de obtener los datos exitosamente
+        saveMenuToStorage(data);
 
         return data;
     } catch (error) {
@@ -49,11 +76,29 @@ const BuildYourMenu = () => {
         const fetchMenu = async () => {
             try {
                 setIsLoading(true);
-                const items = await loadMenuAPI();
-                setMenuItems(items);
+                
+                // Intentar cargar desde localStorage primero
+                const storedItems = loadMenuFromStorage();
+                if (storedItems && storedItems.length > 0) {
+                    setMenuItems(storedItems);
+                    setIsLoading(false);
+                    
+                    // Actualizar en segundo plano sin bloquear la UI
+                    try {
+                        const freshItems = await loadMenuAPI();
+                        setMenuItems(freshItems);
+                    } catch (error) {
+                        console.error('Error al actualizar el menú en segundo plano:', error);
+                        // Si falla la actualización, mantenemos los datos del localStorage
+                    }
+                } else {
+                    // Si no hay datos en localStorage, cargar desde la API
+                    const items = await loadMenuAPI();
+                    setMenuItems(items);
+                    setIsLoading(false);
+                }
             } catch (error) {
                 console.error('Error al cargar el menú:', error);
-            } finally {
                 setIsLoading(false);
             }
         };
@@ -97,6 +142,56 @@ const BuildYourMenu = () => {
         return true;
     }, [quantities, deliveryOption, deliveryData]);
 
+    const constructWhatsAppMessage = (
+        items: Array<{ name: string; quantity: number; price: number; subtotal: number }>,
+        deliveryOption: DeliveryOption,
+        deliveryData: { address: string; phone: string },
+        paymentMethod: PaymentMethod,
+        total: number
+    ) => {
+        let message = "¡Hola, Mana Coffee!\n\n";
+        message += "Quiero hacer un pedido de almuerzo personalizado con los siguientes datos:\n\n";
+        message += "---\n\n";
+
+        // 1. DETALLES DEL PEDIDO
+        message += "*1. DETALLES DEL PEDIDO*\n";
+        items.forEach(item => {
+            message += `- ${item.quantity} x ${item.name} (${formatCurrency(item.price)} c/u)\n`;
+        });
+        message += `\n*Total:* ${formatCurrency(total)}\n\n`;
+
+        // 2. TIPO DE ENTREGA
+        message += "*2. TIPO DE ENTREGA*\n";
+        if (deliveryOption === 'delivery') {
+            message += "- *Tipo:* Domicilio\n";
+            message += `- *Dirección:* ${deliveryData.address}\n`;
+            message += `- *Teléfono de Contacto:* ${deliveryData.phone}\n`;
+        } else {
+            message += "- *Tipo:* Comer en restaurante\n\n";
+        }
+
+        // 3. MÉTODO DE PAGO
+        message += "*3. MÉTODO DE PAGO*\n";
+        let paymentType = '';
+        switch (paymentMethod) {
+            case 'efectivo':
+                paymentType = "Efectivo";
+                break;
+            case 'nequi':
+                paymentType = "Nequi";
+                break;
+            case 'bancolombia':
+                paymentType = "Transferencia Bancaria (Bancolombia)";
+                break;
+        }
+        message += `- *Forma de Pago:* ${paymentType}\n\n`;
+
+        message += "---\n\n";
+        message += "¡Muchas gracias!";
+
+        return message;
+    };
+
     const handleCompleteOrder = () => {
         if (!isValidOrder) return;
 
@@ -110,16 +205,18 @@ const BuildYourMenu = () => {
                 }))
                 .filter(item => item.quantity > 0);
 
-            const orderData = {
-                date: new Date().toISOString(),
-                items: selectedItems,
+            // Construct WhatsApp message
+            const message = constructWhatsAppMessage(
+                selectedItems,
                 deliveryOption,
-                deliveryData: deliveryOption === 'delivery' ? deliveryData : null,
+                deliveryData,
                 paymentMethod,
                 total
-            };
+            );
 
-            console.log('Pedido realizado con éxito:', orderData);
+            // Open WhatsApp
+            const whatsappUrl = `https://wa.me/573150118386?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
 
             setShowSuccess(true);
 
@@ -130,7 +227,7 @@ const BuildYourMenu = () => {
 
             setTimeout(() => {
                 setShowSuccess(false);
-            }, 3000);
+            }, 5000);
 
         } catch (error) {
             console.error('Error al procesar el pedido:', error);
@@ -269,7 +366,7 @@ const BuildYourMenu = () => {
                                 {showSuccess && (
                                     <div className={styles.successAlert}>
                                         <CheckCircle2 className={styles.alertIcon} />
-                                        <p>¡Pedido realizado con éxito! Revisa la consola para ver los detalles.</p>
+                                        <p>¡Pedido realizado con éxito! Se ha abierto WhatsApp para que puedas enviar tu pedido.</p>
                                     </div>
                                 )}
                             </>
