@@ -53,6 +53,29 @@ export type MenuState = {
     isSaving: boolean;
 };
 
+// Props para el nuevo componente ReservationsContent
+export interface ReservationItem {
+    id: string;
+    name: string;
+    date: string; // ISO date string
+    numberOfPeople: number;
+    phone: string;
+    email: string;
+    reason?: string;
+    timestamp: string; // ISO timestamp string
+    reservationType: string;
+}
+
+export interface ReservationsContentProps {
+    reservationsList: ReservationItem[];
+    handleEditReservation: (id: string, updatedItem: Partial<ReservationItem>) => void;
+    handleDeleteReservation: (index: number) => void;
+    handleSaveReservations: () => Promise<void>;
+    isSaving: boolean;
+    apiMessage: ApiMessage | null;
+    styles: { readonly [key: string]: string };
+}
+
 export type MenuAction =
     | { type: 'SET_MENU_LIST'; payload: MenuItem[] }
     | { type: 'UPDATE_NEW_INGREDIENT'; payload: { name: string; value: string | number } }
@@ -61,3 +84,8 @@ export type MenuAction =
     | { type: 'DELETE_INGREDIENT'; payload: number } // payload es el index
     | { type: 'SET_API_MESSAGE'; payload: ApiMessage | null }
     | { type: 'SET_IS_SAVING'; payload: boolean };
+
+export interface SaveReservationsResponse {
+    success: boolean;
+    message: string;
+}

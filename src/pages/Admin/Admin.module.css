@@ -581,3 +581,300 @@
          padding: 5px 8px;
     }
 }
+
+/* Contenedor de Pestañas (Se mantiene igual) */
+.tabs-container {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e6e0d0;
+    gap: 10px;
+    flex-wrap: wrap; 
+}
+
+.tab {
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #6f4e37;
+    transition: color 0.3s, border-bottom 0.3s;
+    margin-right: 0; 
+    border-bottom: 3px solid transparent;
+}
+
+.tab:hover {
+    color: #a0522d;
+}
+
+.tab-active {
+    color: #a0522d;
+    border-bottom: 3px solid #a0522d;
+}
+
+/* Lista de Tarjetas (Requerimiento 3: Columna) */
+.reservations-list {
+    display: flex; /* Cambiamos de grid a flex */
+    flex-direction: column; /* Apiladas verticalmente */
+    gap: 15px; /* Espacio entre las tarjetas */
+    margin-top: 20px;
+}
+
+/* Tarjeta de Reserva Simplificada (Requerimiento 1) */
+.reservation-card {
+    background-color: #fffaf0;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #d3c0a5;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    justify-content: space-between; /* Alinea contenido y acciones */
+    align-items: center; /* Centra verticalmente */
+    width: 100%; /* Ocupa todo el ancho */
+}
+
+.reservation-card:hover {
+    transform: none; /* Desactivamos el efecto de elevación para lista */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-display {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.card-title {
+    font-size: 1.2em;
+    color: #3e2723;
+    margin: 0;
+    font-weight: 700;
+}
+
+.card-date {
+    font-size: 0.95em;
+    color: #6f4e37;
+    margin: 0;
+}
+/* Estilo para los valores importantes */
+.card-date span {
+    font-weight: 600;
+    color: #3e2723;
+}
+
+/* Acciones en la Tarjeta */
+.card-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: 20px;
+    flex-direction: row-reverse;
+}
+
+.action-button {
+    padding: 8px 12px;
+    border: 1px solid #d3c0a5;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85em;
+    transition: background-color 0.2s, color 0.2s;
+    background-color: #fffaf0;
+    white-space: nowrap; /* Evita que el texto del botón se rompa */
+}
+
+/* Nuevo botón de Ver Detalles */
+.details-button {
+    color: #3e2723;
+    background-color: #e6e0d0;
+    border-color: #d3c0a5;
+}
+
+.details-button:hover {
+    background-color: #d3c0a5;
+    border-color: #6f4e37;
+}
+
+.edit-button {
+    color: #cc9900;
+}
+
+.edit-button:hover {
+    background-color: #fff2cc; 
+    border-color: #cc9900;
+}
+
+.delete-button {
+    color: #a0522d;
+    border-color: #a0522d;
+}
+
+.delete-button:hover {
+    background-color: #ffcccc;
+    color: #8b4513;
+}
+
+
+/* --- Estilos para Modales (Se mantienen para el modal de detalles y edición) --- */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #f8f4e1;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 90%;
+    width: 550px; /* Ancho más pequeño para el modal de detalles */
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Modal de Edición (Más ancho) */
+.edit-modal-content {
+    width: 700px; 
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #3e2723;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.modal-title {
+    font-size: 1.5em;
+    color: #3e2723;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #d3c0a5;
+    padding-bottom: 10px;
+}
+
+/* Estilos para el Modal de Detalles (NUEVO) */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    font-size: 1em;
+}
+
+.grid-detail-item {
+    margin: 0;
+    padding: 8px 0;
+    border-bottom: 1px dotted #e6e0d0;
+    color: #6f4e37;
+}
+.grid-detail-item span {
+    font-weight: bold;
+    color: #3e2723;
+}
+.grid-detail-item:last-child {
+    border-bottom: none;
+}
+
+
+/* Formulario para Edición (Mantenido, pero en el modal-content.edit) */
+.edit-modal-content .form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 0; 
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.edit-modal-content .input-group[style*="gridColumn"], 
+.modal-actions {
+    grid-column: span 2;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.cancel-button { /* Se mantiene */
+    background-color: #e6e0d0;
+    color: #3e2723;
+    border: 1px solid #d3c0a5;
+}
+
+.save-modal-button { /* Se mantiene */
+    background-color: #a0522d;
+    color: white;
+    border: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    /* Tarjetas: Las acciones deben apilarse o ser más pequeñas */
+    .reservation-card {
+        flex-direction: column; /* Apila el display y las acciones */
+        align-items: flex-start;
+    }
+
+    .card-actions {
+        margin-left: 0;
+        margin-top: 10px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 3 columnas */
+        gap: 8px;
+    }
+    
+    .action-button {
+        padding: 6px;
+        font-size: 0.75em;
+        white-space: normal;
+    }
+
+    /* Modal de Detalles */
+    .modal-content {
+        width: 95%;
+    }
+
+    /* Modal de Edición */
+    .edit-modal-content {
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .edit-modal-content .form {
+        grid-template-columns: 1fr;
+    }
+
+    .edit-modal-content .input-group[style*="gridColumn"], 
+    .modal-actions {
+        grid-column: span 1 !important;
+    }
+    
+    .modal-actions {
+        flex-direction: column-reverse; 
+        align-items: stretch;
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+}

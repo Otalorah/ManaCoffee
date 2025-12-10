@@ -1,5 +1,12 @@
 import type { UserRegistrationData, ApiResponse, EmailData, CodeData, PasswordUpdateData } from '../types/api';
-import type { MenuItem, VerifyTokenResponse, SaveMenuResponse } from '../types/admin';
+import type { 
+    MenuItem, 
+    VerifyTokenResponse, 
+    SaveMenuResponse, 
+    ReservationItem, 
+    SaveReservationsResponse // <-- Nuevo tipo
+} from '../types/admin';
+
 /**
  * URL base de la API
  */
@@ -234,6 +241,73 @@ export const loadMenuAPI = async (): Promise<MenuItem[]> => {
         }
 
         console.log('Menú cargado exitosamente:', data);
+        return data;
+
+    } catch (error) {
+        if (error instanceof Error) {
+            throw error;
+        }
+
+        throw new Error('Error de conexión. Verifica tu internet.');
+    }
+};
+
+
+/**
+ * NUEVA FUNCIÓN: Guarda o actualiza la lista completa de reservas.
+ * @param reservationsData La lista completa de ReservationItem a guardar.
+ * @returns Una promesa que resuelve con la respuesta del servidor.
+ */
+export const saveReservationsAPI = async (reservationsData: ReservationItem[]): Promise<SaveReservationsResponse> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/reservation/update`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reservationsData)
+        });
+
+        const data: SaveReservationsResponse = await response.json();
+
+        if (!response.ok) {
+            const errorMessage = (data as { detail?: string; error?: string }).detail ||
+                (data as { detail?: string; error?: string }).error ||
+                `Error ${response.status}: Error desconocido del servidor.`;
+            throw new Error(errorMessage);
+        }
+
+        console.log('Reservas guardadas exitosamente:', data);
+        return data;
+
+    } catch (error) {
+        if (error instanceof Error) {
+            throw error;
+        }
+
+        throw new Error('Error de conexión. Verifica tu internet.');
+    }
+};
+
+/**
+ * NUEVA FUNCIÓN: Carga la lista actual de reservas desde el servidor.
+ * @returns Una promesa que resuelve con la lista de ReservationItem.
+ */
+export const loadReservationsAPI = async (): Promise<ReservationItem[]> => {
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/reservation/`); 
+        const data: ReservationItem[] = await response.json();
+
+        if (!response.ok) {
+            // Manejo de errores de la API
+            const errorMessage = (data as { detail?: string; error?: string }).detail ||
+                (data as { detail?: string; error?: string }).error ||
+                `Error ${response.status}: Error desconocido del servidor.`;
+            throw new Error(errorMessage);
+        }
+
+        console.log('Reservas cargadas exitosamente:', data);
         return data;
 
     } catch (error) {
