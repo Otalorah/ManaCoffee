@@ -5,6 +5,79 @@ import { Calendar as CalendarIcon, Users, FileText, CheckCircle, AlertCircle, Us
 import Header from '../../components/layout/Header/Header';
 import styles from './Reservations.module.css';
 
+type SaveMenuResponse = { success: boolean; message: string; id?: string };
+
+// URL Base de la API
+const API_BASE_URL = 'https://apimanacoffee-production.up.railway.app';
+
+type ReservationRecord = {
+    date: string;
+    dateFormatted: string;
+    numberOfPeople: number;
+    reason: string;
+    timestamp: string;
+    timestampFormatted: string;
+    reservationType: 'time' | 'full';
+    time?: string | null;
+    name?: string;
+    email?: string;
+    phone?: string;
+};
+
+/**
+ * Guarda o actualiza la reservación en el servidor.
+ * Adaptada de saveMenuAPI para guardar una ReservationRecord.
+ * @param reservationData La reserva a guardar.
+ * @returns Una promesa que resuelve con la respuesta del servidor.
+ */
+const saveReservationAPI = async (reservationData: ReservationRecord): Promise<SaveMenuResponse> => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/reservation/create`, { 
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reservationData)
+        });
+
+        const data: SaveMenuResponse = await response.json();
+
+        if (!response.ok) {
+            const errorMessage = (data as { detail?: string; error?: string }).detail ||
+                (data as { detail?: string; error?: string }).error ||
+                `Error ${response.status}: Error desconocido del servidor.`;
+            throw new Error(errorMessage);
+        }
+
+        console.log('Registro exitoso:', data);
+        return data;
+
+    } catch (error) {
+        // El error es relanzado para ser capturado en handleContactSubmit
+        if (error instanceof Error) {
+            throw error;
+        }
+
+        // Error genérico de conexión
+        throw new Error('Error de conexión. Verifica tu internet.');
+    }
+};
+
+/**
+ * Combina una fecha con una hora específica en formato HH:mm
+ * @param date Fecha base
+ * @param timeString Hora en formato "HH:mm" (ej: "14:30")
+ * @returns Nueva fecha con la hora combinada
+ */
+const combineDateAndTime = (date: Date, timeString: string): Date => {
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const combined = new Date(date);
+    combined.setHours(hours, minutes, 0, 0);
+    return combined;
+};
+
+// --- FIN TIPOS Y FUNCIÓN API ADAPTADA ---
+
 export default function Reservations() {
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
     const [time, setTime] = useState('');
@@ -20,21 +93,6 @@ export default function Reservations() {
     const [loading, setLoading] = useState(false);
     const [showContactModal, setShowContactModal] = useState(false);
     const [contactError, setContactError] = useState('');
-    type ReservationRecord = {
-        date: string;
-        dateFormatted: string;
-        numberOfPeople: number;
-        reason: string;
-        timestamp: string;
-        timestampFormatted: string;
-        reservationType: 'time' | 'full';
-        time?: string | null;
-        name?: string;
-        email?: string;
-        phone?: string;
-    };
-
-    const [_tempReservationData, setTempReservationData] = useState<ReservationRecord | null>(null);
 
     // --- Helpers to persist and read reservations locally (used for availability checks) ---
     const STORAGE_KEY = 'mc_reservations';
@@ -77,11 +135,11 @@ export default function Reservations() {
         // (no 'allday' option: only 'time' or 'full')
 
         // specific time
-        const time = newRes.time || '';
+        const timeValue = newRes.time || '';
         const totalForTime = existing.reduce((sum: number, r) => {
             if (new Date(r.date).toDateString() !== newDateOnly) return sum;
             if (r.reservationType === 'full') return sum + 35;
-            if (r.time === time) return sum + (Number(r.numberOfPeople) || 0);
+            if (r.time === timeValue) return sum + (Number(r.numberOfPeople) || 0);
             return sum;
         }, 0);
 
@@ -177,24 +235,6 @@ export default function Reservations() {
             }
         }
 
-        // Guardar datos temporales y mostrar modal
-        const reservationData: ReservationRecord = {
-            date: selectedDate.toISOString(),
-            dateFormatted: selectedDate.toLocaleDateString('es-ES', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            }),
-            numberOfPeople: peopleCount,
-            reason: reason.trim(),
-            timestamp: new Date().toISOString(),
-            timestampFormatted: new Date().toLocaleString('es-ES'),
-            reservationType: reservationType,
-            time: reservationType === 'time' ? time || null : null
-        };
-
-        setTempReservationData(reservationData);
         setShowContactModal(true);
     };
 
@@ -220,7 +260,7 @@ export default function Reservations() {
             return;
         }
 
-        // Validar teléfono
+        // Validar teléfono 
         if (!phone.trim()) {
             setContactError('Por favor ingresa tu número celular');
             return;
@@ -243,9 +283,14 @@ export default function Reservations() {
                 return;
             }
 
+            // ✅ Combinar fecha con hora seleccionada
+            const dateWithTime = reservationType === 'time' && time 
+                ? combineDateAndTime(selectedDate, time)
+                : selectedDate;
+
             // Create reservation data
             const reservationData: ReservationRecord = {
-                date: selectedDate.toISOString(),
+                date: dateWithTime.toISOString(), // ✅ Ahora incluye la hora correcta
                 dateFormatted: selectedDate.toLocaleDateString('es-ES', {
                     weekday: 'long',
                     year: 'numeric',
@@ -271,15 +316,14 @@ export default function Reservations() {
                 return;
             }
 
-            // Create filename with timestamp
-            const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-            const filename = `reservation_${timestamp}.json`;
-
-            console.log('Reservación completa:', reservationData);
-            console.log('Sería guardada en:', `public/data/reservations/${filename}`);
-
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 500));
+            // --- INICIO: Integración de la llamada a la API ---
+            console.log('Enviando reservación a la API:', reservationData);
+            
+            // Llamar a la API adaptada
+            const apiResponse = await saveReservationAPI(reservationData);
+            
+            console.log('Respuesta de la API:', apiResponse);
+            // --- FIN: Integración de la llamada a la API ---
 
             // Persist to localStorage (so availability checks work)
             try {
@@ -299,18 +343,15 @@ export default function Reservations() {
             setPhone('');
             setNumberOfPeople('');
             setReason('');
-            setName('');
-            setEmail('');
-            setPhone('');
             setShowContactModal(false);
-            setTempReservationData(null);
 
             // Scroll to top to show success message
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
         } catch (err) {
             console.error('Error saving reservation:', err);
-            setContactError('Error al guardar la reservación. Por favor intenta de nuevo.');
+            // Capturar el mensaje de error lanzado por saveReservationAPI
+            setContactError(err instanceof Error ? err.message : 'Error al guardar la reservación. Por favor intenta de nuevo.');
         } finally {
             setLoading(false);
         }
@@ -323,7 +364,6 @@ export default function Reservations() {
             setEmail('');
             setPhone('');
             setContactError('');
-            setTempReservationData(null);
         }
     };
 
@@ -344,7 +384,7 @@ export default function Reservations() {
                         <div>
                             <p className={styles.alertTitle}>¡Reservación exitosa!</p>
                             <p className={styles.alertText}>
-                                Tu reservación ha sido guardada. Nos pondremos en contacto contigo pronto.
+                                Tu reservación ha sido guardada. Te enviamos un correo confirmando tu reserva.
                             </p>
                         </div>
                     </div>
@@ -384,7 +424,7 @@ export default function Reservations() {
                                     })}
                                 </p>
                             </div>
-                        )}                     
+                        )} 
                     </div>
 
                     <div className={styles.formSection}>
@@ -483,8 +523,6 @@ export default function Reservations() {
                                 <p className={styles.fieldHint}>Máximo 35 personas</p>
                             </div>
 
-                            
-
                             <div className={styles.fieldContainer}>
                                 <label htmlFor="reason" className={styles.label}>
                                     <FileText size={18} className={styles.labelIcon} />
@@ -551,13 +589,13 @@ export default function Reservations() {
 
                         <form onSubmit={handleContactSubmit} className={styles.contactForm}>
                             <div className={styles.fieldContainer}>
-                                <label htmlFor="name" className={styles.label}>
+                                <label htmlFor="modalName" className={styles.label}>
                                     <Users size={18} className={styles.labelIcon} />
                                     Nombre Completo *
                                 </label>
                                 <input
                                     type="text"
-                                    id="name"
+                                    id="modalName"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     className={styles.input}
@@ -568,13 +606,13 @@ export default function Reservations() {
                             </div>
 
                             <div className={styles.fieldContainer}>
-                                <label htmlFor="email" className={styles.label}>
+                                <label htmlFor="modalEmail" className={styles.label}>
                                     <FileText size={18} className={styles.labelIcon} />
                                     Correo Electrónico *
                                 </label>
                                 <input
                                     type="email"
-                                    id="email"
+                                    id="modalEmail"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className={styles.input}
@@ -585,13 +623,13 @@ export default function Reservations() {
                             </div>
 
                             <div className={styles.fieldContainer}>
-                                <label htmlFor="phone" className={styles.label}>
+                                <label htmlFor="modalPhone" className={styles.label}>
                                     <Users size={18} className={styles.labelIcon} />
                                     Número Celular *
                                 </label>
                                 <input
                                     type="tel"
-                                    id="phone"
+                                    id="modalPhone"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
                                     className={styles.input}
