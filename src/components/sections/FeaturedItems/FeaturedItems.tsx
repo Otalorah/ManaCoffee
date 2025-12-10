@@ -31,7 +31,7 @@ const FeaturedItems = ({ items }: FeaturedItemsProps) => {
                     }}
                     plugins={[
                         Autoplay({
-                            delay: 4000,
+                            delay: 3500,
                         }),
                     ]}
                     className={styles.carousel}

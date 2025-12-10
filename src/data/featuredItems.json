@@ -11,7 +11,7 @@
   },
   {
     "image": "/images/3.webp",
-    "title": "Ceviche",
+    "title": "Mazorcada",
     "description": ""
   },
   {
@@ -21,51 +21,31 @@
   },
   {
     "image": "/images/5.webp",
-    "title": "Mazorcada",
-    "description": ""
-  },
-  {
-    "image": "/images/6.webp",
-    "title": "Almuerzos ejecutivos",
-    "description": ""
-  },
-  {
-    "image": "/images/7.webp",
     "title": "Copa Crocante de Helado",
     "description": ""
   },
   {
-    "image": "/images/8.webp",
-    "title": "Pan Gratinado con Dip",
-    "description": ""
-  },
-  {
-    "image": "/images/9.webp",
-    "title": "Pollo a la naranja",
-    "description": ""
-  },
-  {
-    "image": "/images/10.webp",
+    "image": "/images/6.webp",
     "title": "Salchipapas",
     "description": ""
   },
   {
-    "image": "/images/11.webp",
+    "image": "/images/7.webp",
     "title": "Patacones",
     "description": ""
   },
   {
-    "image": "/images/12.webp",
+    "image": "/images/8.webp",
     "title": "Coctel de camarones",
     "description": ""
   },
   {
-    "image": "/images/13.webp",
+    "image": "/images/9.webp",
     "title": "Pechuga Hawaiana",
     "description": ""
   },
   {
-    "image": "/images/14.webp",
+    "image": "/images/10.webp",
     "title": "Salmon en salsa de frutos rojos",
     "description": ""
   }

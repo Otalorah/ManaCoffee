@@ -5,7 +5,7 @@ import Header from '../../components/layout/Header/Header';
 import Footer from '../../components/layout/Footer/Footer';
 import styles from './Delivery.module.css';
 //TODO: Change this to import from the API
-import menuData from './menu.json';
+import menuData from '../../data/menu.json';
 
 // Types
 type PaymentMethod = 'efectivo' | 'bancolombia';
