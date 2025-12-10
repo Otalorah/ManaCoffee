@@ -8,10 +8,11 @@ interface OurStoryProps {
 const OurStory = ({ title, content }: OurStoryProps) => {
     return (
         <div id="#about" className={styles.section}>
-            <section className={styles.section}>
-                <h2 className={styles.title}>{title}</h2>
+            {/* El título ahora está DENTRO del contenedor de la tarjeta */}
+            <div className={styles.storyCard}>
+                <h2 className={styles.title}>{title}</h2> 
                 <p className={styles.content}>{content}</p>
-            </section>
+            </div>
         </div>
     );
 };

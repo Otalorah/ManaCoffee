@@ -9,10 +9,7 @@ const Hero = ({ title, subtitle}: HeroProps) => {
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
-                <div
-                    className={styles.hero}
-                    style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%)` }}
-                >
+                <div className={styles.hero}>
                     <div className={styles.textContainer}>
                         <h1 className={styles.title}>{title}</h1>
                         <p className={styles.subtitle}>{subtitle}</p>

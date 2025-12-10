@@ -1,71 +1,51 @@
 [
   {
-    "image": "/images/1.webp",
+    "image": "/images/cerdo_maracuya.webp",
     "title": "Cerdo en salsa de maracuya",
     "description": ""
   },
   {
-    "image": "/images/2.webp",
+    "image": "/images/coctel_mango.webp",
     "title": "Coctel de mango",
     "description": ""
   },
   {
-    "image": "/images/3.webp",
-    "title": "Ceviche",
-    "description": ""
-  },
-  {
-    "image": "/images/4.webp",
-    "title": "Coctel de fresas",
-    "description": ""
-  },
-  {
-    "image": "/images/5.webp",
+    "image": "/images/mazorcada.webp",
     "title": "Mazorcada",
     "description": ""
   },
   {
-    "image": "/images/6.webp",
-    "title": "Almuerzos ejecutivos",
+    "image": "/images/coctel_fresas.webp",
+    "title": "Coctel de fresas",
     "description": ""
   },
   {
-    "image": "/images/7.webp",
+    "image": "/images/copa_helado.webp",
     "title": "Copa Crocante de Helado",
     "description": ""
   },
   {
-    "image": "/images/8.webp",
-    "title": "Pan Gratinado con Dip",
-    "description": ""
-  },
-  {
-    "image": "/images/9.webp",
-    "title": "Pollo a la naranja",
-    "description": ""
-  },
-  {
-    "image": "/images/10.webp",
+    "image": "/images/salchipapas.webp",
     "title": "Salchipapas",
     "description": ""
   },
   {
-    "image": "/images/11.webp",
+    "image": "/images/patacon.webp",
     "title": "Patacones",
     "description": ""
   },
   {
-    "image": "/images/12.webp",
+    "image": "/images/coctel_camarones.webp",
     "title": "Coctel de camarones",
     "description": ""
   },
   {
-    "image": "/images/13.webp",
+    "image": "/images/pechuga_hawaiana.webp",
     "title": "Pechuga Hawaiana",
     "description": ""
   },
   {
-    "image": "/images/14.webp",
+    "image": "/images/salmon_frutos_rojos.webp",
     "title": "Salmon en salsa de frutos rojos",
     "description": ""
   }

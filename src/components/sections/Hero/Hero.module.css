@@ -8,13 +8,28 @@
     padding: 1rem;
 }
 
+@keyframes warm-gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 
 .hero {
     display: flex;
     min-height: 480px;
     flex-direction: column;
     gap: 1.5rem;
-    background-color: #8b6f47;
+    
+    background: linear-gradient(-45deg, #8b6f47, #5c472d, #a38c6d, #6e5c43);
+    background-size: 400% 400%;
+    animation: warm-gradient-shift 7s ease infinite; 
+    
     border-radius: 0.5rem;
     align-items: center;
     justify-content: center;
@@ -26,7 +41,11 @@
     flex-direction: column;
     gap: 3rem;
     text-align: center;
+    /* Aseguramos que el texto esté por encima de la animación */
+    z-index: 10; 
 }
+
+/* El resto de estilos (.title, .subtitle, y media queries) se mantienen igual */
 
 .title {
     color: white;
@@ -111,4 +130,3 @@
         line-height: 1.2;
     }
 }
-
