@@ -1,77 +1,113 @@
+/* Contenedor principal para centrar la tarjeta */
 .section {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     margin-left: auto;
     margin-right: auto;
     container-type: inline-size;
     text-align: center;
+    max-width: 900px; /* Limita el ancho total */
 }
 
+/* Título dentro de la tarjeta */
 .title {
     color: #6f4e37;
     font-size: 2rem;
     font-weight: bold;
     line-height: 1.25;
     letter-spacing: -0.015em;
-    padding: 1.25rem 1rem 0.75rem;
+    padding: 0 0 1rem 0; /* Espacio debajo del título */
+    text-align: center;
 }
 
+/* Estilo de Tarjeta Adaptado */
+.storyCard {
+    /* Fondo: Gradiente suave y bordes redondeados */
+    background: linear-gradient(135deg, #fff5e6 0%, #ffffff 100%); 
+    border-radius: 1rem;
+    
+    /* Box Shadow y Borde inicial */
+    box-shadow: 0 4px 6px rgba(111, 78, 55, 0.1); 
+    border: 2px solid transparent; /* Inicia transparente */
+    
+    /* Configuraciones para el hover */
+    transition: all 0.3s ease; 
+    position: relative;
+    overflow: hidden; 
+    
+    /* Espaciado y centrado */
+    padding: 2.5rem; 
+    text-align: left; 
+    margin: 0 auto; /* Centrado */
+}
+
+/* Línea superior decorativa (similar a serviceCard::before) */
+.storyCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6f4e37, #8b6f47);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* EFECTO HOVER */
+.storyCard:hover {
+    transform: translateY(-8px); /* Elevación */
+    box-shadow: 0 12px 24px rgba(111, 78, 55, 0.2);
+    border-color: #6f4e37; /* Borde del color de la marca */
+}
+
+.storyCard:hover::before {
+    opacity: 1; /* La línea decorativa se hace visible */
+}
+
+/* El contenido del párrafo */
 .content {
     color: #4a3b32;
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: normal;
-    line-height: 1.5;
-    padding: 0.25rem 1rem 0.75rem;
+    line-height: 1.65; 
+    margin: 0;
+    text-align: center;
 }
 
+/* --- Media Queries --- */
 @media (max-width: 768px) {
     .section {
-        margin-top: 0.15rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .title {
-        font-size: 2rem;
-        font-weight: bold;
-        line-height: 1.5;
-    }
-
-    .content {
-        font-size: 1rem;
-        font-weight: normal;
-        line-height: 1.5;
-        max-width: 50%;
-        max-height: 50%;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-@media (max-width: 500px) {
-    .section {
-        margin-top: 0.15rem;
-        margin-bottom: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        max-width: 90%;
     }
     
     .title {
         font-size: 1.75rem;
-        font-weight: bold;
-        line-height: 1.5;
+    }
+
+    .storyCard {
+        width: 72%;
     }
 
     .content {
         font-size: 1rem;
-        font-weight: normal;
         line-height: 1.5;
-        max-width: 35%;
-        max-height: 35%;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
+    }
+}
+
+@media (max-width: 500px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .storyCard {
+        width: 45%;;
+    }
+
+    .content {
+        font-size: 0.8rem;
+        line-height: 1.5;
     }
 }

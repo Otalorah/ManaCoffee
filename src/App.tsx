@@ -30,7 +30,9 @@ function App() {
             <div id="our-story">
               <OurStory
                 title="Nuestra Historia"
-                content="Nacidos en Enero de 2025, Mana Coffee se ha convertido en un lugar especial para los amantes del café y la buena comida."
+                content="Nacidos en Enero de 2025, Mana Coffee se ha convertido en un lugar especial para los amantes del café y la buena comida. Desde el inicio, nuestro propósito ha sido fusionar el aroma inconfundible del café de alta calidad con una propuesta gastronómica honesta y reconfortante.
+
+Más que un restobar, somos un punto de encuentro donde cada taza y cada plato están diseñados para inspirar conversación y crear un respiro en la rutina diaria."
               />
             </div>
 
